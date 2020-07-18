@@ -17,3 +17,10 @@
 .train-track-logo {
   width: 64px;
 }
+
+.login-card-container {
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,52 @@
+.field {
+  position: relative;
+  border-bottom: 2px solid #afafaf;
+  margin-top: 1.3rem;
+  width: 100%;
+}
+
+.input {
+  outline: none;
+  border: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  background: none;
+  font-size: 1rem;
+  color: white;
+}
+
+.field::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: 0%;
+  transition: transform 500ms ease-in-out;
+  top: 2px;
+}
+
+.field:focus-within::after {
+  transform: scaleX(1);
+}
+
+.label {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 1rem;
+  transform: translateY(calc(-1rem - 2px));
+  transform-origin: 0%;
+  color: #afafaf;
+  transition: transform 400ms;
+}
+
+.field:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+  transform: scale(0.8) translateY(calc(-2.7rem - 2px));
+}
