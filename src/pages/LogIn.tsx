@@ -9,7 +9,13 @@ const LogIn: React.FC = () => {
     <div className="login-container">
       <div className="login-header">
         <img src={Logo} alt="Train Track Logo" className="train-track-logo" />
-        <Button text="Sign Up" size="large" href="#" />
+        <Button
+          text="Sign Up"
+          size="large"
+          onClick={() => {
+            window.location.href = "/signup";
+          }}
+        />
       </div>
       <div className="login-card-container">
         <LoginCard />

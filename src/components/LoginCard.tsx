@@ -5,6 +5,17 @@ import Button from "./Button";
 import Input from "./Input";
 
 const LoginCard: React.FC = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = new FormData(event.target as HTMLFormElement);
+
+    const username = data.get("train-track-username");
+    const password = data.get("train-track-password");
+
+    // TODO send POST request to backend
+  };
+
   return (
     <Card
       style={{
@@ -12,7 +23,7 @@ const LoginCard: React.FC = () => {
       }}
     >
       <h1>Log In</h1>
-      <form>
+      <form onSubmit={onSubmit}>
         <Input type="text" placeholder="Username" name="train-track-username" />
         <Input
           type="password"

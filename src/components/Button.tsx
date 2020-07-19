@@ -3,23 +3,23 @@ import "../styles/Button.css";
 
 type ButtonProps = {
   text: string;
-  href?: string;
+  onClick?: () => void;
   size?: "small" | "medium" | "large";
   style?: CSSProperties;
 };
 
-const Button: React.FC<ButtonProps> = ({ text, href, size, style }) => {
+const Button: React.FC<ButtonProps> = ({ text, onClick, size, style }) => {
   // Size defaults to medium
   size = size ? size : "medium";
 
   return (
-    <a
+    <button
       className={`button-container button-size-${size}`}
       style={style}
-      href={href}
+      onClick={onClick}
     >
       {text}
-    </a>
+    </button>
   );
 };
 

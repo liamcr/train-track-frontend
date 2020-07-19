@@ -9,6 +9,9 @@ function App() {
         <Route exact path="/">
           <LogIn />
         </Route>
+        <Route path="/signup">
+          <div>Sign Up Page</div>
+        </Route>
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
