@@ -2,6 +2,7 @@
   border: 1px solid;
   border-radius: 4px;
   padding: 12px;
+  position: relative;
 }
 
 .alert-success {
@@ -20,4 +21,8 @@
   background-color: var(--danger);
   color: var(--danger-dark);
   border-color: var(--danger-dark);
+}
+
+.alert-message-with-close {
+  width: calc(100% - 28px);
 }

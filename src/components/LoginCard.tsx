@@ -46,6 +46,7 @@ const LoginCard: React.FC = () => {
         message={errorMessage}
         type="danger"
         visible={errorMessage !== ""}
+        onClose={() => setErrorMessage("")}
       />
       <form onSubmit={onSubmit}>
         <Input type="text" placeholder="Username" name="train-track-username" />

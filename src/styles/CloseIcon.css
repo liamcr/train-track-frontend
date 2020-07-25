@@ -1,0 +1,19 @@
+.close-icon-container {
+  border-radius: 8px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 0%, 40%);
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: hsla(0, 0%, 0%, 0.2);
+  user-select: none;
+}
+
+.close-icon-container:active {
+  background-color: hsla(0, 0%, 0%, 0.1);
+}
