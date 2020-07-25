@@ -55,7 +55,7 @@ const LoginCard: React.FC = () => {
           name="train-track-password"
         />
         <div style={{ height: "1rem" }} />
-        <Button text="Submit" style={{ width: "100%" }} />
+        <Button text="Submit" size="large" style={{ width: "100%" }} />
       </form>
     </Card>
   );

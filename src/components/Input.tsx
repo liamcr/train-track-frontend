@@ -5,11 +5,12 @@ type InputProps = {
   type: string;
   placeholder: string;
   name: string;
+  style?: React.CSSProperties;
 };
 
-const Input: React.FC<InputProps> = ({ type, placeholder, name }) => {
+const Input: React.FC<InputProps> = ({ type, placeholder, name, style }) => {
   return (
-    <div className="field">
+    <div className="field" style={style}>
       <input type={type} name={name} className="input" placeholder=" " />
       <label className="label">{placeholder}</label>
     </div>
