@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import LogIn from "./pages/LogIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <LogIn />
         </Route>
         <Route path="/signup">
-          <div>Sign Up Page</div>
+          <SignUp />
         </Route>
         <Redirect from="*" to="/" />
       </Switch>

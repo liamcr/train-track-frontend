@@ -8,7 +8,14 @@ const LogIn: React.FC = () => {
   return (
     <div className="login-container">
       <div className="login-header">
-        <img src={Logo} alt="Train Track Logo" className="train-track-logo" />
+        <img
+          src={Logo}
+          alt="Train Track Logo"
+          className="train-track-logo"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        />
         <Button
           text="Sign Up"
           size="large"

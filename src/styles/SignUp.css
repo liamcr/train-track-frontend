@@ -1,0 +1,27 @@
+.signup-container {
+  background-image: url("../assets/signup-page-background.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.signup-header {
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.train-track-logo {
+  width: 64px;
+  cursor: pointer;
+}
+
+.signup-card-container {
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

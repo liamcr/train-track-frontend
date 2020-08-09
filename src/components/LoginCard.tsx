@@ -7,7 +7,11 @@ import axios from "axios";
 import config from "../config/config";
 import Alert from "./Alert";
 
-const LoginCard: React.FC = () => {
+type LoginCardProps = {
+  signup?: boolean;
+};
+
+const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +26,7 @@ const LoginCard: React.FC = () => {
     const password = data.get("train-track-password");
 
     axios
-      .post(`${config.apiHost}/users/login`, {
+      .post(`${config.apiHost}/users/${signup ? "register" : "login"}`, {
         username: username,
         password: password,
       })
@@ -32,6 +36,8 @@ const LoginCard: React.FC = () => {
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           setErrorMessage("Username or password is invalid.");
+        } else if (err.response && err.response.status === 409) {
+          setErrorMessage("Username is already taken.");
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }
@@ -47,7 +53,7 @@ const LoginCard: React.FC = () => {
         width: "60%",
       }}
     >
-      <h1>Log In</h1>
+      <h1>{signup ? "Sign Up" : "Log In"}</h1>
       <Alert
         message={errorMessage}
         type="danger"
