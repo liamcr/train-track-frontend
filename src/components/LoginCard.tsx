@@ -9,9 +9,12 @@ import Alert from "./Alert";
 
 const LoginCard: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setIsLoading(true);
 
     const data = new FormData(event.target as HTMLFormElement);
 
@@ -32,6 +35,9 @@ const LoginCard: React.FC = () => {
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -56,7 +62,13 @@ const LoginCard: React.FC = () => {
           name="train-track-password"
         />
         <div style={{ height: "1rem" }} />
-        <Button text="Submit" size="large" style={{ width: "100%" }} />
+        <Button
+          text="Submit"
+          size="large"
+          loading={isLoading}
+          disabled={isLoading}
+          style={{ width: "100%" }}
+        />
       </form>
     </Card>
   );

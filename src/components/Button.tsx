@@ -5,16 +5,31 @@ type ButtonProps = {
   text: string;
   onClick?: () => void;
   size?: "small" | "medium" | "large";
+  loading?: boolean;
+  disabled?: boolean;
   style?: CSSProperties;
 };
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, size, style }) => {
+const Button: React.FC<ButtonProps> = ({
+  text,
+  onClick,
+  size,
+  loading,
+  disabled,
+  style,
+}) => {
   // Size defaults to medium
   size = size ? size : "medium";
 
   return (
     <button
-      className={`button-container button-size-${size}`}
+      className={`
+        button-container
+        button-size-${size} 
+        ${loading ? `loader-size-${size}` : ""}
+        ${disabled ? `button-disabled` : ""}
+      `}
+      disabled={disabled}
       style={style}
       onClick={onClick}
     >
