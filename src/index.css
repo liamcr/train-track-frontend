@@ -13,6 +13,7 @@
   --danger-dark: hsl(354, 61%, 28%);
 
   --card-colour: hsl(0, 0%, 29%);
+  --background-color: hsl(0, 0%, 20%);
 }
 
 body {

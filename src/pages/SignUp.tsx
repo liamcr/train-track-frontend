@@ -1,21 +1,12 @@
 import React from "react";
-import Logo from "../assets/train-track-init-logo.svg";
 import "../styles/SignUp.css";
 import LoginCard from "../components/LoginCard";
+import Header from "../components/Header";
 
 const SignUp: React.FC = () => {
   return (
     <div className="signup-container">
-      <div className="signup-header">
-        <img
-          src={Logo}
-          alt="Train Track Logo"
-          className="train-track-logo"
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        />
-      </div>
+      <Header notLoggedIn />
       <div className="signup-card-container">
         <LoginCard signup />
       </div>

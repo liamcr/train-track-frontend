@@ -1,21 +1,13 @@
 import React from "react";
 import Button from "../components/Button";
-import Logo from "../assets/train-track-init-logo.svg";
 import "../styles/LogIn.css";
 import LoginCard from "../components/LoginCard";
+import Header from "../components/Header";
 
 const LogIn: React.FC = () => {
   return (
     <div className="login-container">
-      <div className="login-header">
-        <img
-          src={Logo}
-          alt="Train Track Logo"
-          className="train-track-logo"
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        />
+      <Header notLoggedIn>
         <Button
           text="Sign Up"
           size="large"
@@ -23,7 +15,7 @@ const LogIn: React.FC = () => {
             window.location.href = "/signup";
           }}
         />
-      </div>
+      </Header>
       <div className="login-card-container">
         <LoginCard />
       </div>
