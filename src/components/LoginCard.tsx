@@ -26,14 +26,14 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
     const password = data.get("train-track-password") as string;
 
     if (signup && username.length < 3) {
-      setErrorMessage("Username must be more than 2 characters long.");
+      setErrorMessage("Username must be longer than 2 characters.");
       setIsLoading(false);
       return;
     }
 
     if (signup && password.length < 3) {
       setIsLoading(false);
-      setErrorMessage("Password must be more than 2 characters long.");
+      setErrorMessage("Password must be longer than 2 characters.");
       return;
     }
 

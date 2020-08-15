@@ -1,0 +1,35 @@
+.tab-bar-container {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 64px;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-bar-option {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tab-bar-option:hover {
+  background-color: var(--primary-dark);
+}
+
+.tab-bar-option:active {
+  background-color: var(--primary-darkest);
+}
+
+.tab-bar-selected-option {
+  background-color: var(--primary-dark);
+}
+
+.tab-bar-selected-option:active {
+  background-color: var(--primary-darkest);
+}

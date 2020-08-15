@@ -3,8 +3,9 @@ import { setAccessToken } from "../util/helperFns";
 import axios from "axios";
 import { TIMELINE_URL } from "../consts";
 import Header from "../components/Header";
+import TabBar from "../components/TabBar";
 import "../styles/Timeline.css";
-import Card from "../components/Card";
+import FloatingActionButton from "../components/FloatingActionButton";
 
 const Timeline: React.FC = () => {
   setAccessToken();
@@ -12,6 +13,10 @@ const Timeline: React.FC = () => {
   const [limit, setLimit] = useState(10);
   const [timeline, setTimeline] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const onAddWorkout = () => {
+    console.log("Adding workout...");
+  };
 
   useEffect(() => {
     axios
@@ -42,7 +47,8 @@ const Timeline: React.FC = () => {
   return (
     <div className="timeline-container">
       <Header />
-      {/* <TabBar /> */}
+      <FloatingActionButton onClick={onAddWorkout} />
+      <TabBar index={0} />
     </div>
   );
 };
