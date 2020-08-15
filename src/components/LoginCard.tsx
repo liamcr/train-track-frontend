@@ -22,8 +22,20 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
 
     const data = new FormData(event.target as HTMLFormElement);
 
-    const username = data.get("train-track-username");
-    const password = data.get("train-track-password");
+    const username = data.get("train-track-username") as string;
+    const password = data.get("train-track-password") as string;
+
+    if (signup && username.length < 3) {
+      setErrorMessage("Username must be more than 2 characters long.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (signup && password.length < 3) {
+      setIsLoading(false);
+      setErrorMessage("Password must be more than 2 characters long.");
+      return;
+    }
 
     axios
       .post(`${config.apiHost}/users/${signup ? "register" : "login"}`, {
