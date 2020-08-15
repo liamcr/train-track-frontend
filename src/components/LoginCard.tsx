@@ -4,7 +4,7 @@ import "../styles/LoginCard.css";
 import Button from "./Button";
 import Input from "./Input";
 import axios from "axios";
-import config from "../config/config";
+import { REGISTER_URL, LOGIN_URL } from "../consts";
 import Alert from "./Alert";
 
 type LoginCardProps = {
@@ -38,12 +38,12 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
     }
 
     axios
-      .post(`${config.apiHost}/users/${signup ? "register" : "login"}`, {
+      .post(signup ? REGISTER_URL : LOGIN_URL, {
         username: username,
         password: password,
       })
       .then((response) => {
-        console.log("Success!");
+        window.location.href = `/timeline#${response.data.accessToken}`;
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
