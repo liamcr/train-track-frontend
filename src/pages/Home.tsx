@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   setAccessToken();
 
   const [limit, setLimit] = useState(10);
-  const [timeline, setTimeline] = useState<[Workout] | null>(null);
+  const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onAddWorkout = () => {
