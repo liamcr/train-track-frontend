@@ -1,4 +1,7 @@
 import React from "react";
+import TabBarOption from "./TabBarOption";
+import HomeIcon from "../assets/icons/home.svg";
+import PersonIcon from "../assets/icons/person.svg";
 import "../styles/TabBar.css";
 
 type TabBarProps = {
@@ -8,16 +11,8 @@ type TabBarProps = {
 const TabBar: React.FC<TabBarProps> = ({ index }) => {
   return (
     <div className="tab-bar-container">
-      <div
-        className={`tab-bar-option ${index === 0 && "tab-bar-selected-option"}`}
-      >
-        Home
-      </div>
-      <div
-        className={`tab-bar-option ${index === 1 && "tab-bar-selected-option"}`}
-      >
-        Profile
-      </div>
+      <TabBarOption selected={index === 0} icon={HomeIcon} title="Home" />
+      <TabBarOption selected={index === 1} icon={PersonIcon} title="Profile" />
     </div>
   );
 };
