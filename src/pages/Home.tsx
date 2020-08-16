@@ -6,12 +6,14 @@ import Header from "../components/Header";
 import TabBar from "../components/TabBar";
 import "../styles/Home.css";
 import FloatingActionButton from "../components/FloatingActionButton";
+import { Workout } from "../util/commonTypes";
+import Timeline from "../components/Timeline";
 
 const Home: React.FC = () => {
   setAccessToken();
 
   const [limit, setLimit] = useState(10);
-  const [timeline, setTimeline] = useState<any>(null);
+  const [timeline, setTimeline] = useState<[Workout] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onAddWorkout = () => {
@@ -45,8 +47,9 @@ const Home: React.FC = () => {
   }, [limit]);
 
   return (
-    <div className="timeline-container">
+    <div className="home-container">
       <Header />
+      <Timeline data={timeline} />
       <FloatingActionButton onClick={onAddWorkout} />
       <TabBar index={0} />
     </div>
