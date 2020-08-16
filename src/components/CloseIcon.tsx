@@ -1,5 +1,5 @@
 import React from "react";
-import CloseIconImg from "../assets/alertClose.png";
+import CloseIconImg from "../assets/icons/clear.svg";
 import "../styles/CloseIcon.css";
 
 type CloseIconProps = {

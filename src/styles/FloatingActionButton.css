@@ -7,13 +7,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 32pt;
-  color: white;
   position: fixed;
   right: 16px;
   bottom: 80px;
   user-select: none;
   cursor: pointer;
+}
+
+.add-icon {
+  height: 32px;
+  width: 32px;
 }
 
 .floating-action-button:hover {
