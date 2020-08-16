@@ -26,9 +26,8 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
           },
         })
         .then((response) => {
-          addUser(response.data._id, {
-            displayName: response.data.username,
-          });
+          addUser(response.data._id, { displayName: response.data.username });
+          setUserInfo({ displayName: response.data.username });
         })
         .catch((err) => {
           console.log(err);
@@ -36,7 +35,11 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
     }
   }, [userCache, workout.user]);
 
-  return <Card style={{ width: "100%", maxWidth: "500px" }}></Card>;
+  return (
+    <Card style={{ width: "100%", maxWidth: "500px" }}>
+      <div className="user-information-header"></div>
+    </Card>
+  );
 };
 
 export default WorkoutCard;
