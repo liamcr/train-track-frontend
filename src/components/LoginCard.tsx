@@ -43,7 +43,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
         password: password,
       })
       .then((response) => {
-        window.location.href = `/timeline#${response.data.accessToken}`;
+        window.location.href = `/home#${response.data.accessToken}`;
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {

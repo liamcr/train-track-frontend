@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
-import Timeline from "./pages/Timeline";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/timeline">
-          <Timeline />
+        <Route path="/home">
+          <Home />
         </Route>
         <Redirect from="*" to="/" />
       </Switch>

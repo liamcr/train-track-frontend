@@ -4,10 +4,10 @@ import axios from "axios";
 import { TIMELINE_URL } from "../consts";
 import Header from "../components/Header";
 import TabBar from "../components/TabBar";
-import "../styles/Timeline.css";
+import "../styles/Home.css";
 import FloatingActionButton from "../components/FloatingActionButton";
 
-const Timeline: React.FC = () => {
+const Home: React.FC = () => {
   setAccessToken();
 
   const [limit, setLimit] = useState(10);
@@ -53,4 +53,4 @@ const Timeline: React.FC = () => {
   );
 };
 
-export default Timeline;
+export default Home;

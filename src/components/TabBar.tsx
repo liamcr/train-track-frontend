@@ -11,7 +11,7 @@ const TabBar: React.FC<TabBarProps> = ({ index }) => {
       <div
         className={`tab-bar-option ${index === 0 && "tab-bar-selected-option"}`}
       >
-        Timeline
+        Home
       </div>
       <div
         className={`tab-bar-option ${index === 1 && "tab-bar-selected-option"}`}
