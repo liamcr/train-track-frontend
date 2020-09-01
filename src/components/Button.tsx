@@ -8,6 +8,7 @@ type ButtonProps = {
   size?: "small" | "medium" | "large";
   loading?: boolean;
   disabled?: boolean;
+  variant?: "text" | "contained";
   style?: CSSProperties;
 };
 
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   size = "medium",
   loading,
   disabled,
+  variant = "contained",
   style,
 }) => {
   const loadingIndicatorWidths = {
@@ -29,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`
-        button-container
+        button-container-${variant}
         button-size-${size}
       `}
       disabled={disabled}
