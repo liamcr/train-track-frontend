@@ -47,7 +47,6 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       style={{
         width: "calc(100% - 32px)",
         maxWidth: "500px",
-        height: 128,
         margin: 12,
       }}
     >
@@ -59,6 +58,15 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         ) : (
           userInfo.displayName
         )}
+      </div>
+      <div className="workout-information">
+        <div className="workout-title">{workout.name}</div>
+        {workout.description && (
+          <div className="workout-description">{workout.description}</div>
+        )}
+        <div className="exercise-count">{`${
+          workout.exerciseIds.length
+        } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</div>
       </div>
     </Card>
   );
