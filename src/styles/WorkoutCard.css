@@ -1,0 +1,9 @@
+.user-information-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-display-name {
+  height: 24px;
+}

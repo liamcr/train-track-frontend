@@ -4,6 +4,8 @@ import Card from "./Card";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
 import { USER_URL } from "../consts";
+import Placeholder from "./Placeholder";
+import "../styles/WorkoutCard.css";
 
 type WorkoutCardProps = {
   workout: Workout;
@@ -41,8 +43,23 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   }, [state, workout.user, dispatch, userInfo]);
 
   return (
-    <Card style={{ width: "100%", maxWidth: "500px" }}>
-      <div className="user-information-header">{userInfo?.displayName}</div>
+    <Card
+      style={{
+        width: "calc(100% - 32px)",
+        maxWidth: "500px",
+        height: 128,
+        margin: 12,
+      }}
+    >
+      <div className="user-information-header">
+        <Placeholder height={32} width={32} circle={true} />
+        <div style={{ width: 12 }} />
+        {userInfo === null ? (
+          <Placeholder height={24} width={96} />
+        ) : (
+          userInfo.displayName
+        )}
+      </div>
     </Card>
   );
 };
