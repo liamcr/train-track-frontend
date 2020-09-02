@@ -18,3 +18,24 @@ export const setAccessToken = () => {
   // If no access token in window hash OR localStorage, user must not be logged-in
   window.location.href = "/";
 };
+
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+export const formatDate = (rawDate: string) => {
+  let date = new Date(rawDate);
+
+  return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+};

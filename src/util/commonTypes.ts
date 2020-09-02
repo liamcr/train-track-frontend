@@ -1,9 +1,7 @@
-import { type } from "os";
-
 type Comment = {
   userId: string;
   comment: string;
-  date: Date;
+  date: string;
 };
 
 export type Workout = {
@@ -11,7 +9,7 @@ export type Workout = {
   name: string;
   description?: string;
   exerciseIds: [string];
-  date: Date;
+  date: string;
   likes: [string];
   comments: [Comment];
 };

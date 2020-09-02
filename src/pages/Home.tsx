@@ -80,7 +80,12 @@ const Home: React.FC = () => {
     <div className="home-container">
       <Header />
       <Timeline data={timeline} />
-      <Fab color="primary" size="large" className={classes.fab}>
+      <Fab
+        color="primary"
+        size="large"
+        onClick={onAddWorkout}
+        className={classes.fab}
+      >
         <AddIcon />
       </Fab>
       <BottomNavigation value="home" className={classes.tabBar}>

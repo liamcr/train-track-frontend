@@ -1,20 +1,41 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Workout, User } from "../util/commonTypes";
-import Card from "./Card";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
 import { USER_URL } from "../consts";
-import Placeholder from "./Placeholder";
 import "../styles/WorkoutCard.css";
-import { Button } from "@material-ui/core";
+import {
+  Card,
+  CardHeader,
+  Avatar,
+  CardContent,
+  CardActions,
+  IconButton,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import { formatDate } from "../util/helperFns";
 
 type WorkoutCardProps = {
   workout: Workout;
 };
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    workoutCard: {
+      width: "100%",
+      maxWidth: "500px",
+      margin: 12,
+    },
+  })
+);
+
 const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   const { state, dispatch } = useContext(CacheContext);
   const [userInfo, setUserInfo] = useState<User | null>(null);
+
+  const classes = useStyles();
 
   useEffect(() => {
     if (state[workout.user] !== undefined && userInfo === null) {
@@ -44,23 +65,15 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   }, [state, workout.user, dispatch, userInfo]);
 
   return (
-    <Card
-      style={{
-        width: "calc(100% - 32px)",
-        maxWidth: "500px",
-        margin: 12,
-      }}
-    >
-      <div className="user-information-header">
-        <Placeholder height={32} width={32} circle={true} />
-        <div style={{ width: 12 }} />
-        {userInfo === null ? (
-          <Placeholder height={24} width={96} />
-        ) : (
-          userInfo.displayName
-        )}
-      </div>
-      <div className="workout-information">
+    <Card className={classes.workoutCard}>
+      <CardHeader
+        avatar={
+          <Avatar>{userInfo !== null ? userInfo.displayName[0] : ""}</Avatar>
+        }
+        title={userInfo !== null ? userInfo.displayName : ""}
+        subheader={formatDate(workout.date)}
+      />
+      <CardContent>
         <div className="workout-title">{workout.name}</div>
         {workout.description && (
           <div className="workout-description">{workout.description}</div>
@@ -68,10 +81,13 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         <div className="exercise-count">{`${
           workout.exerciseIds.length
         } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</div>
-      </div>
-      <div className="more-info-button-container">
-        <Button color="primary">More Info</Button>
-      </div>
+      </CardContent>
+      <CardActions>
+        <IconButton>
+          <ThumbUpIcon />
+        </IconButton>
+        {`${workout.likes.length} like${workout.likes.length !== 1 ? "s" : ""}`}
+      </CardActions>
     </Card>
   );
 };
