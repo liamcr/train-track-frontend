@@ -7,6 +7,18 @@ import TabBar from "../components/TabBar";
 import "../styles/Home.css";
 import { Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
+import { Fab, makeStyles, createStyles } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    fab: {
+      position: "fixed",
+      right: 16,
+      bottom: 80,
+    },
+  })
+);
 
 const Home: React.FC = () => {
   setAccessToken();
@@ -14,6 +26,8 @@ const Home: React.FC = () => {
   const [limit, setLimit] = useState(10);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const classes = useStyles();
 
   const onAddWorkout = () => {
     console.log("Adding workout...");
@@ -49,7 +63,9 @@ const Home: React.FC = () => {
     <div className="home-container">
       <Header />
       <Timeline data={timeline} />
-      {/* <FloatingActionButton onClick={onAddWorkout} /> */}
+      <Fab color="primary" size="large" className={classes.fab}>
+        <AddIcon />
+      </Fab>
       <TabBar index={0} />
     </div>
   );
