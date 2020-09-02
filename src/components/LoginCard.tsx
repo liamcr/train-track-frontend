@@ -86,12 +86,6 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
           color="primary"
           fullWidth
         />
-        {/* <Input type="text" placeholder="Username" name="train-track-username" />
-        <Input
-          type="password"
-          placeholder="Password"
-          name="train-track-password"
-        /> */}
         <div style={{ height: "1rem" }} />
         <Button
           type="submit"
