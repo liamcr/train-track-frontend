@@ -30,3 +30,7 @@
   color: var(--text-secondary);
   font-size: 12pt;
 }
+
+.more-info-button-container {
+  text-align: center;
+}

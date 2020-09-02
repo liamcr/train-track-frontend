@@ -6,7 +6,7 @@ import axios from "axios";
 import { USER_URL } from "../consts";
 import Placeholder from "./Placeholder";
 import "../styles/WorkoutCard.css";
-import Button from "./Button";
+import { Button } from "@material-ui/core";
 
 type WorkoutCardProps = {
   workout: Workout;
@@ -69,12 +69,9 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
           workout.exerciseIds.length
         } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</div>
       </div>
-      <Button
-        text="More Info"
-        variant="text"
-        size="large"
-        style={{ margin: "auto", height: 32 }}
-      />
+      <div className="more-info-button-container">
+        <Button color="primary">More Info</Button>
+      </div>
     </Card>
   );
 };
