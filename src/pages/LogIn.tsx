@@ -8,7 +8,13 @@ const LogIn: React.FC = () => {
   return (
     <div className="login-container">
       <Header notLoggedIn>
-        <Button variant="contained" color="primary" size="large" href="/signup">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          href="/signup"
+          disableElevation
+        >
           Sign Up
         </Button>
       </Header>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import "../styles/LoginCard.css";
-import Button from "./Button";
 import Input from "./Input";
 import axios from "axios";
 import { REGISTER_URL, LOGIN_URL } from "../consts";
 import Alert from "./Alert";
+import { Button } from "@material-ui/core";
 
 type LoginCardProps = {
   signup?: boolean;
@@ -81,12 +81,15 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
         />
         <div style={{ height: "1rem" }} />
         <Button
-          text="Submit"
-          size="large"
-          loading={isLoading}
+          type="submit"
+          variant="contained"
+          color="primary"
           disabled={isLoading}
-          style={{ width: "100%" }}
-        />
+          disableElevation
+          fullWidth
+        >
+          Submit
+        </Button>
       </form>
     </Card>
   );
