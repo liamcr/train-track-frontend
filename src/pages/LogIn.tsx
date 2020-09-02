@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
 import "../styles/LogIn.css";
+import { Button } from "@material-ui/core";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";
 
@@ -8,13 +8,9 @@ const LogIn: React.FC = () => {
   return (
     <div className="login-container">
       <Header notLoggedIn>
-        <Button
-          text="Sign Up"
-          size="large"
-          onClick={() => {
-            window.location.href = "/signup";
-          }}
-        />
+        <Button variant="contained" color="primary" size="large" href="/signup">
+          Sign Up
+        </Button>
       </Header>
       <div className="login-card-container">
         <LoginCard />
