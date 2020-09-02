@@ -3,10 +3,11 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
 
 const theme = createMuiTheme({
   palette: {
+    type: "dark",
     primary: { main: "hsl(204, 100%, 50%)" },
   },
 });
@@ -14,6 +15,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
