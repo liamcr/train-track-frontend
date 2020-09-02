@@ -1,9 +1,0 @@
-.tab-bar-container {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  height: 64px;
-  background-color: var(--primary);
-  display: flex;
-  flex-direction: row;
-}
