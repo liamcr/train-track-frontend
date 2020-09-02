@@ -5,7 +5,6 @@ import { TIMELINE_URL } from "../consts";
 import Header from "../components/Header";
 import TabBar from "../components/TabBar";
 import "../styles/Home.css";
-import FloatingActionButton from "../components/FloatingActionButton";
 import { Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 
@@ -50,7 +49,7 @@ const Home: React.FC = () => {
     <div className="home-container">
       <Header />
       <Timeline data={timeline} />
-      <FloatingActionButton onClick={onAddWorkout} />
+      {/* <FloatingActionButton onClick={onAddWorkout} /> */}
       <TabBar index={0} />
     </div>
   );
