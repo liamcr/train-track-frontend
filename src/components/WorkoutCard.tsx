@@ -13,6 +13,7 @@ import {
   IconButton,
   makeStyles,
   createStyles,
+  Typography,
 } from "@material-ui/core";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { formatDate } from "../util/helperFns";
@@ -74,13 +75,13 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         subheader={formatDate(workout.date)}
       />
       <CardContent>
-        <div className="workout-title">{workout.name}</div>
+        <Typography variant="h6">{workout.name}</Typography>
         {workout.description && (
-          <div className="workout-description">{workout.description}</div>
+          <Typography variant="subtitle1">{workout.description}</Typography>
         )}
-        <div className="exercise-count">{`${
+        <Typography variant="subtitle2">{`${
           workout.exerciseIds.length
-        } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</div>
+        } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</Typography>
       </CardContent>
       <CardActions>
         <IconButton>

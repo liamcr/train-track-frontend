@@ -78,14 +78,16 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
             label="Username"
             name="train-track-username"
             color="primary"
-            margin="normal"
+            variant="outlined"
             fullWidth
           />
           <TextField
             label="Password"
             type="password"
             name="train-track-password"
+            variant="outlined"
             color="primary"
+            margin="normal"
             fullWidth
           />
           <div style={{ height: "1rem" }} />
