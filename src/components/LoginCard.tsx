@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import Card from "./Card";
 import "../styles/LoginCard.css";
 import axios from "axios";
 import { REGISTER_URL, LOGIN_URL } from "../consts";
 import Alert from "./Alert";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Card,
+  CardHeader,
+  CardContent,
+} from "@material-ui/core";
 
 type LoginCardProps = {
   signup?: boolean;
@@ -59,45 +64,43 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
   };
 
   return (
-    <Card
-      style={{
-        width: "60%",
-      }}
-    >
-      <h1>{signup ? "Sign Up" : "Log In"}</h1>
-      <Alert
-        message={errorMessage}
-        type="danger"
-        visible={errorMessage !== ""}
-        onClose={() => setErrorMessage("")}
-      />
-      <form onSubmit={onSubmit}>
-        <TextField
-          label="Username"
-          name="train-track-username"
-          color="primary"
-          margin="normal"
-          fullWidth
+    <Card>
+      <CardHeader title={signup ? "Sign Up" : "Log In"} />
+      <CardContent>
+        <Alert
+          message={errorMessage}
+          type="danger"
+          visible={errorMessage !== ""}
+          onClose={() => setErrorMessage("")}
         />
-        <TextField
-          label="Password"
-          type="password"
-          name="train-track-password"
-          color="primary"
-          fullWidth
-        />
-        <div style={{ height: "1rem" }} />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          disabled={isLoading}
-          disableElevation
-          fullWidth
-        >
-          Submit
-        </Button>
-      </form>
+        <form onSubmit={onSubmit}>
+          <TextField
+            label="Username"
+            name="train-track-username"
+            color="primary"
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="train-track-password"
+            color="primary"
+            fullWidth
+          />
+          <div style={{ height: "1rem" }} />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={isLoading}
+            disableElevation
+            fullWidth
+          >
+            Submit
+          </Button>
+        </form>
+      </CardContent>
     </Card>
   );
 };
