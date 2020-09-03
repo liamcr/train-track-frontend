@@ -1,10 +1,10 @@
 import React from "react";
 import { Workout } from "../util/commonTypes";
-import LoadingIndicator from "./LoadingIndicator";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/Timeline.css";
 import WorkoutCard from "./WorkoutCard";
 import { TimelineProvider } from "../util/TimelineUserCache";
+import { CircularProgress } from "@material-ui/core";
 
 type TimelineProps = {
   data: Workout[] | null;
@@ -14,7 +14,7 @@ const Timeline: React.FC<TimelineProps> = ({ data }) => {
   return (
     <div className="timeline-container">
       {data === null ? (
-        <LoadingIndicator size="xlarge" />
+        <CircularProgress color="primary" />
       ) : data.length === 0 ? (
         <div className="not-found-container">
           <img
