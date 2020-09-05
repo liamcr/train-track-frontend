@@ -46,10 +46,6 @@ const Home: React.FC = () => {
 
   const classes = useStyles();
 
-  const onAddWorkout = () => {
-    console.log("Adding workout...");
-  };
-
   useEffect(() => {
     axios
       .get(TIMELINE_URL(limit), {
@@ -83,7 +79,7 @@ const Home: React.FC = () => {
       <Fab
         color="primary"
         size="large"
-        onClick={onAddWorkout}
+        href="/new-workout"
         className={classes.fab}
       >
         <AddIcon />

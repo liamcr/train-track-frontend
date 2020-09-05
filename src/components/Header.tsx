@@ -10,7 +10,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ notLoggedIn, children }) => {
   return (
     <div className="header-container">
-      <ButtonBase href={notLoggedIn ? "/" : "/timeline"}>
+      <ButtonBase href={notLoggedIn ? "/" : "/home"}>
         <img src={Logo} alt="Train Track Logo" className="train-track-logo" />
       </ButtonBase>
 
