@@ -3,7 +3,6 @@ import { setAccessToken } from "../util/helperFns";
 import axios from "axios";
 import { TIMELINE_URL } from "../consts";
 import Header from "../components/Header";
-import "../styles/Home.css";
 import { Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import {
@@ -73,7 +72,7 @@ const Home: React.FC = () => {
   }, [limit]);
 
   return (
-    <div className="home-container">
+    <>
       <Header />
       <Timeline data={timeline} />
       <Fab
@@ -97,7 +96,7 @@ const Home: React.FC = () => {
           icon={<UserIcon />}
         />
       </BottomNavigation>
-    </div>
+    </>
   );
 };
 

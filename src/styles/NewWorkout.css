@@ -1,0 +1,8 @@
+.new-workout-container {
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
