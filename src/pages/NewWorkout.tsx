@@ -9,7 +9,10 @@ import {
   TextField,
 } from "@material-ui/core";
 import Header from "../components/Header";
+import DateFnsUtils from "@date-io/date-fns";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "../styles/NewWorkout.css";
+import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,7 +28,11 @@ const NewWorkout: React.FC = () => {
   setAccessToken();
 
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+  const handleDateChange = (date: MaterialUiPickersDate) => {
+    setSelectedDate(date);
+  };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
 
@@ -45,6 +52,16 @@ const NewWorkout: React.FC = () => {
                 required
                 fullWidth
               />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  fullWidth
+                  inputVariant="outlined"
+                  name="t-t-new-workout-date"
+                  margin="normal"
+                />
+              </MuiPickersUtilsProvider>
               <TextField
                 label="Description"
                 name="t-t-new-workout-description"
