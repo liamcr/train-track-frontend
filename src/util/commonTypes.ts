@@ -14,6 +14,21 @@ export type Workout = {
   comments: [Comment];
 };
 
+export type Exercise = {
+  name: string;
+  description: string;
+  sets: [ExerciseSet];
+};
+
+export type ExerciseSet = {
+  value: number;
+  unit: "reps" | "seconds" | "minutes";
+  weight: {
+    value: number;
+    unit: "kgs" | "lbs";
+  };
+};
+
 export type User = {
   displayName: string;
 };
