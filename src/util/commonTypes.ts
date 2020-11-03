@@ -17,7 +17,7 @@ export type Workout = {
 export type Exercise = {
   name: string;
   description: string;
-  sets: [ExerciseSet];
+  sets: ExerciseSet[];
 };
 
 export type ExerciseSet = {

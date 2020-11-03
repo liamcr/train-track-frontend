@@ -7,12 +7,15 @@ import {
   createStyles,
   CardContent,
   TextField,
+  Button,
 } from "@material-ui/core";
 import Header from "../components/Header";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "../styles/NewWorkout.css";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+import ExerciseInputItem from "../components/ExerciseInputItem";
+import { Exercise } from "../util/commonTypes";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,9 +32,29 @@ const NewWorkout: React.FC = () => {
 
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
   const handleDateChange = (date: MaterialUiPickersDate) => {
     setSelectedDate(date);
+  };
+
+  const handleAddExercise = () => {
+    setExercises((prevVal) => [
+      ...prevVal,
+      { name: "", description: "", sets: [] },
+    ]);
+  };
+
+  const handleUpdateExercise = (index: number, updatedExercise: Exercise) => {
+    setExercises((prevVal) => {
+      let updatedVal = [...prevVal];
+
+      updatedVal[index] = updatedExercise;
+
+      console.log(updatedVal);
+
+      return updatedVal;
+    });
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
@@ -72,6 +95,17 @@ const NewWorkout: React.FC = () => {
                 margin="normal"
                 fullWidth
               />
+              {exercises.map((val, ind) => (
+                <ExerciseInputItem
+                  exercise={val}
+                  setExercise={(updatedExercise: Exercise) => {
+                    console.log(updatedExercise);
+                    handleUpdateExercise(ind, updatedExercise);
+                  }}
+                  key={ind}
+                />
+              ))}
+              <Button onClick={handleAddExercise}>+ Add Exercise</Button>
             </form>
           </CardContent>
         </Card>
