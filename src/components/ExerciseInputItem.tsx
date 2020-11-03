@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { Exercise } from "../util/commonTypes";
+import "../styles/ExerciseInputItem.css";
 
 type ExerciseInputItemProps = {
   exercise: Exercise;
@@ -12,7 +13,7 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
   setExercise,
 }) => {
   return (
-    <div>
+    <div className="exercise-input-container">
       <TextField
         label="Name"
         color="primary"
@@ -31,6 +32,7 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
         label="Description"
         color="primary"
         fullWidth
+        margin="normal"
         value={exercise.description}
         onChange={(e) => {
           let exerciseCopy = { ...exercise };

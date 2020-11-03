@@ -8,6 +8,7 @@ import {
   CardContent,
   TextField,
   Button,
+  Typography,
 } from "@material-ui/core";
 import Header from "../components/Header";
 import DateFnsUtils from "@date-io/date-fns";
@@ -95,17 +96,22 @@ const NewWorkout: React.FC = () => {
                 margin="normal"
                 fullWidth
               />
-              {exercises.map((val, ind) => (
-                <ExerciseInputItem
-                  exercise={val}
-                  setExercise={(updatedExercise: Exercise) => {
-                    console.log(updatedExercise);
-                    handleUpdateExercise(ind, updatedExercise);
-                  }}
-                  key={ind}
-                />
-              ))}
-              <Button onClick={handleAddExercise}>+ Add Exercise</Button>
+              <Typography variant="h6">Exercises</Typography>
+              <div className="dynamic-exercise-container">
+                {exercises.map((val, ind) => (
+                  <ExerciseInputItem
+                    exercise={val}
+                    setExercise={(updatedExercise: Exercise) => {
+                      console.log(updatedExercise);
+                      handleUpdateExercise(ind, updatedExercise);
+                    }}
+                    key={ind}
+                  />
+                ))}
+              </div>
+              <Button onClick={handleAddExercise} color="primary" size="large">
+                + Add Exercise
+              </Button>
             </form>
           </CardContent>
         </Card>
