@@ -45,7 +45,7 @@ const NewWorkout: React.FC = () => {
       {
         name: "",
         description: "",
-        sets: [{ value: 5, unit: "reps", weight: {} }],
+        sets: [{ value: 5, unit: "reps", weight: { unit: "lbs" } }],
       },
     ]);
   };

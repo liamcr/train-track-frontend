@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, IconButton, TextField, Typography } from "@material-ui/core";
+import { IconButton, TextField, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { Exercise, ExerciseSet } from "../util/commonTypes";
@@ -18,7 +18,11 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
   const onAddSet = () => {
     let updatedExercise = { ...exercise };
 
-    updatedExercise.sets.push({ value: 5, unit: "reps", weight: {} });
+    updatedExercise.sets.push({
+      value: 5,
+      unit: "reps",
+      weight: { unit: "lbs" },
+    });
 
     setExercise(updatedExercise);
   };
@@ -69,16 +73,28 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
             key={index}
             exerciseSet={set}
             setSet={(updatedSet: ExerciseSet) => {
-              console.log("Yeet");
+              let updatedExercise = { ...exercise };
+
+              updatedExercise.sets[index] = updatedSet;
+
+              setExercise(updatedExercise);
             }}
           />
         </div>
       ))}
       <div className="set-list-management-buttons">
-        <IconButton color="primary" onClick={onAddSet}>
+        <IconButton
+          color="primary"
+          onClick={onAddSet}
+          disabled={exercise.sets.length === 25}
+        >
           <AddIcon />
         </IconButton>
-        <IconButton color="primary" onClick={onRemoveSet}>
+        <IconButton
+          color="primary"
+          onClick={onRemoveSet}
+          disabled={exercise.sets.length === 1}
+        >
           <RemoveIcon />
         </IconButton>
       </div>

@@ -10,3 +10,13 @@
   padding: 5px;
   color: var(--text-secondary);
 }
+
+.set-input-values {
+  width: 100%;
+}
+
+.set-input-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
