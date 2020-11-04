@@ -1,7 +1,10 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
-import { Exercise } from "../util/commonTypes";
+import { Button, IconButton, TextField, Typography } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import { Exercise, ExerciseSet } from "../util/commonTypes";
 import "../styles/ExerciseInputItem.css";
+import SetInputItem from "./SetInputItem";
 
 type ExerciseInputItemProps = {
   exercise: Exercise;
@@ -12,6 +15,22 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
   exercise,
   setExercise,
 }) => {
+  const onAddSet = () => {
+    let updatedExercise = { ...exercise };
+
+    updatedExercise.sets.push({ value: 5, unit: "reps", weight: {} });
+
+    setExercise(updatedExercise);
+  };
+
+  const onRemoveSet = () => {
+    let updatedExercise = { ...exercise };
+
+    updatedExercise.sets.pop();
+
+    setExercise(updatedExercise);
+  };
+
   return (
     <div className="exercise-input-container">
       <TextField
@@ -42,6 +61,27 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
           setExercise(exerciseCopy);
         }}
       />
+      <Typography variant="h6">Sets</Typography>
+      {exercise.sets.map((set, index) => (
+        <div className="set-input-list-element">
+          <div className="set-list-item-num">{index + 1}</div>
+          <SetInputItem
+            key={index}
+            exerciseSet={set}
+            setSet={(updatedSet: ExerciseSet) => {
+              console.log("Yeet");
+            }}
+          />
+        </div>
+      ))}
+      <div className="set-list-management-buttons">
+        <IconButton color="primary" onClick={onAddSet}>
+          <AddIcon />
+        </IconButton>
+        <IconButton color="primary" onClick={onRemoveSet}>
+          <RemoveIcon />
+        </IconButton>
+      </div>
     </div>
   );
 };

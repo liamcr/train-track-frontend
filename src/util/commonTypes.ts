@@ -24,8 +24,8 @@ export type ExerciseSet = {
   value: number;
   unit: "reps" | "seconds" | "minutes";
   weight: {
-    value: number;
-    unit: "kgs" | "lbs";
+    value?: number;
+    unit?: "kgs" | "lbs";
   };
 };
 

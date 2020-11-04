@@ -5,3 +5,8 @@
 .dynamic-exercise-container .exercise-input-container:not(:last-child) {
   border-bottom: 1px #666666 solid;
 }
+
+.set-list-management-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

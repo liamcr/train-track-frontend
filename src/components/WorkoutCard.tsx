@@ -3,7 +3,6 @@ import { Workout, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
 import { USER_URL } from "../consts";
-import "../styles/WorkoutCard.css";
 import {
   Card,
   CardHeader,

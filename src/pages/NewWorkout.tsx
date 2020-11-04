@@ -42,7 +42,11 @@ const NewWorkout: React.FC = () => {
   const handleAddExercise = () => {
     setExercises((prevVal) => [
       ...prevVal,
-      { name: "", description: "", sets: [] },
+      {
+        name: "",
+        description: "",
+        sets: [{ value: 5, unit: "reps", weight: {} }],
+      },
     ]);
   };
 
@@ -96,7 +100,7 @@ const NewWorkout: React.FC = () => {
                 margin="normal"
                 fullWidth
               />
-              <Typography variant="h6">Exercises</Typography>
+              <Typography variant="h5">Exercises</Typography>
               <div className="dynamic-exercise-container">
                 {exercises.map((val, ind) => (
                   <ExerciseInputItem
