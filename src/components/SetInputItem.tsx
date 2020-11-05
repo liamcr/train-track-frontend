@@ -6,11 +6,18 @@ import { MenuItem, TextField } from "@material-ui/core";
 type SetInputItemProps = {
   exerciseSet: ExerciseSet;
   setSet: (arg0: ExerciseSet) => void;
+  isLastSet: boolean;
 };
 
-const SetInputItem: React.FC<SetInputItemProps> = ({ exerciseSet, setSet }) => {
+const SetInputItem: React.FC<SetInputItemProps> = ({
+  exerciseSet,
+  setSet,
+  isLastSet,
+}) => {
   return (
-    <div className="set-input-values">
+    <div
+      className={`set-input-values ${!isLastSet ? "not-last-set-input" : ""}`}
+    >
       <div className="set-input-row">
         <TextField
           color="primary"

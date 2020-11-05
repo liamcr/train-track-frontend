@@ -13,6 +13,11 @@
 
 .set-input-values {
   width: 100%;
+  padding: 12px 0;
+}
+
+.not-last-set-input {
+  border-bottom: 1px #666666 solid;
 }
 
 .set-input-row {

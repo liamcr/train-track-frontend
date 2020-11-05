@@ -79,6 +79,7 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
 
               setExercise(updatedExercise);
             }}
+            isLastSet={index === exercise.sets.length - 1}
           />
         </div>
       ))}
