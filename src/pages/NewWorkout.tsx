@@ -17,6 +17,9 @@ import "../styles/NewWorkout.css";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
+import axios from "axios";
+import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../consts";
+import Alert from "../components/Alert";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -33,7 +36,15 @@ const NewWorkout: React.FC = () => {
 
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [exercises, setExercises] = useState<Exercise[]>([
+    {
+      name: "",
+      description: "",
+      sets: [{ value: 5, unit: "reps", weight: { unit: "lbs" } }],
+    },
+  ]);
 
   const handleDateChange = (date: MaterialUiPickersDate) => {
     setSelectedDate(date);
@@ -56,13 +67,87 @@ const NewWorkout: React.FC = () => {
 
       updatedVal[index] = updatedExercise;
 
-      console.log(updatedVal);
-
       return updatedVal;
     });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    const data = new FormData(event.target as HTMLFormElement);
+
+    const workoutName = data.get("t-t-new-workout-title") as string;
+    const workoutDescription = data.get(
+      "t-t-new-workout-description"
+    ) as string;
+
+    axios
+      .post(
+        ADD_WORKOUT_URL,
+        {
+          name: workoutName,
+          description: workoutDescription,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "train-track-access-token"
+            )}`,
+          },
+        }
+      )
+      .then(async (response) => {
+        const newWorkoutId = response.data.workout._id;
+
+        await axios
+          .post(
+            ADD_EXERCISES_URL,
+            {
+              workoutId: newWorkoutId,
+              exercises: exercises,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                  "train-track-access-token"
+                )}`,
+              },
+            }
+          )
+          .then((response) => {
+            if (response.status === 200) {
+              window.location.href = "/home";
+            }
+          })
+          .catch((err) => {
+            if (
+              err.response &&
+              (err.response.status === 401 || err.response.status === 403)
+            ) {
+              window.location.href = "/";
+            } else if (err.response && err.response.status === 404) {
+              setErrorMessage(err.response.data);
+            } else {
+              setErrorMessage("Something went wrong. Try again later.");
+            }
+          });
+      })
+      .catch((err) => {
+        if (
+          err.response &&
+          (err.response.status === 401 || err.response.status === 403)
+        ) {
+          window.location.href = "/";
+        } else {
+          setErrorMessage("Something went wrong. Try again later.");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <>
@@ -71,6 +156,12 @@ const NewWorkout: React.FC = () => {
         <Card className={classes.card}>
           <CardHeader title="New Workout" />
           <CardContent>
+            <Alert
+              message={errorMessage}
+              type="danger"
+              visible={errorMessage !== ""}
+              onClose={() => setErrorMessage("")}
+            />
             <form onSubmit={onSubmit}>
               <TextField
                 label="Title"
@@ -106,7 +197,6 @@ const NewWorkout: React.FC = () => {
                   <ExerciseInputItem
                     exercise={val}
                     setExercise={(updatedExercise: Exercise) => {
-                      console.log(updatedExercise);
                       handleUpdateExercise(ind, updatedExercise);
                     }}
                     key={ind}
@@ -115,6 +205,17 @@ const NewWorkout: React.FC = () => {
               </div>
               <Button onClick={handleAddExercise} color="primary" size="large">
                 + Add Exercise
+              </Button>
+              <div style={{ height: 12 }} />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isLoading}
+                disableElevation
+                fullWidth
+              >
+                Submit
               </Button>
             </form>
           </CardContent>

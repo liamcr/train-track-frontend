@@ -5,3 +5,5 @@ export const LOGIN_URL = `${apiHost}/users/login`;
 export const USER_URL = (userId: string) => `${apiHost}/users/${userId}`;
 export const TIMELINE_URL = (limit = 10, offset = 0) =>
   `${apiHost}/timeline?limit=${limit}&offset=${offset}`;
+export const ADD_WORKOUT_URL = `${apiHost}/workouts/add`;
+export const ADD_EXERCISES_URL = `${apiHost}/exercises/addBulk`;

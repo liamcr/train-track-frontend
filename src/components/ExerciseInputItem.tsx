@@ -67,7 +67,7 @@ const ExerciseInputItem: React.FC<ExerciseInputItemProps> = ({
       />
       <Typography variant="h6">Sets</Typography>
       {exercise.sets.map((set, index) => (
-        <div className="set-input-list-element">
+        <div className="set-input-list-element" key={index}>
           <div className="set-list-item-num">{index + 1}</div>
           <SetInputItem
             key={index}
