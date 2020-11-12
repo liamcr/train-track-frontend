@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import { createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
 import NewWorkout from "./pages/NewWorkout";
+import Profile from "./pages/Profile";
 
 const theme = createMuiTheme({
   palette: {
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/new-workout">
             <NewWorkout />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Redirect from="*" to="/" />
         </Switch>

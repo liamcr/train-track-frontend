@@ -5,11 +5,12 @@ import { ButtonBase } from "@material-ui/core";
 
 type HeaderProps = {
   notLoggedIn?: boolean;
+  fixed?: boolean;
 };
 
-const Header: React.FC<HeaderProps> = ({ notLoggedIn, children }) => {
+const Header: React.FC<HeaderProps> = ({ notLoggedIn, fixed, children }) => {
   return (
-    <div className="header-container">
+    <div className="header-container" style={{position: fixed ? "fixed" : "sticky"}}>
       <ButtonBase href={notLoggedIn ? "/" : "/home"}>
         <img src={Logo} alt="Train Track Logo" className="train-track-logo" />
       </ButtonBase>

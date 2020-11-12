@@ -1,0 +1,20 @@
+.profile-image-container,
+.profile-image,
+.profile-image-overlay {
+  width: 100%;
+  height: 40vh;
+}
+.profile-image {
+  object-fit: cover;
+}
+
+.profile-image-overlay {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  padding-left: 12px;
+}

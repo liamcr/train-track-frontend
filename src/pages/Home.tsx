@@ -94,6 +94,7 @@ const Home: React.FC = () => {
           label="Profile"
           value="profile"
           icon={<UserIcon />}
+          href={"/profile"}
         />
       </BottomNavigation>
     </>
