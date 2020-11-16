@@ -33,6 +33,13 @@ export type User = {
   displayName: string;
 };
 
+export type FullUser = {
+  username: string;
+  followers: string[];
+  following: string[];
+  _id: string;
+};
+
 export type UserCache = {
   [key: string]: User;
 };

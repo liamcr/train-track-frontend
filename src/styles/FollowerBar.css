@@ -1,0 +1,12 @@
+.follower-bar-container {
+  width: 100%;
+  background-color: var(--card-colour);
+  display: flex;
+}
+
+.user-follow-count {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
