@@ -1,5 +1,7 @@
 import { ButtonBase, Typography } from "@material-ui/core";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { USER_URL } from "../consts";
 import "../styles/FollowerBar.css";
 
 type FollowerBarProps = {
@@ -8,6 +10,67 @@ type FollowerBarProps = {
 };
 
 const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
+  const [followerDisplayNames, setFollowerDisplayNames] = useState<{
+    [key: string]: string;
+  }>({});
+  const [followingDisplayNames, setFollowingDisplayNames] = useState<{
+    [key: string]: string;
+  }>({});
+
+  useEffect(() => {
+    if (followers) {
+      for (let followerId of followers) {
+        axios
+          .get(USER_URL(followerId), {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                "train-track-access-token"
+              )}`,
+            },
+          })
+          .then((response) => {
+            setFollowerDisplayNames((prevState) => {
+              let updatedState = { ...prevState };
+
+              updatedState[response.data._id] = response.data.username;
+
+              return updatedState;
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+  }, [followers]);
+
+  useEffect(() => {
+    if (following) {
+      for (let followingId of following) {
+        axios
+          .get(USER_URL(followingId), {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                "train-track-access-token"
+              )}`,
+            },
+          })
+          .then((response) => {
+            setFollowingDisplayNames((prevState) => {
+              let updatedState = { ...prevState };
+
+              updatedState[response.data._id] = response.data.username;
+
+              return updatedState;
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+  }, [following]);
+
   return (
     <div className="follower-bar-container">
       {followers && following ? (
