@@ -111,6 +111,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
               setFollowerOpen(false);
             }}
             open={followerOpen}
+            fullWidth
           >
             <DialogTitle>Followers</DialogTitle>
             <List>
@@ -144,6 +145,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
               setFollowingOpen(false);
             }}
             open={followingOpen}
+            fullWidth
           >
             <DialogTitle>Following</DialogTitle>
             <List>
