@@ -1,4 +1,14 @@
-import { ButtonBase, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  ButtonBase,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USER_URL } from "../consts";
@@ -16,6 +26,9 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
   const [followingDisplayNames, setFollowingDisplayNames] = useState<{
     [key: string]: string;
   }>({});
+
+  const [followerOpen, setFollowerOpen] = useState(false);
+  const [followingOpen, setFollowingOpen] = useState(false);
 
   useEffect(() => {
     if (followers) {
@@ -75,14 +88,90 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
     <div className="follower-bar-container">
       {followers && following ? (
         <>
-          <ButtonBase className="user-follow-count">
+          <ButtonBase
+            className="user-follow-count"
+            onClick={() => {
+              setFollowerOpen(true);
+            }}
+          >
             <Typography variant="h6">{followers.length}</Typography>
             <Typography variant="subtitle2">Followers</Typography>
           </ButtonBase>
-          <ButtonBase className="user-follow-count">
+          <ButtonBase
+            className="user-follow-count"
+            onClick={() => {
+              setFollowingOpen(true);
+            }}
+          >
             <Typography variant="h6">{following.length}</Typography>
             <Typography variant="subtitle2">Following</Typography>
           </ButtonBase>
+          <Dialog
+            onClose={() => {
+              setFollowerOpen(false);
+            }}
+            open={followerOpen}
+          >
+            <DialogTitle>Followers</DialogTitle>
+            <List>
+              {followers.map((followerId) => (
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.location.href = `/profile?id=${followerId}`;
+                  }}
+                >
+                  <ListItemIcon>
+                    <Avatar>
+                      {followerDisplayNames[followerId]
+                        ? followerDisplayNames[followerId][0]
+                        : ""}
+                    </Avatar>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      followerDisplayNames[followerId]
+                        ? followerDisplayNames[followerId]
+                        : ""
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Dialog>
+          <Dialog
+            onClose={() => {
+              setFollowingOpen(false);
+            }}
+            open={followingOpen}
+          >
+            <DialogTitle>Following</DialogTitle>
+            <List>
+              {following.map((followingId) => (
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.location.href = `/profile?id=${followingId}`;
+                  }}
+                >
+                  <ListItemIcon>
+                    <Avatar>
+                      {followingDisplayNames[followingId]
+                        ? followingDisplayNames[followingId][0]
+                        : ""}
+                    </Avatar>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      followingDisplayNames[followingId]
+                        ? followingDisplayNames[followingId]
+                        : ""
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Dialog>
         </>
       ) : (
         <div />
