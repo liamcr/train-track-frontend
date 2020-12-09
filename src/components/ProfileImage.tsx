@@ -12,7 +12,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ src, profileName }) => {
     <div className="profile-image-container">
       <img className="profile-image" src={src} alt={`${profileName} DP`} />
       <div className="profile-image-overlay">
-        <Typography variant="h3">{profileName}</Typography>
+        <Typography variant="h4">{profileName}</Typography>
       </div>
     </div>
   );

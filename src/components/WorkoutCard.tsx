@@ -13,6 +13,7 @@ import {
   makeStyles,
   createStyles,
   Typography,
+  CardActionArea,
 } from "@material-ui/core";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { formatDate } from "../util/helperFns";
@@ -66,13 +67,15 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
 
   return (
     <Card className={classes.workoutCard}>
-      <CardHeader
-        avatar={
-          <Avatar>{userInfo !== null ? userInfo.displayName[0] : ""}</Avatar>
-        }
-        title={userInfo !== null ? userInfo.displayName : ""}
-        subheader={formatDate(workout.date)}
-      />
+      <CardActionArea href={`/profile?id=${workout.user}`}>
+        <CardHeader
+          avatar={
+            <Avatar>{userInfo !== null ? userInfo.displayName[0] : ""}</Avatar>
+          }
+          title={userInfo !== null ? userInfo.displayName : ""}
+          subheader={formatDate(workout.date)}
+        />
+      </CardActionArea>
       <CardContent>
         <Typography variant="h6">{workout.name}</Typography>
         {workout.description && (
