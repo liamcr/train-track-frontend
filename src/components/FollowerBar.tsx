@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USER_URL } from "../consts";
+import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.css";
 
 type FollowerBarProps = {
@@ -114,31 +115,42 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             fullWidth
           >
             <DialogTitle>Followers</DialogTitle>
-            <List>
-              {followers.map((followerId) => (
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.location.href = `/profile?id=${followerId}`;
-                  }}
-                >
-                  <ListItemIcon>
-                    <Avatar>
-                      {followerDisplayNames[followerId]
-                        ? followerDisplayNames[followerId][0]
-                        : ""}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      followerDisplayNames[followerId]
-                        ? followerDisplayNames[followerId]
-                        : ""
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
+            {followers.length > 0 ? (
+              <List>
+                {followers.map((followerId) => (
+                  <ListItem
+                    button
+                    onClick={() => {
+                      window.location.href = `/profile?id=${followerId}`;
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Avatar>
+                        {followerDisplayNames[followerId]
+                          ? followerDisplayNames[followerId][0]
+                          : ""}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        followerDisplayNames[followerId]
+                          ? followerDisplayNames[followerId]
+                          : ""
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <div className="no-users-container">
+                <img
+                  src={NotFoundIcon}
+                  className="not-found-icon"
+                  alt="No workouts found"
+                />
+                No users found.
+              </div>
+            )}
           </Dialog>
           <Dialog
             onClose={() => {
@@ -148,31 +160,42 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             fullWidth
           >
             <DialogTitle>Following</DialogTitle>
-            <List>
-              {following.map((followingId) => (
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.location.href = `/profile?id=${followingId}`;
-                  }}
-                >
-                  <ListItemIcon>
-                    <Avatar>
-                      {followingDisplayNames[followingId]
-                        ? followingDisplayNames[followingId][0]
-                        : ""}
-                    </Avatar>
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      followingDisplayNames[followingId]
-                        ? followingDisplayNames[followingId]
-                        : ""
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
+            {following.length > 0 ? (
+              <List>
+                {following.map((followingId) => (
+                  <ListItem
+                    button
+                    onClick={() => {
+                      window.location.href = `/profile?id=${followingId}`;
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Avatar>
+                        {followingDisplayNames[followingId]
+                          ? followingDisplayNames[followingId][0]
+                          : ""}
+                      </Avatar>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        followingDisplayNames[followingId]
+                          ? followingDisplayNames[followingId]
+                          : ""
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <div className="no-users-container">
+                <img
+                  src={NotFoundIcon}
+                  className="not-found-icon"
+                  alt="No workouts found"
+                />
+                No users found.
+              </div>
+            )}
           </Dialog>
         </>
       ) : (

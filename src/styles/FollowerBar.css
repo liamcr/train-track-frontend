@@ -10,3 +10,18 @@
   display: flex;
   flex-direction: column;
 }
+
+.no-users-container {
+  color: var(--primary-disabled);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+
+.not-found-icon {
+  width: 96px;
+  height: 96px;
+}
