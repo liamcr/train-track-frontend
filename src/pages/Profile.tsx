@@ -16,6 +16,7 @@ import ProfileImage from "../components/ProfileImage";
 import { FullUser, Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import FollowerBar from "../components/FollowerBar";
+import FollowButton from "../components/FollowButton";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -82,6 +83,12 @@ const Profile: React.FC = () => {
         }
         profileName={userData ? userData.username : ""}
       />
+      {userData !== null && userData.isFollowing !== undefined && (
+        <FollowButton
+          initFollowState={userData.isFollowing}
+          userId={userData._id}
+        />
+      )}
       <FollowerBar
         followers={userData ? userData.followers : null}
         following={userData ? userData.following : null}
