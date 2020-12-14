@@ -8,9 +8,10 @@ import { CircularProgress } from "@material-ui/core";
 
 type TimelineProps = {
   data: Workout[] | null;
+  profile?: boolean;
 };
 
-const Timeline: React.FC<TimelineProps> = ({ data }) => {
+const Timeline: React.FC<TimelineProps> = ({ data, profile }) => {
   return (
     <div className="timeline-container">
       {data === null ? (
@@ -22,7 +23,9 @@ const Timeline: React.FC<TimelineProps> = ({ data }) => {
             className="not-found-icon"
             alt="No workouts found"
           />
-          No workouts found. Click the "+" button below to add your first!
+          {`No workouts found. ${
+            !profile ? 'Click the "+" button below to add your first!' : ""
+          }`}
         </div>
       ) : (
         <TimelineProvider>

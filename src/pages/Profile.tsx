@@ -93,7 +93,7 @@ const Profile: React.FC = () => {
         followers={userData ? userData.followers : null}
         following={userData ? userData.following : null}
       />
-      <Timeline data={userWorkouts} />
+      <Timeline data={userWorkouts} profile />
       <BottomNavigation value="profile" className={classes.tabBar}>
         <BottomNavigationAction
           label="Home"
