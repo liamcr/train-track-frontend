@@ -105,6 +105,7 @@ const Profile: React.FC = () => {
           label="Search"
           value="search"
           icon={<SearchIcon />}
+          href="/search"
         />
         <BottomNavigationAction
           label="Profile"

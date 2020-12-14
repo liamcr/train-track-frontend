@@ -10,6 +10,9 @@ export const USER_WORKOUTS_URL = (userId: string) =>
 export const ADD_WORKOUT_URL = `${apiHost}/workouts/add`;
 export const ADD_EXERCISES_URL = `${apiHost}/exercises/addBulk`;
 
+export const SEARCH_URL = (searchQuery: string) =>
+  `${apiHost}/search?search=${searchQuery}`;
+
 export const FOLLOW_URL = (userId: string) =>
   `${apiHost}/users/follow/${userId}`;
 export const UNFOLLOW_URL = (userId: string) =>
