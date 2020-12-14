@@ -1,0 +1,20 @@
+.user-search-container {
+  width: 95%;
+  max-width: 600px;
+  margin: 8px auto;
+}
+
+.no-users-search-container {
+  color: var(--primary-disabled);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 16pt;
+  margin-top: 12px;
+}
+
+.not-found-icon {
+  width: 96px;
+  height: 96px;
+}

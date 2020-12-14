@@ -10,7 +10,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
-import SearchBar from "../components/SearchBar";
+import UserSearch from "../components/UserSearch";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -34,7 +34,7 @@ const Search: React.FC = () => {
   return (
     <>
       <Header />
-      <SearchBar />
+      <UserSearch />
       <BottomNavigation value="search" className={classes.tabBar}>
         <BottomNavigationAction
           label="Home"

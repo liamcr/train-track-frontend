@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
       <ProfileImage
         src={
           userData
-            ? "https://scontent.fybz2-1.fna.fbcdn.net/v/t1.0-9/71033630_1574351756041270_2416587937782169600_o.jpg?_nc_cat=100&ccb=2&_nc_sid=09cbfe&_nc_ohc=EmM_JYxNc7gAX8zYEpH&_nc_ht=scontent.fybz2-1.fna&oh=096c4a6860805536bc94c3043d6d631e&oe=5FCD3B4E"
+            ? "https://pbs.twimg.com/profile_images/1189566497603117056/IocOf6FS_400x400.jpg"
             : "#"
         }
         profileName={userData ? userData.username : ""}
