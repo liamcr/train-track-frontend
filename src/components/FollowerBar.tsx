@@ -123,6 +123,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     onClick={() => {
                       window.location.href = `/profile?id=${followerId}`;
                     }}
+                    key={followerId}
                   >
                     <ListItemIcon>
                       <Avatar>
@@ -168,6 +169,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     onClick={() => {
                       window.location.href = `/profile?id=${followingId}`;
                     }}
+                    key={followingId}
                   >
                     <ListItemIcon>
                       <Avatar>

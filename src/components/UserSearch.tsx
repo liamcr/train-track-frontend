@@ -20,7 +20,7 @@ const UserSearch: React.FC = () => {
       {isLoading ? (
         <CircularProgress color="primary" />
       ) : searchResults !== null && searchResults.length > 0 ? (
-        searchResults.map((user) => <UserCard userInfo={user} />)
+        searchResults.map((user) => <UserCard key={user._id} userInfo={user} />)
       ) : searchResults === null ? (
         <div className="no-users-search-container">
           <Search style={{ fontSize: 96 }} />
