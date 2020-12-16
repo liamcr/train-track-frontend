@@ -17,3 +17,9 @@ export const FOLLOW_URL = (userId: string) =>
   `${apiHost}/users/follow/${userId}`;
 export const UNFOLLOW_URL = (userId: string) =>
   `${apiHost}/users/unfollow/${userId}`;
+
+export const LIKE_URL = (workoutId: string) =>
+  `${apiHost}/workouts/like/${workoutId}`;
+
+export const UNLIKE_URL = (workoutId: string) =>
+  `${apiHost}/workouts/unlike/${workoutId}`;

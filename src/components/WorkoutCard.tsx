@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Workout, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
-import { USER_URL } from "../consts";
+import { LIKE_URL, UNLIKE_URL, USER_URL } from "../consts";
 import {
   Card,
   CardHeader,
@@ -35,8 +35,43 @@ const useStyles = makeStyles(() =>
 const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   const { state, dispatch } = useContext(CacheContext);
   const [userInfo, setUserInfo] = useState<User | null>(null);
+  const [numLikes, setNumLikes] = useState(workout.likes.length);
+  const [liked, setLiked] = useState(workout.liked);
+  const [isLoading, setIsLoading] = useState(false);
 
   const classes = useStyles();
+
+  const onLikePressed = () => {
+    setIsLoading(true);
+
+    axios
+      .post(
+        liked ? UNLIKE_URL(workout._id) : LIKE_URL(workout._id),
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "train-track-access-token"
+            )}`,
+          },
+        }
+      )
+      .then((res) => {
+        setLiked((prevState) => !prevState);
+
+        if (res.data.includes("unliked")) {
+          setNumLikes((prevState) => prevState - 1);
+        } else {
+          setNumLikes((prevState) => prevState + 1);
+        }
+      })
+      .catch((err) => {
+        console.error(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
     if (state[workout.user] !== undefined && userInfo === null) {
@@ -86,10 +121,14 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         } exercise${workout.exerciseIds.length !== 1 ? "s" : ""}`}</Typography>
       </CardContent>
       <CardActions>
-        <IconButton>
+        <IconButton
+          onClick={onLikePressed}
+          disabled={isLoading}
+          color={liked ? "primary" : "default"}
+        >
           <ThumbUpIcon />
         </IconButton>
-        {`${workout.likes.length} like${workout.likes.length !== 1 ? "s" : ""}`}
+        {`${numLikes} like${numLikes !== 1 ? "s" : ""}`}
       </CardActions>
     </Card>
   );

@@ -5,13 +5,15 @@ type Comment = {
 };
 
 export type Workout = {
+  _id: string;
   user: string;
   name: string;
   description?: string;
-  exerciseIds: [string];
+  exerciseIds: string[];
   date: string;
-  likes: [string];
-  comments: [Comment];
+  liked: boolean;
+  likes: string[];
+  comments: Comment[];
 };
 
 export type Exercise = {
