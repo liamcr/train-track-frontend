@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { USER_URL, WORKOUT_URL } from "../consts";
 import { FullUser, Workout } from "../util/commonTypes";
-import { formatDate, setAccessToken } from "../util/helperFns";
+import { setAccessToken } from "../util/helperFns";
 import "../styles/WorkoutPage.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
@@ -33,7 +33,6 @@ const WorkoutPage: React.FC = () => {
   const classes = useStyles();
 
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);
-  const [userData, setUserData] = useState<FullUser | null>(null);
 
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
@@ -51,18 +50,6 @@ const WorkoutPage: React.FC = () => {
         })
         .then((response) => {
           setWorkoutData(response.data);
-
-          axios
-            .get(USER_URL(response.data.user), {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                  "train-track-access-token"
-                )}`,
-              },
-            })
-            .then((userResponse) => {
-              setUserData(userResponse.data);
-            });
         });
     }
   }, []);

@@ -39,13 +39,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   };
 
   return (
-    <Button
-      color="primary"
-      variant="contained"
-      onClick={onButtonPressed}
-      disabled={isLoading}
-      fullWidth
-    >
+    <Button color="primary" onClick={onButtonPressed} disabled={isLoading}>
       {followState ? "- Unfollow" : "+ Follow"}
     </Button>
   );

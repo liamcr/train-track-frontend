@@ -18,3 +18,11 @@
   align-items: flex-end;
   padding-left: 12px;
 }
+
+.profile-overlay-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: calc(100% - 24px);
+  align-items: center;
+}

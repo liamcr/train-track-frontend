@@ -75,20 +75,13 @@ const Profile: React.FC = () => {
   return (
     <>
       <Header fixed />
-      <ProfileImage
-        src={
-          userData
-            ? "https://pbs.twimg.com/profile_images/1189566497603117056/IocOf6FS_400x400.jpg"
-            : "#"
-        }
-        profileName={userData ? userData.username : ""}
-      />
-      {userData !== null && userData.isFollowing !== undefined && (
+      <ProfileImage user={userData} />
+      {/* {userData !== null && userData.isFollowing !== undefined && (
         <FollowButton
           initFollowState={userData.isFollowing}
           userId={userData._id}
         />
-      )}
+      )} */}
       <FollowerBar
         followers={userData ? userData.followers : null}
         following={userData ? userData.following : null}
