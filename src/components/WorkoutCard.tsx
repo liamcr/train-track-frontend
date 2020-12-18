@@ -13,6 +13,7 @@ import {
   createStyles,
   Typography,
   CardActionArea,
+  Link,
 } from "@material-ui/core";
 import { formatDate } from "../util/helperFns";
 import LikeButton from "./LikeButton";
@@ -76,7 +77,15 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         />
       </CardActionArea>
       <CardContent>
-        <Typography variant="h6">{workout.name}</Typography>
+        <Typography variant="h6">
+          <Link
+            href={`/workout?id=${workout._id}`}
+            color="inherit"
+            underline="none"
+          >
+            {workout.name}
+          </Link>
+        </Typography>
         {workout.description && (
           <Typography variant="subtitle1">{workout.description}</Typography>
         )}
