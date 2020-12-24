@@ -1,19 +1,16 @@
 import {
-  Avatar,
   Card,
   CardActions,
-  Chip,
   CircularProgress,
   createStyles,
-  Divider,
   makeStyles,
   Typography,
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { USER_URL, WORKOUT_URL } from "../consts";
-import { FullUser, Workout } from "../util/commonTypes";
+import { WORKOUT_URL } from "../consts";
+import { Workout } from "../util/commonTypes";
 import { setAccessToken } from "../util/helperFns";
 import "../styles/WorkoutPage.css";
 import LikeButton from "../components/LikeButton";

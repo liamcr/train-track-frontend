@@ -10,6 +10,8 @@ export const USER_WORKOUTS_URL = (userId: string) =>
 export const ADD_WORKOUT_URL = `${apiHost}/workouts/add`;
 export const ADD_EXERCISES_URL = `${apiHost}/exercises/addBulk`;
 
+export const UPLOAD_URL = `${apiHost}/upload`;
+
 export const WORKOUT_URL = (workoutId: string) =>
   `${apiHost}/workouts/${workoutId}`;
 

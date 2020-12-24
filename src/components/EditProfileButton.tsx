@@ -7,10 +7,12 @@ import {
   DialogActions,
   Button,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { FullUser } from "../util/commonTypes";
+import axios from "axios";
+import { UPLOAD_URL } from "../consts";
 
 type EditProfileButtonProps = {
   user: FullUser;
@@ -18,6 +20,9 @@ type EditProfileButtonProps = {
 
 const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,6 +30,43 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
 
   const handleClickClose = () => {
     setOpen(false);
+  };
+
+  const handleFileInputOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+    } else {
+      setSelectedFile(null);
+    }
+  };
+
+  const handleAddImageClick = () => {
+    if (inputRef.current !== null) {
+      inputRef.current.click();
+    }
+  };
+
+  const handleApplyClick = () => {
+    if (selectedFile === null) {
+      setOpen(false);
+    } else {
+      const fd = new FormData();
+      fd.append("image", selectedFile, selectedFile.name);
+
+      axios
+        .post(UPLOAD_URL, fd, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "train-track-access-token"
+            )}`,
+          },
+        })
+        .then(() => {
+          console.log("success!");
+        });
+    }
   };
 
   return (
@@ -44,16 +86,36 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
             }}
           >
             <Typography>Display Picture</Typography>
-            <IconButton>
-              <AddAPhotoIcon color="primary" />
-            </IconButton>
+            <input
+              type="file"
+              onChange={handleFileInputOnChange}
+              style={{ display: "none" }}
+              ref={inputRef}
+              accept="image/png, image/jpeg"
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Typography noWrap style={{ maxWidth: 64 }}>
+                {selectedFile !== null ? selectedFile?.name : ""}
+              </Typography>
+              <IconButton onClick={handleAddImageClick}>
+                <AddAPhotoIcon color="primary" />
+              </IconButton>
+            </div>
           </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClickClose} color="primary">
             Cancel
           </Button>
-          <Button color="primary">Apply</Button>
+          <Button color="primary" onClick={handleApplyClick}>
+            Apply
+          </Button>
         </DialogActions>
       </Dialog>
     </>

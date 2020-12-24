@@ -42,7 +42,7 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
       .then((response) => {
         setUserData(response.data);
       });
-  }, []);
+  }, [workoutData.user]);
 
   return (
     <>
