@@ -20,6 +20,7 @@ type EditProfileButtonProps = {
 
 const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,6 +53,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     if (selectedFile === null) {
       setOpen(false);
     } else {
+      setIsLoading(true);
+
       const fd = new FormData();
       fd.append("image", selectedFile, selectedFile.name);
 
@@ -63,8 +66,11 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
             )}`,
           },
         })
-        .then(() => {
-          console.log("success!");
+        .then((response) => {
+          window.location.href = "/profile";
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   };
@@ -113,7 +119,11 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
           <Button onClick={handleClickClose} color="primary">
             Cancel
           </Button>
-          <Button color="primary" onClick={handleApplyClick}>
+          <Button
+            color="primary"
+            onClick={handleApplyClick}
+            disabled={isLoading}
+          >
             Apply
           </Button>
         </DialogActions>

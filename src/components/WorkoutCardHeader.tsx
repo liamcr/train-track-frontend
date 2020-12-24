@@ -57,7 +57,13 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
         </Typography>
         {userData !== null && (
           <Chip
-            avatar={<Avatar>{userData.username[0]}</Avatar>}
+            avatar={
+              userData.displayImage !== "" ? (
+                <Avatar src={userData.displayImage} />
+              ) : (
+                <Avatar>{userData.username[0]}</Avatar>
+              )
+            }
             clickable
             onClick={() => {
               window.location.href = `/profile?id=${userData._id}`;

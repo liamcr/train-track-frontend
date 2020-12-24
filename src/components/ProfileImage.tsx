@@ -12,7 +12,11 @@ type ProfileImageProps = {
 const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
   return (
     <div className="profile-image-container">
-      <img className="profile-image" src={"#"} alt={`${user?.username} DP`} />
+      <img
+        className="profile-image"
+        src={user?.displayImage}
+        alt={`${user?.username} DP`}
+      />
       <div className="profile-image-overlay">
         <div className="profile-overlay-content">
           <Typography variant="h4">{user?.username}</Typography>

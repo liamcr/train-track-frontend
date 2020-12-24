@@ -56,6 +56,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
             payload: {
               userId: response.data._id,
               displayName: response.data.username,
+              displayImage: response.data.displayImage,
             },
           });
         })
@@ -70,7 +71,13 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       <CardActionArea href={`/profile?id=${workout.user}`}>
         <CardHeader
           avatar={
-            <Avatar>{userInfo !== null ? userInfo.displayName[0] : ""}</Avatar>
+            userInfo !== null && userInfo.displayImage !== "" ? (
+              <Avatar src={userInfo.displayImage} />
+            ) : (
+              <Avatar>
+                {userInfo !== null ? userInfo.displayName[0] : ""}
+              </Avatar>
+            )
           }
           title={userInfo !== null ? userInfo.displayName : ""}
           subheader={formatDate(workout.date)}

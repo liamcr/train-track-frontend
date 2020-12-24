@@ -7,19 +7,25 @@ const CacheContext = createContext<{
   state: UserCache;
   dispatch: Dispatch<{
     type: string;
-    payload: { userId: string; displayName: string };
+    payload: { userId: string; displayName: string; displayImage: string };
   }>;
 }>({ state: initialState, dispatch: () => null });
 
 const userReducer = (
   state: UserCache,
-  action: { type: string; payload: { userId: string; displayName: string } }
+  action: {
+    type: string;
+    payload: { userId: string; displayName: string; displayImage: string };
+  }
 ) => {
   switch (action.type) {
     case "ADD_USER":
       return {
         ...state,
-        [action.payload.userId]: { displayName: action.payload.displayName },
+        [action.payload.userId]: {
+          displayName: action.payload.displayName,
+          displayImage: action.payload.displayImage,
+        },
       };
     default:
       return state;

@@ -25,8 +25,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
   const [liked, setLiked] = useState(workout.liked);
   const [isLoading, setIsLoading] = useState(false);
   const [likesOpen, setLikesOpen] = useState(false);
-  const [userDisplayNames, setUserDisplayNames] = useState<{
-    [key: string]: string;
+  const [userInfo, setUserInfo] = useState<{
+    [key: string]: {
+      username: string;
+      displayImage: string;
+    };
   }>({});
 
   const onLikePressed = () => {
@@ -73,10 +76,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
             },
           })
           .then((response) => {
-            setUserDisplayNames((prevState) => {
+            setUserInfo((prevState) => {
               let updatedState = { ...prevState };
 
-              updatedState[response.data._id] = response.data.username;
+              updatedState[response.data._id] = {
+                username: response.data.username,
+                displayImage: response.data.displayImage,
+              };
 
               return updatedState;
             });
@@ -122,16 +128,16 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
                 key={userId}
               >
                 <ListItemIcon>
-                  <Avatar>
-                    {userDisplayNames[userId]
-                      ? userDisplayNames[userId][0]
-                      : ""}
-                  </Avatar>
+                  {userInfo[userId] && userInfo[userId].displayImage !== "" ? (
+                    <Avatar src={userInfo[userId].displayImage} />
+                  ) : (
+                    <Avatar>
+                      {userInfo[userId] ? userInfo[userId].username[0] : ""}
+                    </Avatar>
+                  )}
                 </ListItemIcon>
                 <ListItemText
-                  primary={
-                    userDisplayNames[userId] ? userDisplayNames[userId] : ""
-                  }
+                  primary={userInfo[userId] ? userInfo[userId].username : ""}
                 />
               </ListItem>
             ))}

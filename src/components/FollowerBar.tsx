@@ -22,10 +22,16 @@ type FollowerBarProps = {
 
 const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
   const [followerDisplayNames, setFollowerDisplayNames] = useState<{
-    [key: string]: string;
+    [key: string]: {
+      username: string;
+      displayImage: string;
+    };
   }>({});
   const [followingDisplayNames, setFollowingDisplayNames] = useState<{
-    [key: string]: string;
+    [key: string]: {
+      username: string;
+      displayImage: string;
+    };
   }>({});
 
   const [followerOpen, setFollowerOpen] = useState(false);
@@ -46,7 +52,10 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             setFollowerDisplayNames((prevState) => {
               let updatedState = { ...prevState };
 
-              updatedState[response.data._id] = response.data.username;
+              updatedState[response.data._id] = {
+                username: response.data.username,
+                displayImage: response.data.displayImage,
+              };
 
               return updatedState;
             });
@@ -73,7 +82,10 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             setFollowingDisplayNames((prevState) => {
               let updatedState = { ...prevState };
 
-              updatedState[response.data._id] = response.data.username;
+              updatedState[response.data._id] = {
+                username: response.data.username,
+                displayImage: response.data.displayImage,
+              };
 
               return updatedState;
             });
@@ -126,16 +138,23 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     key={followerId}
                   >
                     <ListItemIcon>
-                      <Avatar>
-                        {followerDisplayNames[followerId]
-                          ? followerDisplayNames[followerId][0]
-                          : ""}
-                      </Avatar>
+                      {followerDisplayNames[followerId] &&
+                      followerDisplayNames[followerId].displayImage !== "" ? (
+                        <Avatar
+                          src={followerDisplayNames[followerId].displayImage}
+                        />
+                      ) : (
+                        <Avatar>
+                          {followerDisplayNames[followerId]
+                            ? followerDisplayNames[followerId].username[0]
+                            : ""}
+                        </Avatar>
+                      )}
                     </ListItemIcon>
                     <ListItemText
                       primary={
                         followerDisplayNames[followerId]
-                          ? followerDisplayNames[followerId]
+                          ? followerDisplayNames[followerId].username
                           : ""
                       }
                     />
@@ -172,16 +191,23 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     key={followingId}
                   >
                     <ListItemIcon>
-                      <Avatar>
-                        {followingDisplayNames[followingId]
-                          ? followingDisplayNames[followingId][0]
-                          : ""}
-                      </Avatar>
+                      {followingDisplayNames[followingId] &&
+                      followingDisplayNames[followingId].displayImage !== "" ? (
+                        <Avatar
+                          src={followingDisplayNames[followingId].displayImage}
+                        />
+                      ) : (
+                        <Avatar>
+                          {followingDisplayNames[followingId]
+                            ? followingDisplayNames[followingId].username[0]
+                            : ""}
+                        </Avatar>
+                      )}
                     </ListItemIcon>
                     <ListItemText
                       primary={
                         followingDisplayNames[followingId]
-                          ? followingDisplayNames[followingId]
+                          ? followingDisplayNames[followingId].username
                           : ""
                       }
                     />

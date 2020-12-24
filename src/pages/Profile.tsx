@@ -76,12 +76,6 @@ const Profile: React.FC = () => {
     <>
       <Header fixed />
       <ProfileImage user={userData} />
-      {/* {userData !== null && userData.isFollowing !== undefined && (
-        <FollowButton
-          initFollowState={userData.isFollowing}
-          userId={userData._id}
-        />
-      )} */}
       <FollowerBar
         followers={userData ? userData.followers : null}
         following={userData ? userData.following : null}

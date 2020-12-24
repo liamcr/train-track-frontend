@@ -33,12 +33,14 @@ export type ExerciseSet = {
 
 export type User = {
   displayName: string;
+  displayImage: string;
 };
 
 export type FullUser = {
   username: string;
   followers: string[];
   following: string[];
+  displayImage: string;
   isFollowing?: boolean;
   _id: string;
 };
