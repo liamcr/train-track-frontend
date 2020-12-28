@@ -8,6 +8,9 @@ export const TIMELINE_URL = (limit = 10, offset = 0) =>
 export const USER_WORKOUTS_URL = (userId: string) =>
   `${apiHost}/workouts/user/${userId}`;
 export const ADD_WORKOUT_URL = `${apiHost}/workouts/add`;
+
+export const GET_EXERCISE_URL = (exerciseId: string) =>
+  `${apiHost}/exercises/${exerciseId}`;
 export const ADD_EXERCISES_URL = `${apiHost}/exercises/addBulk`;
 
 export const UPLOAD_URL = `${apiHost}/upload`;

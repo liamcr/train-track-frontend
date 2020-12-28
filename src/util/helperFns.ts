@@ -1,3 +1,5 @@
+import { ExerciseSet } from "./commonTypes";
+
 /**
  * Handles the updating and verification of the user's access token.
  * Redirects the user to the log-in page if there is no access token
@@ -38,4 +40,20 @@ export const formatDate = (rawDate: string) => {
   let date = new Date(rawDate);
 
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+};
+
+const singularUnits = {
+  reps: "rep",
+  seconds: "second",
+  minutes: "minute",
+};
+
+export const formatSet = (setObj: ExerciseSet) => {
+  return `${setObj.value} ${singularUnits[setObj.unit]}${
+    setObj.value !== 1 ? "s" : ""
+  }${
+    setObj.weight.unit !== undefined && setObj.weight.value !== undefined
+      ? ` · ${setObj.weight.value} ${setObj.weight.unit}`
+      : ""
+  }`;
 };

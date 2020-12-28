@@ -9,12 +9,13 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { WORKOUT_URL } from "../consts";
-import { Workout } from "../util/commonTypes";
+import { GET_EXERCISE_URL, WORKOUT_URL } from "../consts";
+import { Exercise, Workout } from "../util/commonTypes";
 import { setAccessToken } from "../util/helperFns";
 import "../styles/WorkoutPage.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
+import ExerciseList from "../components/ExerciseList";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,6 +31,7 @@ const WorkoutPage: React.FC = () => {
   const classes = useStyles();
 
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);
+  const [exercises, setExercises] = useState<Exercise[] | null>(null);
 
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
@@ -47,6 +49,18 @@ const WorkoutPage: React.FC = () => {
         })
         .then((response) => {
           setWorkoutData(response.data);
+
+          axios
+            .get(GET_EXERCISE_URL(response.data.exerciseIds.join()), {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                  "train-track-access-token"
+                )}`,
+              },
+            })
+            .then((response) => {
+              setExercises(response.data);
+            });
         });
     }
   }, []);
@@ -66,6 +80,10 @@ const WorkoutPage: React.FC = () => {
                   {workoutData.description}
                 </Typography>
               )}
+              <Typography variant="h4" style={{ marginTop: 32 }}>
+                Exercises
+              </Typography>
+              {exercises !== null && <ExerciseList exercises={exercises} />}
               <CardActions>
                 <LikeButton workout={workoutData} />
               </CardActions>
