@@ -48,7 +48,6 @@ const useStyles = makeStyles(() =>
     },
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor: "hsl(204, 100%, 35%)",
     },
     content: {
       flexGrow: 1,
