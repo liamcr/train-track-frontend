@@ -10,7 +10,6 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import Header from "../components/Header";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "../styles/NewWorkout.css";
@@ -20,6 +19,7 @@ import { Exercise } from "../util/commonTypes";
 import axios from "axios";
 import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../consts";
 import Alert from "../components/Alert";
+import PageWrapper from "../components/PageWrapper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -150,8 +150,7 @@ const NewWorkout: React.FC = () => {
   };
 
   return (
-    <>
-      <Header />
+    <PageWrapper bottomNavHidden>
       <div className="new-workout-container">
         <Card className={classes.card}>
           <CardHeader title="New Workout" />
@@ -221,7 +220,7 @@ const NewWorkout: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-    </>
+    </PageWrapper>
   );
 };
 

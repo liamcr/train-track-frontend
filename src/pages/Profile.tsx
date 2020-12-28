@@ -2,43 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USER_URL, USER_WORKOUTS_URL } from "../consts";
 import { setAccessToken } from "../util/helperFns";
-import {
-  makeStyles,
-  createStyles,
-  BottomNavigation,
-  BottomNavigationAction,
-} from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
-import UserIcon from "@material-ui/icons/Person";
-import Header from "../components/Header";
 import ProfileImage from "../components/ProfileImage";
 import { FullUser, Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import FollowerBar from "../components/FollowerBar";
-import FollowButton from "../components/FollowButton";
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    tabBar: {
-      position: "fixed",
-      bottom: 0,
-      width: "100vw",
-      backgroundColor: "hsl(204, 100%, 50%)",
-      "& .Mui-selected": {
-        color: "white",
-      },
-    },
-  })
-);
+import PageWrapper from "../components/PageWrapper";
 
 const Profile: React.FC = () => {
   setAccessToken();
 
   const [userData, setUserData] = useState<FullUser | null>(null);
   const [userWorkouts, setUserWorkouts] = useState<Workout[] | null>(null);
-
-  const classes = useStyles();
 
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
@@ -73,35 +47,14 @@ const Profile: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Header fixed />
+    <PageWrapper navValue="profile" fixedHeader>
       <ProfileImage user={userData} />
       <FollowerBar
         followers={userData ? userData.followers : null}
         following={userData ? userData.following : null}
       />
       <Timeline data={userWorkouts} profile />
-      <BottomNavigation value="profile" className={classes.tabBar}>
-        <BottomNavigationAction
-          label="Home"
-          value="home"
-          href="/home"
-          icon={<HomeIcon />}
-        />
-        <BottomNavigationAction
-          label="Search"
-          value="search"
-          icon={<SearchIcon />}
-          href="/search"
-        />
-        <BottomNavigationAction
-          label="Profile"
-          value="profile"
-          icon={<UserIcon />}
-          href="/profile"
-        />
-      </BottomNavigation>
-    </>
+    </PageWrapper>
   );
 };
 

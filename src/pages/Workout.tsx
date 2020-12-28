@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
 import { GET_EXERCISE_URL, WORKOUT_URL } from "../consts";
 import { Exercise, Workout } from "../util/commonTypes";
 import { setAccessToken } from "../util/helperFns";
@@ -16,6 +15,7 @@ import "../styles/WorkoutPage.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
 import ExerciseList from "../components/ExerciseList";
+import PageWrapper from "../components/PageWrapper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -66,8 +66,7 @@ const WorkoutPage: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Header fixed />
+    <PageWrapper bottomNavHidden>
       <div className="workout-card-container">
         <Card className={classes.workoutCard}>
           {workoutData === null ? (
@@ -91,7 +90,7 @@ const WorkoutPage: React.FC = () => {
           )}
         </Card>
       </div>
-    </>
+    </PageWrapper>
   );
 };
 

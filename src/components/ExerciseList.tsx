@@ -1,4 +1,4 @@
-import { List, ListItem, ListSubheader } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import React from "react";
 import { Exercise } from "../util/commonTypes";
 import ExerciseDisplay from "./ExerciseDisplay";
