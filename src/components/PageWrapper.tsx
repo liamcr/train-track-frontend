@@ -84,26 +84,29 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
           <Header fixed={!!fixedHeader} />
           {children}
           {!bottomNavHidden && (
-            <BottomNavigation value={navValue} className={classes.tabBar}>
-              <BottomNavigationAction
-                label="Home"
-                value="home"
-                icon={<HomeIcon />}
-                href="/home"
-              />
-              <BottomNavigationAction
-                label="Search"
-                value="search"
-                icon={<SearchIcon />}
-                href="/search"
-              />
-              <BottomNavigationAction
-                label="Profile"
-                value="profile"
-                icon={<UserIcon />}
-                href="/profile"
-              />
-            </BottomNavigation>
+            <>
+              <div style={{ height: 64 }} />
+              <BottomNavigation value={navValue} className={classes.tabBar}>
+                <BottomNavigationAction
+                  label="Home"
+                  value="home"
+                  icon={<HomeIcon />}
+                  href="/home"
+                />
+                <BottomNavigationAction
+                  label="Search"
+                  value="search"
+                  icon={<SearchIcon />}
+                  href="/search"
+                />
+                <BottomNavigationAction
+                  label="Profile"
+                  value="profile"
+                  icon={<UserIcon />}
+                  href="/profile"
+                />
+              </BottomNavigation>
+            </>
           )}
         </>
       ) : (
@@ -146,7 +149,12 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
               ))}
             </List>
           </Drawer>
-          <div className={classes.content}>{children}</div>
+          <div
+            className={classes.content}
+            style={{ marginTop: navValue !== "profile" ? 32 : 0 }}
+          >
+            {children}
+          </div>
         </div>
       )}
     </>

@@ -4,7 +4,12 @@ import axios from "axios";
 import { TIMELINE_URL } from "../consts";
 import { Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
-import { Fab, makeStyles, createStyles } from "@material-ui/core";
+import {
+  Fab,
+  makeStyles,
+  createStyles,
+  useMediaQuery,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import PageWrapper from "../components/PageWrapper";
 
@@ -13,7 +18,6 @@ const useStyles = makeStyles(() =>
     fab: {
       position: "fixed",
       right: 16,
-      bottom: 72,
     },
   })
 );
@@ -24,6 +28,8 @@ const Home: React.FC = () => {
   const [limit, setLimit] = useState(10);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const classes = useStyles();
 
@@ -61,6 +67,7 @@ const Home: React.FC = () => {
         size="large"
         href="/new-workout"
         className={classes.fab}
+        style={{ bottom: isMobile ? 72 : 16 }}
       >
         <AddIcon />
       </Fab>

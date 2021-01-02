@@ -9,7 +9,7 @@
 }
 
 .profile-image-overlay {
-  top: calc(-40vh - 5px);
+  top: calc(-40vh - 6px);
   z-index: 2;
   position: relative;
   background-color: rgba(0, 0, 0, 0.2);
