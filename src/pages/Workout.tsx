@@ -20,6 +20,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     workoutCard: {
       padding: 16,
+      marginBottom: 12,
     },
   })
 );
