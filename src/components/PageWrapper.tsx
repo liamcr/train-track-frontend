@@ -19,6 +19,7 @@ import UserIcon from "@material-ui/icons/Person";
 import React, { useEffect } from "react";
 import Logo from "../assets/train-track-init-logo.svg";
 import Header from "./Header";
+import { setAccessToken } from "../util/helperFns";
 
 type PageWrapperProps = {
   navValue?: "home" | "search" | "profile";
@@ -73,6 +74,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
   fixedHeader,
   bottomNavHidden,
 }) => {
+  setAccessToken();
+
   const classes = useStyles();
 
   const isMobile = useMediaQuery("(max-width: 600px)");

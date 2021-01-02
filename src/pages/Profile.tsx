@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USER_URL, USER_WORKOUTS_URL } from "../consts";
-import { setAccessToken } from "../util/helperFns";
 import ProfileImage from "../components/ProfileImage";
 import { FullUser, Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
@@ -9,8 +8,6 @@ import FollowerBar from "../components/FollowerBar";
 import PageWrapper from "../components/PageWrapper";
 
 const Profile: React.FC = () => {
-  setAccessToken();
-
   const [userData, setUserData] = useState<FullUser | null>(null);
   const [userWorkouts, setUserWorkouts] = useState<Workout[] | null>(null);
 

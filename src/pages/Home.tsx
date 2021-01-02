@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { setAccessToken } from "../util/helperFns";
 import axios from "axios";
 import { TIMELINE_URL } from "../consts";
 import { Workout } from "../util/commonTypes";
@@ -23,8 +22,6 @@ const useStyles = makeStyles(() =>
 );
 
 const Home: React.FC = () => {
-  setAccessToken();
-
   const [limit, setLimit] = useState(10);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

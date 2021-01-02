@@ -10,7 +10,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GET_EXERCISE_URL, WORKOUT_URL } from "../consts";
 import { Exercise, Workout } from "../util/commonTypes";
-import { setAccessToken } from "../util/helperFns";
 import "../styles/WorkoutPage.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
@@ -26,8 +25,6 @@ const useStyles = makeStyles(() =>
 );
 
 const WorkoutPage: React.FC = () => {
-  setAccessToken();
-
   const classes = useStyles();
 
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);

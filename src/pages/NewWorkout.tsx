@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { setAccessToken } from "../util/helperFns";
 import {
   Card,
   CardHeader,
@@ -32,8 +31,6 @@ const useStyles = makeStyles(() =>
 );
 
 const NewWorkout: React.FC = () => {
-  setAccessToken();
-
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [isLoading, setIsLoading] = useState(false);
