@@ -69,7 +69,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
           });
       }
     }
-  }, [followers]);
+  }, [followers, dispatch]);
 
   useEffect(() => {
     if (following) {

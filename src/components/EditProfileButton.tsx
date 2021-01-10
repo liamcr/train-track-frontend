@@ -6,22 +6,34 @@ import {
   Typography,
   DialogActions,
   Button,
+  TextField,
 } from "@material-ui/core";
 import React, { useRef, useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { FullUser } from "../util/commonTypes";
-import axios from "axios";
-import { UPLOAD_URL } from "../consts";
+import axios, { AxiosResponse } from "axios";
+import { UPDATE_USER_URL, UPLOAD_URL } from "../consts";
+import Alert from "./Alert";
 
 type EditProfileButtonProps = {
   user: FullUser;
+};
+
+type EditableUserData = {
+  username: string;
 };
 
 const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [newUserData, setNewUserData] = useState<EditableUserData>({
+    username: user.username,
+  });
+  const [displayPictureChanged, setDisplayPictureChanged] = useState(false);
+  const [userDataChanged, setUserDataChanged] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -38,8 +50,10 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   ) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedFile(event.target.files[0]);
+      setDisplayPictureChanged(true);
     } else {
       setSelectedFile(null);
+      setDisplayPictureChanged(false);
     }
   };
 
@@ -49,10 +63,10 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     }
   };
 
-  const handleApplyClick = () => {
-    if (selectedFile === null) {
-      setOpen(false);
-    } else {
+  const handleDisplayImageUpdate = (
+    callback: (res: AxiosResponse<any>) => void
+  ) => {
+    if (selectedFile !== null) {
       setIsLoading(true);
 
       const fd = new FormData();
@@ -66,13 +80,64 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
             )}`,
           },
         })
-        .then((response) => {
-          window.location.href = "/profile";
-        })
-        .finally(() => {
+        .then(callback)
+        .catch((err) => {
+          setErrorMessage("Something went wrong uploading your picture");
+
           setIsLoading(false);
         });
     }
+  };
+
+  const handleUserDataUpdate = (
+    callback: (res: AxiosResponse<any>) => void
+  ) => {
+    setIsLoading(true);
+
+    axios
+      .post(UPDATE_USER_URL, newUserData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            "train-track-access-token"
+          )}`,
+        },
+      })
+      .then(callback)
+      .catch((err) => {
+        setErrorMessage("Username is already taken");
+
+        setIsLoading(false);
+      });
+  };
+
+  const handleApplyClick = () => {
+    if (displayPictureChanged && userDataChanged) {
+      handleDisplayImageUpdate(() => {
+        handleUserDataUpdate(() => {
+          window.location.href = "/profile";
+        });
+      });
+    } else if (userDataChanged) {
+      handleUserDataUpdate(() => {
+        window.location.href = "/profile";
+      });
+    } else if (displayPictureChanged) {
+      handleDisplayImageUpdate(() => {
+        window.location.href = "/profile";
+      });
+    }
+  };
+
+  const onUpdateUsernameField = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setNewUserData({
+      username: event.target.value,
+    });
+
+    setUserDataChanged(
+      event.target.value !== user.username && event.target.value.length >= 3
+    );
   };
 
   return (
@@ -83,6 +148,12 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
       <Dialog open={open} onClose={handleClickClose} fullWidth>
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
+          <Alert
+            message={errorMessage}
+            type="danger"
+            visible={errorMessage !== ""}
+            onClose={() => setErrorMessage("")}
+          />
           <div
             style={{
               display: "flex",
@@ -114,6 +185,22 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
               </IconButton>
             </div>
           </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TextField
+              label="Username"
+              color="primary"
+              value={newUserData.username}
+              onChange={onUpdateUsernameField}
+              fullWidth
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClickClose} color="primary">
@@ -122,7 +209,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
           <Button
             color="primary"
             onClick={handleApplyClick}
-            disabled={isLoading}
+            disabled={isLoading || (!displayPictureChanged && !userDataChanged)}
           >
             Apply
           </Button>

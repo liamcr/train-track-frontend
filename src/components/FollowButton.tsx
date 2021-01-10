@@ -16,7 +16,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   const [followState, setFollowState] = useState(initFollowState);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { state, dispatch } = useContext(FollowersContext);
+  const { dispatch } = useContext(FollowersContext);
 
   const onButtonPressed = () => {
     setIsLoading(true);
