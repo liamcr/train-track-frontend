@@ -8,7 +8,6 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
   makeStyles,
   Typography,
   useMediaQuery,
@@ -16,7 +15,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
-import React, { useEffect } from "react";
+import React from "react";
 import Logo from "../assets/train-track-init-logo.svg";
 import Header from "./Header";
 import { setAccessToken } from "../util/helperFns";
