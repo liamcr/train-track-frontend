@@ -14,6 +14,7 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { FullUser } from "../util/commonTypes";
 import axios, { AxiosResponse } from "axios";
 import { UPDATE_USER_URL, UPLOAD_URL } from "../consts";
+import Alert from "./Alert";
 
 type EditProfileButtonProps = {
   user: FullUser;
@@ -32,6 +33,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   });
   const [displayPictureChanged, setDisplayPictureChanged] = useState(false);
   const [userDataChanged, setUserDataChanged] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,6 +82,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         })
         .then(callback)
         .catch((err) => {
+          setErrorMessage("Something went wrong uploading your picture");
+
           setIsLoading(false);
         });
     }
@@ -100,6 +104,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
       })
       .then(callback)
       .catch((err) => {
+        setErrorMessage("Username is already taken");
+
         setIsLoading(false);
       });
   };
@@ -142,6 +148,12 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
       <Dialog open={open} onClose={handleClickClose} fullWidth>
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
+          <Alert
+            message={errorMessage}
+            type="danger"
+            visible={errorMessage !== ""}
+            onClose={() => setErrorMessage("")}
+          />
           <div
             style={{
               display: "flex",
