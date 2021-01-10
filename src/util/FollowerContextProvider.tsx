@@ -1,5 +1,4 @@
 import React, { useReducer, createContext, Dispatch } from "react";
-import { UserCache } from "./commonTypes";
 
 type FollowersState = {
   updatedFollowers: number;
@@ -13,6 +12,7 @@ const FollowersContext = createContext<{
   state: FollowersState;
   dispatch: Dispatch<{
     type: string;
+    initValue?: number;
   }>;
 }>({ state: initialState, dispatch: () => null });
 
@@ -20,6 +20,7 @@ const followersReducer = (
   state: FollowersState,
   action: {
     type: string;
+    initValue?: number;
   }
 ) => {
   switch (action.type) {
@@ -39,6 +40,14 @@ const followersReducer = (
       return {
         ...unfollowedState,
       };
+    case "SET":
+      if (action.initValue !== undefined) {
+        return {
+          updatedFollowers: action.initValue,
+        };
+      } else {
+        return { ...state };
+      }
     default:
       return state;
   }

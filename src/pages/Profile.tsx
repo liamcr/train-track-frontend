@@ -6,6 +6,7 @@ import { FullUser, Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import FollowerBar from "../components/FollowerBar";
 import PageWrapper from "../components/PageWrapper";
+import { FollowersProvider } from "../util/FollowerContextProvider";
 
 const Profile: React.FC = () => {
   const [userData, setUserData] = useState<FullUser | null>(null);
@@ -45,11 +46,13 @@ const Profile: React.FC = () => {
 
   return (
     <PageWrapper navValue="profile" fixedHeader>
-      <ProfileImage user={userData} />
-      <FollowerBar
-        followers={userData ? userData.followers : null}
-        following={userData ? userData.following : null}
-      />
+      <FollowersProvider>
+        <ProfileImage user={userData} />
+        <FollowerBar
+          followers={userData ? userData.followers : null}
+          following={userData ? userData.following : null}
+        />
+      </FollowersProvider>
       <Timeline data={userWorkouts} profile />
     </PageWrapper>
   );
