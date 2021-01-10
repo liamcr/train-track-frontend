@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FOLLOW_URL, UNFOLLOW_URL } from "../consts";
+import { FollowersContext } from "../util/FollowerContextProvider";
 
 type FollowButtonProps = {
   initFollowState: boolean;
@@ -14,6 +15,8 @@ const FollowButton: React.FC<FollowButtonProps> = ({
 }) => {
   const [followState, setFollowState] = useState(initFollowState);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { state, dispatch } = useContext(FollowersContext);
 
   const onButtonPressed = () => {
     setIsLoading(true);
@@ -31,6 +34,9 @@ const FollowButton: React.FC<FollowButtonProps> = ({
         }
       )
       .then(() => {
+        followState
+          ? dispatch({ type: "UNFOLLOW" })
+          : dispatch({ type: "FOLLOW" });
         setFollowState((prevState) => !prevState);
       })
       .finally(() => {

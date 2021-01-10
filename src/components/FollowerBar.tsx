@@ -10,10 +10,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../consts";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.css";
+import { FollowersContext } from "../util/FollowerContextProvider";
 
 type FollowerBarProps = {
   followers: string[] | null;
@@ -34,11 +35,14 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
     };
   }>({});
 
+  const { state, dispatch } = useContext(FollowersContext);
+
   const [followerOpen, setFollowerOpen] = useState(false);
   const [followingOpen, setFollowingOpen] = useState(false);
 
   useEffect(() => {
     if (followers) {
+      dispatch({ type: "SET", initValue: followers.length });
       for (let followerId of followers) {
         axios
           .get(USER_URL(followerId), {
@@ -107,7 +111,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
               setFollowerOpen(true);
             }}
           >
-            <Typography variant="h6">{followers.length}</Typography>
+            <Typography variant="h6">{state.updatedFollowers}</Typography>
             <Typography variant="subtitle2">Followers</Typography>
           </ButtonBase>
           <ButtonBase
