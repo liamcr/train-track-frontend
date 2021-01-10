@@ -14,9 +14,13 @@ import {
   Typography,
   CardActionArea,
   Link,
+  IconButton,
+  ButtonBase,
 } from "@material-ui/core";
 import { formatDate } from "../util/helperFns";
 import LikeButton from "./LikeButton";
+import { Comment } from "@material-ui/icons";
+import CommentSection from "./CommentSection";
 
 type WorkoutCardProps = {
   workout: Workout;
@@ -102,7 +106,16 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       </CardContent>
       <CardActions>
         <LikeButton workout={workout} />
+        <IconButton>
+          <Comment />
+        </IconButton>
+        <ButtonBase style={{ marginLeft: 0, padding: 4 }} disabled>
+          {`${workout.comments.length} comment${
+            workout.comments.length !== 1 ? "s" : ""
+          }`}
+        </ButtonBase>
       </CardActions>
+      <CommentSection workout={workout} />
     </Card>
   );
 };
