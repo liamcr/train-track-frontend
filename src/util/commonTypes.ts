@@ -1,4 +1,5 @@
 export type Comment = {
+  _id: string;
   userId: string;
   comment: string;
   date: string;

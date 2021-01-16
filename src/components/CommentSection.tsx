@@ -2,6 +2,7 @@ import { Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { Comment, Workout } from "../util/commonTypes";
 import CommentInput from "./CommentInput";
+import PreviousComments from "./PreviousComments";
 
 type CommentSectionProps = {
   workout: Workout;
@@ -22,6 +23,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
         padding: 8,
       }}
     >
+      <PreviousComments commentList={commentList} />
       <CommentInput workout={workout} addComment={addComment} />
     </Paper>
   );
