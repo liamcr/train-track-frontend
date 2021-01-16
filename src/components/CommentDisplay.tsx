@@ -2,7 +2,7 @@ import { Avatar, Divider, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../consts";
-import { Comment, FullUser, User } from "../util/commonTypes";
+import { Comment, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 
 type CommentDisplayProps = {

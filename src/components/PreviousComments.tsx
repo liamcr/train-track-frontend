@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Comment } from "../util/commonTypes";
 import CommentDisplay from "./CommentDisplay";
