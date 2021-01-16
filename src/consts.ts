@@ -33,3 +33,6 @@ export const UNLIKE_URL = (workoutId: string) =>
   `${apiHost}/workouts/unlike/${workoutId}`;
 
 export const UPDATE_USER_URL = `${apiHost}/users/update`;
+
+export const COMMENT_URL = (workoutId: string) =>
+  `${apiHost}/workouts/comment/${workoutId}`;
