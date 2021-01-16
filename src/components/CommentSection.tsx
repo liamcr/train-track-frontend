@@ -20,7 +20,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
       square
       style={{
         backgroundColor: "rgb(60, 60, 60)",
-        padding: 8,
+        padding: 16,
       }}
     >
       <PreviousComments commentList={commentList} />

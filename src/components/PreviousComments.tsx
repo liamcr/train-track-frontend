@@ -1,6 +1,14 @@
-import { Button } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Comment } from "../util/commonTypes";
+import CommentDisplay from "./CommentDisplay";
 
 type PreviousCommentsProps = {
   commentList: Comment[];
@@ -24,7 +32,7 @@ const PreviousComments: React.FC<PreviousCommentsProps> = ({ commentList }) => {
         <Button onClick={onSeeMoreComments}>See More Comments</Button>
       )}
       {commentList.slice(numCommentsShown * -1).map((comment) => (
-        <div key={comment._id}>{comment.comment}</div>
+        <CommentDisplay key={comment._id} comment={comment} />
       ))}
     </div>
   );
