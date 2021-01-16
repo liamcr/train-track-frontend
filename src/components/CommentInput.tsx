@@ -3,13 +3,14 @@ import { Send } from "@material-ui/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { COMMENT_URL, USER_URL } from "../consts";
-import { Workout } from "../util/commonTypes";
+import { Comment, Workout } from "../util/commonTypes";
 
 type CommentInputProps = {
   workout: Workout;
+  addComment: (arg0: Comment) => void;
 };
 
-const CommentInput: React.FC<CommentInputProps> = ({ workout }) => {
+const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
   const [currentUserDisplayPicture, setCurrentUserDisplayPicture] = useState(
     ""
   );
@@ -51,8 +52,9 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout }) => {
           },
         }
       )
-      .then(() => {
+      .then((res) => {
         setComment("");
+        addComment(res.data);
       })
       .finally(() => {
         setIsLoading(false);

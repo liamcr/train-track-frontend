@@ -1,6 +1,6 @@
 import { Paper } from "@material-ui/core";
-import React from "react";
-import { Workout } from "../util/commonTypes";
+import React, { useState } from "react";
+import { Comment, Workout } from "../util/commonTypes";
 import CommentInput from "./CommentInput";
 
 type CommentSectionProps = {
@@ -8,6 +8,12 @@ type CommentSectionProps = {
 };
 
 const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
+  const [commentList, setCommentList] = useState<Comment[]>(workout.comments);
+
+  const addComment = (comment: Comment) => {
+    setCommentList((prevCommentList) => [...prevCommentList, comment]);
+  };
+
   return (
     <Paper
       square
@@ -16,7 +22,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
         padding: 8,
       }}
     >
-      <CommentInput workout={workout} />
+      <CommentInput workout={workout} addComment={addComment} />
     </Paper>
   );
 };
