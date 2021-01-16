@@ -77,6 +77,13 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
         onChange={handleOnCommentChange}
         color="primary"
         inputProps={{ maxLength: 120 }}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13 && comment.length >= 1) {
+            e.preventDefault();
+
+            onSend();
+          }
+        }}
       />
       <IconButton
         color="primary"
