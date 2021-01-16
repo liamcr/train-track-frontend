@@ -1,12 +1,47 @@
 import { Avatar, Divider, Typography } from "@material-ui/core";
-import React from "react";
-import { Comment } from "../util/commonTypes";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { USER_URL } from "../consts";
+import { Comment, FullUser, User } from "../util/commonTypes";
+import { CacheContext } from "../util/TimelineUserCache";
 
 type CommentDisplayProps = {
   comment: Comment;
 };
 
 const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
+  const { state, dispatch } = useContext(CacheContext);
+
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (state[comment.userId] !== undefined && userInfo === null) {
+      setUserInfo(state[comment.userId]);
+    } else if (state[comment.userId] === undefined) {
+      axios
+        .get(USER_URL(comment.userId), {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "train-track-access-token"
+            )}`,
+          },
+        })
+        .then((response) => {
+          dispatch({
+            type: "ADD_USER",
+            payload: {
+              userId: response.data._id,
+              displayName: response.data.username,
+              displayImage: response.data.displayImage,
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [state, comment.userId, dispatch, userInfo]);
+
   return (
     <div key={comment._id}>
       <div
@@ -18,10 +53,10 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
           marginTop: 4,
         }}
       >
-        <Avatar />
+        <Avatar src={userInfo?.displayImage} />
         <div style={{ marginLeft: 16 }}>
           <Typography variant="subtitle2" color="textSecondary">
-            liamc
+            {userInfo === null ? "" : userInfo.displayName}
           </Typography>
           <Typography>{comment.comment}</Typography>
         </div>
