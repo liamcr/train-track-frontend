@@ -42,6 +42,10 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
     }
   }, [state, comment.userId, dispatch, userInfo]);
 
+  const onAvatarOrNameClick = () => {
+    window.location.href = `/profile?id=${comment.userId}`;
+  };
+
   return (
     <div key={comment._id}>
       <div
@@ -53,9 +57,18 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
           marginTop: 4,
         }}
       >
-        <Avatar src={userInfo?.displayImage} />
+        <Avatar
+          src={userInfo?.displayImage}
+          onClick={onAvatarOrNameClick}
+          style={{ cursor: "pointer" }}
+        />
         <div style={{ marginLeft: 16 }}>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            onClick={onAvatarOrNameClick}
+            style={{ cursor: "pointer" }}
+          >
             {userInfo === null ? "" : userInfo.displayName}
           </Typography>
           <Typography>{comment.comment}</Typography>
