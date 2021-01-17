@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USER_URL, USER_WORKOUTS_URL } from "../consts";
 import ProfileImage from "../components/ProfileImage";
-import { FullUser, Workout } from "../util/commonTypes";
+import { FullUser } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import FollowerBar from "../components/FollowerBar";
 import PageWrapper from "../components/PageWrapper";
@@ -10,7 +10,6 @@ import { FollowersProvider } from "../util/FollowerContextProvider";
 
 const Profile: React.FC = () => {
   const [userData, setUserData] = useState<FullUser | null>(null);
-  const [userWorkouts, setUserWorkouts] = useState<Workout[] | null>(null);
 
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
@@ -27,19 +26,6 @@ const Profile: React.FC = () => {
       })
       .then((user) => {
         setUserData(user.data);
-
-        axios
-          .get(USER_WORKOUTS_URL(user.data._id), {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem(
-                "train-track-access-token"
-              )}`,
-            },
-          })
-          .then((response) => {
-            setUserWorkouts(response.data);
-          })
-          .catch((err) => console.log("oops"));
       })
       .catch((err) => console.log("oops"));
   }, []);
@@ -53,7 +39,9 @@ const Profile: React.FC = () => {
           following={userData ? userData.following : null}
         />
       </FollowersProvider>
-      <Timeline data={userWorkouts} profile />
+      {userData && (
+        <Timeline dataUrl={USER_WORKOUTS_URL(userData._id)} profile />
+      )}
     </PageWrapper>
   );
 };
