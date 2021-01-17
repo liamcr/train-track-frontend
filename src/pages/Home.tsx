@@ -22,7 +22,7 @@ const useStyles = makeStyles(() =>
 );
 
 const Home: React.FC = () => {
-  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -30,9 +30,11 @@ const Home: React.FC = () => {
 
   const classes = useStyles();
 
+  const limit = 2;
+
   useEffect(() => {
     axios
-      .get(TIMELINE_URL(limit), {
+      .get(TIMELINE_URL(limit, offset), {
         headers: {
           Authorization: `Bearer ${localStorage.getItem(
             "train-track-access-token"
@@ -54,7 +56,7 @@ const Home: React.FC = () => {
           setErrorMessage("Something went wrong. Try again later.");
         }
       });
-  }, [limit]);
+  }, [offset]);
 
   return (
     <PageWrapper navValue="home">
