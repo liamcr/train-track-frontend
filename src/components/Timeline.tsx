@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Workout } from "../util/commonTypes";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/Timeline.css";
@@ -13,13 +13,33 @@ type TimelineProps = {
 };
 
 const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
 
-  const limit = 10;
+  const limit = 3;
+
+  const observer = useRef<IntersectionObserver>();
+  const bottomRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setOffset((prevOffset) => prevOffset + limit);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [observer, isLoading, hasMore]
+  );
 
   useEffect(() => {
+    let isMounted = true;
+    setIsLoading(true);
+
     axios
       .get(`${dataUrl}?limit=${limit}&offset=${offset}`, {
         headers: {
@@ -29,7 +49,17 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
         },
       })
       .then((response) => {
-        setTimeline(response.data);
+        if (isMounted) {
+          setTimeline((prevTimeline) =>
+            prevTimeline === null
+              ? response.data
+              : [...prevTimeline, ...response.data]
+          );
+
+          if (response.data.length < limit) {
+            setHasMore(false);
+          }
+        }
       })
       .catch((err) => {
         if (
@@ -42,8 +72,15 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
       });
-  }, [offset]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [offset, dataUrl, setHasMore]);
 
   return (
     <div className="timeline-container">
@@ -61,11 +98,14 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
           }`}
         </div>
       ) : (
-        <TimelineProvider>
-          {timeline.map((workout, index) => (
-            <WorkoutCard key={index} workout={workout} />
-          ))}
-        </TimelineProvider>
+        <>
+          <TimelineProvider>
+            {timeline.map((workout, index) => (
+              <WorkoutCard key={index} workout={workout} />
+            ))}
+          </TimelineProvider>
+          {hasMore && <CircularProgress ref={bottomRef} />}
+        </>
       )}
     </div>
   );
