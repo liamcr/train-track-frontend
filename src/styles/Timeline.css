@@ -20,3 +20,11 @@
   width: 128px;
   height: 128px;
 }
+
+.no-more-posts {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 16pt;
+}

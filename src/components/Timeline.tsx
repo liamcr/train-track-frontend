@@ -104,7 +104,11 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
               <WorkoutCard key={index} workout={workout} />
             ))}
           </TimelineProvider>
-          {hasMore && <CircularProgress ref={bottomRef} />}
+          {hasMore ? (
+            <CircularProgress ref={bottomRef} />
+          ) : (
+            <div className="no-more-posts">No More Posts</div>
+          )}
         </>
       )}
     </div>
