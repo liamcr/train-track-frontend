@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { TIMELINE_URL } from "../consts";
-import { Workout } from "../util/commonTypes";
 import Timeline from "../components/Timeline";
 import {
   Fab,
@@ -22,43 +20,13 @@ const useStyles = makeStyles(() =>
 );
 
 const Home: React.FC = () => {
-  const [limit, setLimit] = useState(10);
-  const [timeline, setTimeline] = useState<Workout[] | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   const classes = useStyles();
 
-  useEffect(() => {
-    axios
-      .get(TIMELINE_URL(limit), {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
-        },
-      })
-      .then((response) => {
-        setTimeline(response.data);
-      })
-      .catch((err) => {
-        if (
-          err.response &&
-          (err.response.status === 401 || err.response.status === 403)
-        ) {
-          window.location.href = "/";
-        } else if (err.response && err.response.status === 404) {
-          setErrorMessage(err.response.data);
-        } else {
-          setErrorMessage("Something went wrong. Try again later.");
-        }
-      });
-  }, [limit]);
-
   return (
     <PageWrapper navValue="home">
-      <Timeline data={timeline} />
+      <Timeline dataUrl={TIMELINE_URL} />
       <Fab
         color="primary"
         size="large"
