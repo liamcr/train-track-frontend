@@ -17,8 +17,8 @@ import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
 import axios from "axios";
 import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../consts";
-import Alert from "../components/Alert";
 import PageWrapper from "../components/PageWrapper";
+import ToastAlert from "../components/ToastAlert";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -146,18 +146,16 @@ const NewWorkout: React.FC = () => {
       });
   };
 
+  const handleClose = () => {
+    setErrorMessage("");
+  };
+
   return (
     <PageWrapper bottomNavHidden>
       <div className="new-workout-container">
         <Card className={classes.card}>
           <CardHeader title="New Workout" />
           <CardContent>
-            <Alert
-              message={errorMessage}
-              type="danger"
-              visible={errorMessage !== ""}
-              onClose={() => setErrorMessage("")}
-            />
             <form onSubmit={onSubmit}>
               <TextField
                 label="Title"
@@ -217,6 +215,7 @@ const NewWorkout: React.FC = () => {
           </CardContent>
         </Card>
       </div>
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
     </PageWrapper>
   );
 };

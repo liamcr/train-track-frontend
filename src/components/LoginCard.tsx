@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/LoginCard.css";
 import axios from "axios";
 import { REGISTER_URL, LOGIN_URL } from "../consts";
-import Alert from "./Alert";
+
 import {
   Button,
   TextField,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardContent,
 } from "@material-ui/core";
+import ToastAlert from "./ToastAlert";
 
 type LoginCardProps = {
   signup?: boolean;
@@ -63,47 +64,48 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
       });
   };
 
+  const handleClose = () => {
+    setErrorMessage("");
+  };
+
   return (
-    <Card>
-      <CardHeader title={signup ? "Sign Up" : "Log In"} />
-      <CardContent>
-        <Alert
-          message={errorMessage}
-          type="danger"
-          visible={errorMessage !== ""}
-          onClose={() => setErrorMessage("")}
-        />
-        <form onSubmit={onSubmit}>
-          <TextField
-            label="Username"
-            name="train-track-username"
-            color="primary"
-            variant="outlined"
-            fullWidth
-          />
-          <TextField
-            label="Password"
-            type="password"
-            name="train-track-password"
-            variant="outlined"
-            color="primary"
-            margin="normal"
-            fullWidth
-          />
-          <div style={{ height: "1rem" }} />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isLoading}
-            disableElevation
-            fullWidth
-          >
-            Submit
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+    <>
+      <Card>
+        <CardHeader title={signup ? "Sign Up" : "Log In"} />
+        <CardContent>
+          <form onSubmit={onSubmit}>
+            <TextField
+              label="Username"
+              name="train-track-username"
+              color="primary"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              label="Password"
+              type="password"
+              name="train-track-password"
+              variant="outlined"
+              color="primary"
+              margin="normal"
+              fullWidth
+            />
+            <div style={{ height: "1rem" }} />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isLoading}
+              disableElevation
+              fullWidth
+            >
+              Submit
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
+    </>
   );
 };
 

@@ -14,7 +14,7 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { FullUser } from "../util/commonTypes";
 import axios, { AxiosResponse } from "axios";
 import { UPDATE_USER_URL, UPLOAD_URL } from "../consts";
-import Alert from "./Alert";
+import ToastAlert from "./ToastAlert";
 
 type EditProfileButtonProps = {
   user: FullUser;
@@ -140,6 +140,10 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     );
   };
 
+  const handleClose = () => {
+    setErrorMessage("");
+  };
+
   return (
     <>
       <IconButton onClick={handleClickOpen}>
@@ -148,12 +152,6 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
       <Dialog open={open} onClose={handleClickClose} fullWidth>
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
-          <Alert
-            message={errorMessage}
-            type="danger"
-            visible={errorMessage !== ""}
-            onClose={() => setErrorMessage("")}
-          />
           <div
             style={{
               display: "flex",
@@ -214,6 +212,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
             Apply
           </Button>
         </DialogActions>
+        <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
       </Dialog>
     </>
   );
