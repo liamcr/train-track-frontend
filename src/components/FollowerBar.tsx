@@ -15,6 +15,7 @@ import { USER_URL } from "../consts";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.css";
 import { FollowersContext } from "../util/FollowerContextProvider";
+import ToastAlert from "./ToastAlert";
 
 type FollowerBarProps = {
   followers: string[] | null;
@@ -37,6 +38,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
 
   const { state, dispatch } = useContext(FollowersContext);
 
+  const [errorMessage, setErrorMessage] = useState("");
   const [followerOpen, setFollowerOpen] = useState(false);
   const [followingOpen, setFollowingOpen] = useState(false);
 
@@ -65,7 +67,16 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             });
           })
           .catch((err) => {
-            console.error(err);
+            if (
+              err.response &&
+              (err.response.status === 401 || err.response.status === 403)
+            ) {
+              window.location.href = "/";
+            } else if (err.response && err.response.status === 404) {
+              setErrorMessage(err.response.data);
+            } else {
+              setErrorMessage("Something went wrong. Try again later.");
+            }
           });
       }
     }
@@ -95,11 +106,24 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             });
           })
           .catch((err) => {
-            console.error(err);
+            if (
+              err.response &&
+              (err.response.status === 401 || err.response.status === 403)
+            ) {
+              window.location.href = "/";
+            } else if (err.response && err.response.status === 404) {
+              setErrorMessage(err.response.data);
+            } else {
+              setErrorMessage("Something went wrong. Try again later.");
+            }
           });
       }
     }
   }, [following]);
+
+  const handleClose = () => {
+    setErrorMessage("");
+  };
 
   return (
     <div className="follower-bar-container">
@@ -233,6 +257,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
       ) : (
         <div />
       )}
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
     </div>
   );
 };

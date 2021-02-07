@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { FOLLOW_URL, UNFOLLOW_URL } from "../consts";
 import { FollowersContext } from "../util/FollowerContextProvider";
+import ToastAlert from "./ToastAlert";
 
 type FollowButtonProps = {
   initFollowState: boolean;
@@ -13,6 +14,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   initFollowState,
   userId,
 }) => {
+  const [errorMessage, setErrorMessage] = useState("");
   const [followState, setFollowState] = useState(initFollowState);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,15 +41,37 @@ const FollowButton: React.FC<FollowButtonProps> = ({
           : dispatch({ type: "FOLLOW" });
         setFollowState((prevState) => !prevState);
       })
+      .catch((err) => {
+        if (
+          err.response &&
+          (err.response.status === 401 || err.response.status === 403)
+        ) {
+          window.location.href = "/";
+        } else if (
+          err.response &&
+          (err.response.status === 400 || err.response.status === 404)
+        ) {
+          setErrorMessage(err.response.data);
+        } else {
+          setErrorMessage("Something went wrong. Try again later.");
+        }
+      })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
+  const handleClose = () => {
+    setErrorMessage("");
+  };
+
   return (
-    <Button color="primary" onClick={onButtonPressed} disabled={isLoading}>
-      {followState ? "- Unfollow" : "+ Follow"}
-    </Button>
+    <>
+      <Button color="primary" onClick={onButtonPressed} disabled={isLoading}>
+        {followState ? "- Unfollow" : "+ Follow"}
+      </Button>
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
+    </>
   );
 };
 

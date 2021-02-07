@@ -10,6 +10,7 @@ import { Search } from "@material-ui/icons";
 import { FullUser } from "../util/commonTypes";
 import axios from "axios";
 import { SEARCH_URL } from "../consts";
+import ToastAlert from "./ToastAlert";
 
 type SearchBarProps = {
   updateSearchResults: React.Dispatch<React.SetStateAction<FullUser[] | null>>;
@@ -48,11 +49,24 @@ const SearchBar: React.FC<SearchBarProps> = ({
         updateSearchResults(response.data);
       })
       .catch((err) => {
-        setErrorMessage(err.message);
+        if (
+          err.response &&
+          (err.response.status === 401 || err.response.status === 403)
+        ) {
+          window.location.href = "/";
+        } else if (err.response && err.response.status === 400) {
+          setErrorMessage(err.response.data);
+        } else {
+          setErrorMessage("Something went wrong. Try again later.");
+        }
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const handleClose = () => {
+    setErrorMessage("");
   };
 
   return (
@@ -82,6 +96,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           }
         }}
       />
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
     </Paper>
   );
 };

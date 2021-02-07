@@ -6,6 +6,7 @@ import WorkoutCard from "./WorkoutCard";
 import { TimelineProvider } from "../util/TimelineUserCache";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
+import ToastAlert from "./ToastAlert";
 
 type TimelineProps = {
   dataUrl: string;
@@ -16,7 +17,7 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [hasMore, setHasMore] = useState(true);
 
   const limit = 3;
@@ -82,6 +83,10 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
     };
   }, [offset, dataUrl, setHasMore]);
 
+  const handleClose = () => {
+    setErrorMessage("");
+  };
+
   return (
     <div className="timeline-container">
       {timeline === null ? (
@@ -111,6 +116,7 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
           )}
         </>
       )}
+      <ToastAlert message={errorMessage} type="error" onClose={handleClose} />
     </div>
   );
 };
