@@ -49,8 +49,16 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
-      setDisplayPictureChanged(true);
+      const fileSizeInMB = event.target.files[0].size / 1024 / 1024;
+
+      if (fileSizeInMB < 2) {
+        setSelectedFile(event.target.files[0]);
+        setDisplayPictureChanged(true);
+      } else {
+        setErrorMessage("Uploaded image must be less than 2 mb");
+        setSelectedFile(null);
+        setDisplayPictureChanged(false);
+      }
     } else {
       setSelectedFile(null);
       setDisplayPictureChanged(false);
