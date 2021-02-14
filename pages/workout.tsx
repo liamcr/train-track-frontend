@@ -10,7 +10,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GET_EXERCISE_URL, WORKOUT_URL } from "../util/consts";
 import { Exercise, Workout } from "../util/commonTypes";
-import "../styles/WorkoutPage.module.css";
+import styles from "../styles/WorkoutPage.module.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
 import ExerciseList from "../components/ExerciseList";
@@ -95,7 +95,7 @@ const WorkoutPage: React.FC = () => {
 
   return (
     <PageWrapper bottomNavHidden>
-      <div className="workout-card-container">
+      <div className={styles.workoutCardContainer}>
         <Card className={classes.workoutCard}>
           {workoutData === null ? (
             <CircularProgress color="primary" />

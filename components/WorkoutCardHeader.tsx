@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
 import { FullUser, Workout } from "../util/commonTypes";
 import { formatDate } from "../util/helperFns";
+import styles from "../styles/WorkoutPage.module.css";
 
 type WorkoutCardHeaderProps = {
   workoutData: Workout;
@@ -47,7 +48,7 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
   return (
     <>
       <Typography variant="h2">{workoutData.name}</Typography>
-      <div className="workout-card-subheader">
+      <div className={styles.workoutCardSubheader}>
         <Typography
           variant="subtitle1"
           color="textSecondary"

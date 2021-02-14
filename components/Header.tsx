@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Header.module.css";
+import styles from "../styles/Header.module.css";
 import { ButtonBase } from "@material-ui/core";
 import Image from "next/image";
 
@@ -11,7 +11,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ notLoggedIn, fixed, children }) => {
   return (
     <div
-      className="header-container"
+      className={styles.headerContainer}
       style={{ position: fixed ? "fixed" : "sticky" }}
     >
       <ButtonBase href={notLoggedIn ? "/" : "/home"}>
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ notLoggedIn, fixed, children }) => {
         />
       </ButtonBase>
 
-      <div className="header-trailing-items">{children}</div>
+      <div className={styles.headerTrailingItems}>{children}</div>
     </div>
   );
 };

@@ -1,11 +1,11 @@
-.signup-container {
+.signupContainer {
   background-image: url("/signup-page-background.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
 }
 
-.signup-card-container {
+.signupCardContainer {
   height: calc(100vh - 80px);
   display: flex;
   justify-content: center;

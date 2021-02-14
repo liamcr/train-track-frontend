@@ -1,15 +1,15 @@
 import React from "react";
-import "../styles/SignUp.module.css";
+import styles from "../styles/SignUp.module.css";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";
 import SEO from "../components/SEO";
 
 const SignUp: React.FC = () => {
   return (
-    <div className="signup-container">
+    <div className={styles.signupContainer}>
       <SEO title="Train Track" />
       <Header notLoggedIn />
-      <div className="signup-card-container">
+      <div className={styles.signupCardContainer}>
         <LoginCard signup />
       </div>
     </div>

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import "../styles/NewWorkout.module.css";
+import styles from "../styles/NewWorkout.module.css";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
@@ -154,7 +154,7 @@ const NewWorkout: React.FC = () => {
 
   return (
     <PageWrapper bottomNavHidden>
-      <div className="new-workout-container">
+      <div className={styles.newWorkoutContainer}>
         <Card className={classes.card}>
           <CardHeader title="New Workout" />
           <CardContent>
@@ -188,7 +188,7 @@ const NewWorkout: React.FC = () => {
                 fullWidth
               />
               <Typography variant="h5">Exercises</Typography>
-              <div className="dynamic-exercise-container">
+              <div className={styles.dynamicExerciseContainer}>
                 {exercises.map((val, ind) => (
                   <ExerciseInputItem
                     exercise={val}

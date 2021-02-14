@@ -1,4 +1,4 @@
-.timeline-container {
+.timelineContainer {
   width: 90%;
   margin: auto;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.not-found-container {
+.notFoundContainer {
   color: var(--primary-disabled);
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   font-size: 20pt;
 }
 
-.no-more-posts {
+.noMorePosts {
   font-style: italic;
   color: var(--text-secondary);
   margin-top: 16px;

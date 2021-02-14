@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Workout } from "../util/commonTypes";
-import "../styles/Timeline.module.css";
+import styles from "../styles/Timeline.module.css";
 import WorkoutCard from "./WorkoutCard";
 import { TimelineProvider } from "../util/TimelineUserCache";
 import { CircularProgress } from "@material-ui/core";
@@ -89,11 +89,11 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
   };
 
   return (
-    <div className="timeline-container">
+    <div className={styles.timelineContainer}>
       {timeline === null ? (
         <CircularProgress color="primary" />
       ) : timeline.length === 0 ? (
-        <div className="not-found-container">
+        <div className={styles.notFoundContainer}>
           <Image
             src="/notFound.svg"
             height={128}
@@ -114,7 +114,7 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
           {hasMore ? (
             <CircularProgress ref={bottomRef} />
           ) : (
-            <div className="no-more-posts">No More Posts</div>
+            <div className={styles.noMorePosts}>No More Posts</div>
           )}
         </>
       )}

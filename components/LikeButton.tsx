@@ -15,6 +15,7 @@ import { Workout } from "../util/commonTypes";
 import { LIKE_URL, UNLIKE_URL, USER_URL } from "../util/consts";
 import axios from "axios";
 import Image from "next/image";
+import styles from "../styles/FollowerBar.module.css";
 
 type LikeButtonProps = {
   workout: Workout;
@@ -145,7 +146,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
             ))}
           </List>
         ) : (
-          <div className="no-users-container">
+          <div className={styles.noUsersContainer}>
             <Image
               src="/notFound.svg"
               height={96}

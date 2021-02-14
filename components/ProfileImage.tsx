@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
 import Image from "next/image";
 import React from "react";
-import "../styles/ProfileImage.module.css";
+import styles from "../styles/ProfileImage.module.css";
 import { FullUser } from "../util/commonTypes";
 import EditProfileButton from "./EditProfileButton";
 import FollowButton from "./FollowButton";
@@ -13,10 +13,9 @@ type ProfileImageProps = {
 
 const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
   return (
-    <div className="profile-image-container">
+    <div className={styles.profileImageContainer}>
       {user && user.displayImage !== "" ? (
         <Image
-          className="profile-image"
           layout="fill"
           objectFit="cover"
           src={user.displayImage}
@@ -25,8 +24,8 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
       ) : (
         <Person style={{ width: "100%", height: "100%" }} color="primary" />
       )}
-      <div className="profile-image-overlay">
-        <div className="profile-overlay-content">
+      <div className={styles.profileImageOverlay}>
+        <div className={styles.profileOverlayContent}>
           <Typography variant="h4">{user?.username}</Typography>
 
           {user !== null && user.isFollowing !== undefined && (

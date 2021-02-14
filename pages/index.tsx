@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/LogIn.module.css";
+import styles from "../styles/LogIn.module.css";
 import { Button } from "@material-ui/core";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";
@@ -7,7 +7,7 @@ import SEO from "../components/SEO";
 
 const LogIn: React.FC = () => {
   return (
-    <div className="login-container">
+    <div className={styles.loginContainer}>
       <SEO title="Train Track" />
       <Header notLoggedIn>
         <Button
@@ -20,7 +20,7 @@ const LogIn: React.FC = () => {
           Sign Up
         </Button>
       </Header>
-      <div className="login-card-container">
+      <div className={styles.loginCardContainer}>
         <LoginCard />
       </div>
     </div>

@@ -1,10 +1,10 @@
-.user-search-container {
+.userSearchContainer {
   width: 95%;
   max-width: 600px;
   margin: 8px auto;
 }
 
-.no-users-search-container {
+.noUsersSearchContainer {
   color: var(--primary-disabled);
   display: flex;
   flex-direction: column;

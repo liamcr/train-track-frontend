@@ -1,17 +1,17 @@
-.follower-bar-container {
+.followerBarContainer {
   width: 100%;
   background-color: var(--card-colour);
   display: flex;
 }
 
-.user-follow-count {
+.userFollowCount {
   width: 50%;
   text-align: center;
   display: flex;
   flex-direction: column;
 }
 
-.no-users-container {
+.noUsersContainer {
   color: var(--primary-disabled);
   display: flex;
   flex-direction: column;

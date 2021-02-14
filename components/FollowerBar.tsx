@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
-import "../styles/FollowerBar.module.css";
+import styles from "../styles/FollowerBar.module.css";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
 import Image from "next/image";
@@ -126,11 +126,11 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
   };
 
   return (
-    <div className="follower-bar-container">
+    <div className={styles.followerBarContainer}>
       {followers && following ? (
         <>
           <ButtonBase
-            className="user-follow-count"
+            className={styles.userFollowCount}
             onClick={() => {
               setFollowerOpen(true);
             }}
@@ -139,7 +139,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             <Typography variant="subtitle2">Followers</Typography>
           </ButtonBase>
           <ButtonBase
-            className="user-follow-count"
+            className={styles.userFollowCount}
             onClick={() => {
               setFollowingOpen(true);
             }}
@@ -191,7 +191,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                 ))}
               </List>
             ) : (
-              <div className="no-users-container">
+              <div className={styles.noUsersContainer}>
                 <Image
                   src="/notFound.svg"
                   width={96}
@@ -246,9 +246,9 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                 ))}
               </List>
             ) : (
-              <div className="no-users-container">
+              <div className={styles.noUsersContainer}>
                 <Image
-                  src="./notFound.svg"
+                  src="/notFound.svg"
                   width={96}
                   height={96}
                   alt="No workouts found"
