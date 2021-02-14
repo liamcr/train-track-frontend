@@ -1,8 +1,9 @@
 import React from "react";
-import styles from "../styles/SignUp.module.css";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";
 import SEO from "../components/SEO";
+
+const styles = require("../styles/SignUp.module.css");
 
 const SignUp: React.FC = () => {
   return (

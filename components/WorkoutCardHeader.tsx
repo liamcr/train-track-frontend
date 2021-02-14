@@ -10,7 +10,8 @@ import React, { useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
 import { FullUser, Workout } from "../util/commonTypes";
 import { formatDate } from "../util/helperFns";
-import styles from "../styles/WorkoutPage.module.css";
+
+const styles = require("../styles/WorkoutPage.module.css");
 
 type WorkoutCardHeaderProps = {
   workoutData: Workout;

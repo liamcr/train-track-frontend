@@ -1,5 +1,5 @@
 import React from "react";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import "../styles.css";
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 

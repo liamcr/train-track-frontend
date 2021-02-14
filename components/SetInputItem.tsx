@@ -1,7 +1,8 @@
 import React from "react";
 import { ExerciseSet } from "../util/commonTypes";
-import styles from "../styles/NewWorkout.module.css";
 import { MenuItem, TextField } from "@material-ui/core";
+
+const styles = require("../styles/NewWorkout.module.css");
 
 type SetInputItemProps = {
   exerciseSet: ExerciseSet;

@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "../styles/Header.module.css";
 import { ButtonBase } from "@material-ui/core";
 import Image from "next/image";
+
+const styles = require("../styles/Header.module.css");
 
 type HeaderProps = {
   notLoggedIn?: boolean;

@@ -2,10 +2,11 @@ import { Typography } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
 import Image from "next/image";
 import React from "react";
-import styles from "../styles/ProfileImage.module.css";
 import { FullUser } from "../util/commonTypes";
 import EditProfileButton from "./EditProfileButton";
 import FollowButton from "./FollowButton";
+
+const styles = require("../styles/ProfileImage.module.css");
 
 type ProfileImageProps = {
   user: FullUser | null;

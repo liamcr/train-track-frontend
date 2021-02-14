@@ -10,12 +10,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { GET_EXERCISE_URL, WORKOUT_URL } from "../util/consts";
 import { Exercise, Workout } from "../util/commonTypes";
-import styles from "../styles/WorkoutPage.module.css";
 import LikeButton from "../components/LikeButton";
 import WorkoutCardHeader from "../components/WorkoutCardHeader";
 import ExerciseList from "../components/ExerciseList";
 import PageWrapper from "../components/PageWrapper";
 import ToastAlert from "../components/ToastAlert";
+
+const styles = require("../styles/WorkoutPage.module.css");
 
 const useStyles = makeStyles(() =>
   createStyles({

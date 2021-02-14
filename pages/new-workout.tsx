@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import styles from "../styles/NewWorkout.module.css";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
@@ -19,6 +18,8 @@ import axios from "axios";
 import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../util/consts";
 import PageWrapper from "../components/PageWrapper";
 import ToastAlert from "../components/ToastAlert";
+
+const styles = require("../styles/NewWorkout.module.css");
 
 const useStyles = makeStyles(() =>
   createStyles({

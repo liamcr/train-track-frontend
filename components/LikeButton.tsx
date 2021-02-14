@@ -15,7 +15,8 @@ import { Workout } from "../util/commonTypes";
 import { LIKE_URL, UNLIKE_URL, USER_URL } from "../util/consts";
 import axios from "axios";
 import Image from "next/image";
-import styles from "../styles/FollowerBar.module.css";
+
+const styles = require("../styles/FollowerBar.module.css");
 
 type LikeButtonProps = {
   workout: Workout;

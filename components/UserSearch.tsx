@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
-import styles from "../styles/UserSearch.module.css";
 import { FullUser } from "../util/commonTypes";
 import UserCard from "./UserCard";
 import { CircularProgress } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import Image from "next/image";
+
+const styles = require("../styles/UserSearch.module.css");
 
 const UserSearch: React.FC = () => {
   const [searchResults, setSearchResults] = useState<FullUser[] | null>(null);

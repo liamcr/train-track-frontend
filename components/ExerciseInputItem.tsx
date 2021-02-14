@@ -3,8 +3,9 @@ import { IconButton, TextField, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { Exercise, ExerciseSet } from "../util/commonTypes";
-import styles from "../styles/NewWorkout.module.css";
 import SetInputItem from "./SetInputItem";
+
+const styles = require("../styles/NewWorkout.module.css");
 
 type ExerciseInputItemProps = {
   exercise: Exercise;

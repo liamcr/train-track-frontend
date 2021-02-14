@@ -12,10 +12,11 @@ import {
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
-import styles from "../styles/FollowerBar.module.css";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
 import Image from "next/image";
+
+const styles = require("../styles/FollowerBar.module.css");
 
 type FollowerBarProps = {
   followers: string[] | null;

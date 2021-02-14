@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Workout } from "../util/commonTypes";
-import styles from "../styles/Timeline.module.css";
 import WorkoutCard from "./WorkoutCard";
 import { TimelineProvider } from "../util/TimelineUserCache";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import ToastAlert from "./ToastAlert";
 import Image from "next/image";
+
+const styles = require("../styles/Timeline.module.css");
 
 type TimelineProps = {
   dataUrl: string;
