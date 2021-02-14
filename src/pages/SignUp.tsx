@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/SignUp.css";
+import "../styles/SignUp.module.css";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";
 

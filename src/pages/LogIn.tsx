@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/LogIn.css";
+import "../styles/LogIn.module.css";
 import { Button } from "@material-ui/core";
 import LoginCard from "../components/LoginCard";
 import Header from "../components/Header";

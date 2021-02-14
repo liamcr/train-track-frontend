@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import "../styles/NewWorkout.css";
+import "../styles/NewWorkout.module.css";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
