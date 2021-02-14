@@ -15,7 +15,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import { setAccessToken } from "../util/helperFns";
 import Image from "next/image";
@@ -73,11 +73,13 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
   fixedHeader,
   bottomNavHidden,
 }) => {
-  setAccessToken();
-
   const classes = useStyles();
 
   const isMobile = useMediaQuery("(max-width: 600px)");
+
+  useEffect(() => {
+    setAccessToken();
+  }, []);
 
   return (
     <>

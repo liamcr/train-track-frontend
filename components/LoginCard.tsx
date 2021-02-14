@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/LoginCard.module.css";
 import axios from "axios";
 import { REGISTER_URL, LOGIN_URL } from "../util/consts";
 

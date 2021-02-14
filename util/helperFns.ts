@@ -6,14 +6,14 @@ import { ExerciseSet } from "./commonTypes";
  * available.
  */
 export const setAccessToken = () => {
-  const windowHash = window?.location?.hash?.substr(1);
+  const windowHash = window.location.hash.substr(1);
 
   if (windowHash) {
-    localStorage?.setItem("train-track-access-token", windowHash);
+    localStorage.setItem("train-track-access-token", windowHash);
     return;
   }
 
-  if (localStorage?.getItem("train-track-access-token")) {
+  if (localStorage.getItem("train-track-access-token")) {
     return;
   }
 
