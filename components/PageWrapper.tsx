@@ -20,6 +20,7 @@ import Logo from "../assets/train-track-init-logo.svg";
 import Header from "./Header";
 import { setAccessToken } from "../util/helperFns";
 import Image from "next/image";
+import SEO from "./SEO";
 
 type PageWrapperProps = {
   navValue?: "home" | "search" | "profile";
@@ -81,6 +82,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 
   return (
     <>
+      <SEO title="Train Track" />
       {isMobile ? (
         <>
           <Header fixed={!!fixedHeader} />
