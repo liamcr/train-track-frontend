@@ -2,7 +2,7 @@ import { Avatar, IconButton, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { COMMENT_URL, USER_URL } from "../consts";
+import { COMMENT_URL, USER_URL } from "../util/consts";
 import { Comment, Workout } from "../util/commonTypes";
 
 type CommentInputProps = {

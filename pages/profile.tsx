@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { USER_URL, USER_WORKOUTS_URL } from "../consts";
+import { USER_URL, USER_WORKOUTS_URL } from "../util/consts";
 import ProfileImage from "../components/ProfileImage";
 import { FullUser } from "../util/commonTypes";
 import Timeline from "../components/Timeline";

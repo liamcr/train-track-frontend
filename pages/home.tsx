@@ -1,5 +1,5 @@
 import React from "react";
-import { TIMELINE_URL } from "../consts";
+import { TIMELINE_URL } from "../util/consts";
 import Timeline from "../components/Timeline";
 import {
   Fab,

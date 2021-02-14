@@ -16,7 +16,7 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import ExerciseInputItem from "../components/ExerciseInputItem";
 import { Exercise } from "../util/commonTypes";
 import axios from "axios";
-import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../consts";
+import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../util/consts";
 import PageWrapper from "../components/PageWrapper";
 import ToastAlert from "../components/ToastAlert";
 

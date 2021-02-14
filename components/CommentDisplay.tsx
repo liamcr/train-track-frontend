@@ -1,7 +1,7 @@
 import { Avatar, Divider, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { USER_URL } from "../consts";
+import { USER_URL } from "../util/consts";
 import { Comment, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 

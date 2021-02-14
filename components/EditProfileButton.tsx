@@ -13,7 +13,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { FullUser } from "../util/commonTypes";
 import axios, { AxiosResponse } from "axios";
-import { UPDATE_USER_URL, UPLOAD_URL } from "../consts";
+import { UPDATE_USER_URL, UPLOAD_URL } from "../util/consts";
 import ToastAlert from "./ToastAlert";
 
 type EditProfileButtonProps = {

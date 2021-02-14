@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { FOLLOW_URL, UNFOLLOW_URL } from "../consts";
+import { FOLLOW_URL, UNFOLLOW_URL } from "../util/consts";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
 

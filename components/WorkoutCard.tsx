@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Workout, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
-import { USER_URL } from "../consts";
+import { USER_URL } from "../util/consts";
 import {
   Card,
   CardHeader,

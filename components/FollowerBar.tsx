@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { USER_URL } from "../consts";
+import { USER_URL } from "../util/consts";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.module.css";
 import { FollowersContext } from "../util/FollowerContextProvider";

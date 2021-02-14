@@ -9,7 +9,7 @@ import {
 import { Search } from "@material-ui/icons";
 import { FullUser } from "../util/commonTypes";
 import axios from "axios";
-import { SEARCH_URL } from "../consts";
+import { SEARCH_URL } from "../util/consts";
 import ToastAlert from "./ToastAlert";
 
 type SearchBarProps = {

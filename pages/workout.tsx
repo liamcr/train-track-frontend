@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { GET_EXERCISE_URL, WORKOUT_URL } from "../consts";
+import { GET_EXERCISE_URL, WORKOUT_URL } from "../util/consts";
 import { Exercise, Workout } from "../util/commonTypes";
 import "../styles/WorkoutPage.module.css";
 import LikeButton from "../components/LikeButton";

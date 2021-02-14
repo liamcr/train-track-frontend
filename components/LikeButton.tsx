@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { Workout } from "../util/commonTypes";
-import { LIKE_URL, UNLIKE_URL, USER_URL } from "../consts";
+import { LIKE_URL, UNLIKE_URL, USER_URL } from "../util/consts";
 import axios from "axios";
 import NotFoundIcon from "../assets/icons/notFound.svg";
 import Image from "next/image";
