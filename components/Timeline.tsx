@@ -7,6 +7,7 @@ import { TimelineProvider } from "../util/TimelineUserCache";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import ToastAlert from "./ToastAlert";
+import Image from "next/image";
 
 type TimelineProps = {
   dataUrl: string;
@@ -94,9 +95,10 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
         <CircularProgress color="primary" />
       ) : timeline.length === 0 ? (
         <div className="not-found-container">
-          <img
+          <Image
             src={NotFoundIcon}
-            className="not-found-icon"
+            height={128}
+            width={128}
             alt="No workouts found"
           />
           {`No workouts found. ${

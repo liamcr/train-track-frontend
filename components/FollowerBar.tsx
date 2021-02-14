@@ -16,6 +16,7 @@ import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.module.css";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
+import Image from "next/image";
 
 type FollowerBarProps = {
   followers: string[] | null;
@@ -192,9 +193,10 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
               </List>
             ) : (
               <div className="no-users-container">
-                <img
+                <Image
                   src={NotFoundIcon}
-                  className="not-found-icon"
+                  width={96}
+                  height={96}
                   alt="No workouts found"
                 />
                 No users found.
@@ -246,9 +248,10 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
               </List>
             ) : (
               <div className="no-users-container">
-                <img
+                <Image
                   src={NotFoundIcon}
-                  className="not-found-icon"
+                  width={96}
+                  height={96}
                   alt="No workouts found"
                 />
                 No users found.

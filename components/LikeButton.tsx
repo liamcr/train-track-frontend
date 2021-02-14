@@ -15,6 +15,7 @@ import { Workout } from "../util/commonTypes";
 import { LIKE_URL, UNLIKE_URL, USER_URL } from "../consts";
 import axios from "axios";
 import NotFoundIcon from "../assets/icons/notFound.svg";
+import Image from "next/image";
 
 type LikeButtonProps = {
   workout: Workout;
@@ -146,9 +147,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
           </List>
         ) : (
           <div className="no-users-container">
-            <img
+            <Image
               src={NotFoundIcon}
-              className="not-found-icon"
+              height={96}
+              width={96}
               alt="No workouts found"
             />
             No users found.

@@ -1,11 +1,7 @@
 .profile-image-container,
-.profile-image,
 .profile-image-overlay {
   width: 100%;
   height: 40vh;
-}
-.profile-image {
-  object-fit: cover;
 }
 
 .profile-image-overlay {

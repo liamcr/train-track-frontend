@@ -19,6 +19,7 @@ import React from "react";
 import Logo from "../assets/train-track-init-logo.svg";
 import Header from "./Header";
 import { setAccessToken } from "../util/helperFns";
+import Image from "next/image";
 
 type PageWrapperProps = {
   navValue?: "home" | "search" | "profile";
@@ -61,7 +62,6 @@ const useStyles = makeStyles(() =>
       alignItems: "center",
     },
     logo: {
-      height: 64,
       marginRight: 16,
     },
   })
@@ -122,7 +122,13 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
             anchor="left"
           >
             <ButtonBase href="/home" className={classes.logoContainer}>
-              <img src={Logo} alt="Train Track Logo" className={classes.logo} />
+              <Image
+                src={Logo}
+                alt="Train Track Logo"
+                height={64}
+                width={68}
+                className={classes.logo}
+              />
               <Typography variant="h4">Train Track</Typography>
             </ButtonBase>
             <Divider />

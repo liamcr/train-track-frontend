@@ -16,11 +16,6 @@
   font-size: 20pt;
 }
 
-.not-found-icon {
-  width: 128px;
-  height: 128px;
-}
-
 .no-more-posts {
   font-style: italic;
   color: var(--text-secondary);
