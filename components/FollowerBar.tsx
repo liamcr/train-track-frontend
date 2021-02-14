@@ -12,7 +12,6 @@ import {
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
-import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/FollowerBar.module.css";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
@@ -194,7 +193,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             ) : (
               <div className="no-users-container">
                 <Image
-                  src={NotFoundIcon}
+                  src="/notFound.svg"
                   width={96}
                   height={96}
                   alt="No workouts found"
@@ -249,7 +248,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
             ) : (
               <div className="no-users-container">
                 <Image
-                  src={NotFoundIcon}
+                  src="./notFound.svg"
                   width={96}
                   height={96}
                   alt="No workouts found"

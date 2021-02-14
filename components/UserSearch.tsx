@@ -4,7 +4,6 @@ import "../styles/UserSearch.module.css";
 import { FullUser } from "../util/commonTypes";
 import UserCard from "./UserCard";
 import { CircularProgress } from "@material-ui/core";
-import NotFoundIcon from "../assets/icons/notFound.svg";
 import { Search } from "@material-ui/icons";
 import Image from "next/image";
 
@@ -30,7 +29,7 @@ const UserSearch: React.FC = () => {
       ) : (
         <div className="no-users-search-container">
           <Image
-            src={NotFoundIcon}
+            src="/notFound.svg"
             height={96}
             width={96}
             alt="No users found"

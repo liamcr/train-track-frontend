@@ -1,5 +1,5 @@
 .login-container {
-  background-image: url("../assets/person-deadlifting.jpg");
+  background-image: url("/person-deadlifting.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;

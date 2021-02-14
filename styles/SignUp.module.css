@@ -1,5 +1,5 @@
 .signup-container {
-  background-image: url("../assets/signup-page-background.jpg");
+  background-image: url("/signup-page-background.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;

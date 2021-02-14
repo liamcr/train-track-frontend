@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Workout } from "../util/commonTypes";
-import NotFoundIcon from "../assets/icons/notFound.svg";
 import "../styles/Timeline.module.css";
 import WorkoutCard from "./WorkoutCard";
 import { TimelineProvider } from "../util/TimelineUserCache";
@@ -96,7 +95,7 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
       ) : timeline.length === 0 ? (
         <div className="not-found-container">
           <Image
-            src={NotFoundIcon}
+            src="/notFound.svg"
             height={128}
             width={128}
             alt="No workouts found"

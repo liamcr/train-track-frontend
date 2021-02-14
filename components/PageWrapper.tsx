@@ -16,7 +16,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
 import React from "react";
-import Logo from "../assets/train-track-init-logo.svg";
 import Header from "./Header";
 import { setAccessToken } from "../util/helperFns";
 import Image from "next/image";
@@ -125,7 +124,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
           >
             <ButtonBase href="/home" className={classes.logoContainer}>
               <Image
-                src={Logo}
+                src="/train-track-init-logo.svg"
                 alt="Train Track Logo"
                 height={64}
                 width={68}
