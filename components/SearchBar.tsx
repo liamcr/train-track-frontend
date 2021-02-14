@@ -35,6 +35,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   const executeSearch = () => {
+    if (typeof localStorage === "undefined") return;
+
     setIsLoading(true);
 
     axios
@@ -53,7 +55,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           err.response &&
           (err.response.status === 401 || err.response.status === 403)
         ) {
-          window.location.href = "/";
+          if (typeof window !== "undefined") window.location.href = "/";
         } else if (err.response && err.response.status === 400) {
           setErrorMessage(err.response.data);
         } else {

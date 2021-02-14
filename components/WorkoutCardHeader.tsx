@@ -66,7 +66,8 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
             }
             clickable
             onClick={() => {
-              window.location.href = `/profile?id=${userData._id}`;
+              if (typeof window !== "undefined")
+                window.location.href = `/profile?id=${userData._id}`;
             }}
             color="primary"
             label={userData.username}

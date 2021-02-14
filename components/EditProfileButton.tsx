@@ -74,6 +74,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const handleDisplayImageUpdate = (
     callback: (res: AxiosResponse<any>) => void
   ) => {
+    if (typeof localStorage === "undefined") return;
+
     if (selectedFile !== null) {
       setIsLoading(true);
 
@@ -100,6 +102,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const handleUserDataUpdate = (
     callback: (res: AxiosResponse<any>) => void
   ) => {
+    if (typeof localStorage === "undefined") return;
+
     setIsLoading(true);
 
     axios
@@ -122,16 +126,16 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     if (displayPictureChanged && userDataChanged) {
       handleDisplayImageUpdate(() => {
         handleUserDataUpdate(() => {
-          window.location.href = "/profile";
+          if (typeof window !== "undefined") window.location.href = "/profile";
         });
       });
     } else if (userDataChanged) {
       handleUserDataUpdate(() => {
-        window.location.href = "/profile";
+        if (typeof window !== "undefined") window.location.href = "/profile";
       });
     } else if (displayPictureChanged) {
       handleDisplayImageUpdate(() => {
-        window.location.href = "/profile";
+        if (typeof window !== "undefined") window.location.href = "/profile";
       });
     }
   };

@@ -33,6 +33,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
   }>({});
 
   const onLikePressed = () => {
+    if (typeof localStorage === "undefined") return;
     setIsLoading(true);
 
     axios
@@ -123,7 +124,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
               <ListItem
                 button
                 onClick={() => {
-                  window.location.href = `/profile?id=${userId}`;
+                  if (typeof window !== "undefined")
+                    window.location.href = `/profile?id=${userId}`;
                 }}
                 key={userId}
               >

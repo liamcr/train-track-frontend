@@ -132,7 +132,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
                   key={i}
                   button
                   onClick={() => {
-                    window.location.href = `/${name.toLowerCase()}`;
+                    if (typeof window !== "undefined")
+                      window.location.href = `/${name.toLowerCase()}`;
                   }}
                 >
                   <ListItemIcon>

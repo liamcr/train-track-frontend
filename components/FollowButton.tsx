@@ -21,6 +21,8 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   const { dispatch } = useContext(FollowersContext);
 
   const onButtonPressed = () => {
+    if (typeof localStorage === "undefined") return;
+
     setIsLoading(true);
 
     axios
@@ -46,7 +48,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
           err.response &&
           (err.response.status === 401 || err.response.status === 403)
         ) {
-          window.location.href = "/";
+          if (typeof window !== "undefined") window.location.href = "/";
         } else if (
           err.response &&
           (err.response.status === 400 || err.response.status === 404)

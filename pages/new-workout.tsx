@@ -71,6 +71,8 @@ const NewWorkout: React.FC = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (typeof localStorage === "undefined") return;
+
     setIsLoading(true);
 
     const data = new FormData(event.target as HTMLFormElement);
@@ -115,7 +117,7 @@ const NewWorkout: React.FC = () => {
           )
           .then((response) => {
             if (response.status === 200) {
-              window.location.href = "/home";
+              if (typeof window !== "undefined") window.location.href = "/home";
             }
           })
           .catch((err) => {
@@ -123,7 +125,7 @@ const NewWorkout: React.FC = () => {
               err.response &&
               (err.response.status === 401 || err.response.status === 403)
             ) {
-              window.location.href = "/";
+              if (typeof window !== "undefined") window.location.href = "/";
             } else if (err.response && err.response.status === 404) {
               setErrorMessage(err.response.data);
             } else {
@@ -136,7 +138,7 @@ const NewWorkout: React.FC = () => {
           err.response &&
           (err.response.status === 401 || err.response.status === 403)
         ) {
-          window.location.href = "/";
+          if (typeof window !== "undefined") window.location.href = "/";
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }

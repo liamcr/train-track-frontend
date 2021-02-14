@@ -38,6 +38,8 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
   };
 
   const onSend = () => {
+    if (typeof localStorage === "undefined") return;
+
     setIsLoading(true);
 
     axios
