@@ -28,13 +28,7 @@ const UserCard: React.FC<UserCardProps> = ({ userInfo }) => {
     <Card className={classes.root}>
       <CardActionArea href={`/profile/${userInfo._id}`}>
         <CardHeader
-          avatar={
-            userInfo.displayImage !== "" ? (
-              <Avatar src={userInfo.displayImage} />
-            ) : (
-              <Avatar>{userInfo.username[0]}</Avatar>
-            )
-          }
+          avatar={<Avatar src={userInfo.displayImage} />}
           title={userInfo.username}
           subheader={`${userInfo.followers.length} followers | ${userInfo.following.length} following`}
         />

@@ -60,13 +60,7 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
         </Typography>
         {userData !== null && (
           <Chip
-            avatar={
-              userData.displayImage !== "" ? (
-                <Avatar src={userData.displayImage} />
-              ) : (
-                <Avatar>{userData.username[0]}</Avatar>
-              )
-            }
+            avatar={<Avatar src={userData.displayImage} />}
             clickable
             onClick={() => {
               if (typeof window !== "undefined")

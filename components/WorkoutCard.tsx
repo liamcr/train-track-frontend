@@ -75,15 +75,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
     <Card className={classes.workoutCard}>
       <CardActionArea href={`/profile/${workout.user}`}>
         <CardHeader
-          avatar={
-            userInfo !== null && userInfo.displayImage !== "" ? (
-              <Avatar src={userInfo.displayImage} />
-            ) : (
-              <Avatar>
-                {userInfo !== null ? userInfo.displayName[0] : ""}
-              </Avatar>
-            )
-          }
+          avatar={<Avatar src={userInfo?.displayImage} />}
           title={userInfo !== null ? userInfo.displayName : ""}
           subheader={formatDate(workout.date)}
         />

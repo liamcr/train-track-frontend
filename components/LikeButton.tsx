@@ -130,13 +130,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
                 key={userId}
               >
                 <ListItemIcon>
-                  {userInfo[userId] && userInfo[userId].displayImage !== "" ? (
-                    <Avatar src={userInfo[userId].displayImage} />
-                  ) : (
-                    <Avatar>
-                      {userInfo[userId] ? userInfo[userId].username[0] : ""}
-                    </Avatar>
-                  )}
+                  {<Avatar src={userInfo[userId]?.displayImage} />}
                 </ListItemIcon>
                 <ListItemText
                   primary={userInfo[userId] ? userInfo[userId].username : ""}

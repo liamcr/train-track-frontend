@@ -167,18 +167,11 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     key={followerId}
                   >
                     <ListItemIcon>
-                      {followerDisplayNames[followerId] &&
-                      followerDisplayNames[followerId].displayImage !== "" ? (
+                      {
                         <Avatar
-                          src={followerDisplayNames[followerId].displayImage}
+                          src={followerDisplayNames[followerId]?.displayImage}
                         />
-                      ) : (
-                        <Avatar>
-                          {followerDisplayNames[followerId]
-                            ? followerDisplayNames[followerId].username[0]
-                            : ""}
-                        </Avatar>
-                      )}
+                      }
                     </ListItemIcon>
                     <ListItemText
                       primary={
@@ -222,18 +215,11 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     key={followingId}
                   >
                     <ListItemIcon>
-                      {followingDisplayNames[followingId] &&
-                      followingDisplayNames[followingId].displayImage !== "" ? (
+                      {
                         <Avatar
-                          src={followingDisplayNames[followingId].displayImage}
+                          src={followingDisplayNames[followingId]?.displayImage}
                         />
-                      ) : (
-                        <Avatar>
-                          {followingDisplayNames[followingId]
-                            ? followingDisplayNames[followingId].username[0]
-                            : ""}
-                        </Avatar>
-                      )}
+                      }
                     </ListItemIcon>
                     <ListItemText
                       primary={
