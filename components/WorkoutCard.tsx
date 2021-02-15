@@ -91,7 +91,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       <CardContent>
         <Typography variant="h6">
           <Link
-            href={`/workout/${workout._id}`}
+            href={`/workouts/${workout._id}`}
             color="inherit"
             underline="none"
           >
