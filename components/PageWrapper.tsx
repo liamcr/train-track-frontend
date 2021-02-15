@@ -63,8 +63,8 @@ const useStyles = makeStyles(() =>
       flexDirection: "row",
       alignItems: "center",
     },
-    logo: {
-      marginRight: 16,
+    logoText: {
+      marginLeft: 16,
     },
   })
 );
@@ -149,9 +149,10 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
                 alt="Train Track Logo"
                 height={64}
                 width={68}
-                className={classes.logo}
               />
-              <Typography variant="h4">Train Track</Typography>
+              <Typography variant="h4" className={classes.logoText}>
+                Train Track
+              </Typography>
             </ButtonBase>
             <Divider />
             <List>
