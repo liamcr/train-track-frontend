@@ -129,6 +129,8 @@ const NewWorkout: React.FC = () => {
             } else {
               setErrorMessage("Something went wrong. Try again later.");
             }
+
+            setIsLoading(false);
           });
       })
       .catch((err) => {
@@ -140,8 +142,7 @@ const NewWorkout: React.FC = () => {
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }
-      })
-      .finally(() => {
+
         setIsLoading(false);
       });
   };
