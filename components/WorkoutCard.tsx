@@ -21,6 +21,7 @@ import { formatDate } from "../util/helperFns";
 import LikeButton from "./LikeButton";
 import { Comment } from "@material-ui/icons";
 import CommentSection from "./CommentSection";
+import { useCookies } from "react-cookie";
 
 type WorkoutCardProps = {
   workout: Workout;
@@ -40,6 +41,8 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   const { state, dispatch } = useContext(CacheContext);
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
+  const [cookies] = useCookies(["userToken"]);
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -49,9 +52,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       axios
         .get(USER_URL(workout.user), {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies.userToken}`,
           },
         })
         .then((response) => {

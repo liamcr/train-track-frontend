@@ -6,6 +6,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import ToastAlert from "./ToastAlert";
 import Image from "next/image";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/Timeline.module.css");
 
@@ -20,6 +21,8 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
   const [timeline, setTimeline] = useState<Workout[] | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasMore, setHasMore] = useState(true);
+
+  const [cookies] = useCookies(["userToken"]);
 
   const limit = 3;
 
@@ -46,9 +49,7 @@ const Timeline: React.FC<TimelineProps> = ({ dataUrl, profile }) => {
     axios
       .get(`${dataUrl}?limit=${limit}&offset=${offset}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
       .then((response) => {

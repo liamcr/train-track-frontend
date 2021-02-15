@@ -11,6 +11,7 @@ import { FullUser } from "../util/commonTypes";
 import axios from "axios";
 import { SEARCH_URL } from "../util/consts";
 import ToastAlert from "./ToastAlert";
+import { useCookies } from "react-cookie";
 
 type SearchBarProps = {
   updateSearchResults: React.Dispatch<React.SetStateAction<FullUser[] | null>>;
@@ -34,17 +35,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const executeSearch = () => {
-    if (typeof localStorage === "undefined") return;
+  const [cookies] = useCookies(["userToken"]);
 
+  const executeSearch = () => {
     setIsLoading(true);
 
     axios
       .get(SEARCH_URL(query), {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
       .then((response) => {

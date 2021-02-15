@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
 import { Comment, User } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
+import { useCookies } from "react-cookie";
 
 type CommentDisplayProps = {
   comment: Comment;
@@ -14,6 +15,8 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
 
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
+  const [cookies] = useCookies(["userToken"]);
+
   useEffect(() => {
     if (state[comment.userId] !== undefined && userInfo === null) {
       setUserInfo(state[comment.userId]);
@@ -21,9 +24,7 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
       axios
         .get(USER_URL(comment.userId), {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies["userToken"]}`,
           },
         })
         .then((response) => {

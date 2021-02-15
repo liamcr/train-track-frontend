@@ -17,7 +17,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
 import React, { useEffect } from "react";
 import Header from "./Header";
-import { setAccessToken } from "../util/helperFns";
+import { getAccessToken } from "../util/helperFns";
 import Image from "next/image";
 import SEO from "./SEO";
 
@@ -78,7 +78,9 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    setAccessToken();
+    if (!getAccessToken()) {
+      window.location.href = "/";
+    }
   }, []);
 
   return (

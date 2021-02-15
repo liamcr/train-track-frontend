@@ -10,6 +10,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import ToastAlert from "./ToastAlert";
+import { useCookies } from "react-cookie";
 
 type LoginCardProps = {
   signup?: boolean;
@@ -18,6 +19,8 @@ type LoginCardProps = {
 const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [cookie, setCookie] = useCookies(["userToken"]);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,8 +50,15 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
         password: password,
       })
       .then((response) => {
-        if (typeof window !== "undefined")
-          window.location.href = `/home#${response.data.accessToken}`;
+        const accessToken = response?.data?.accessToken;
+
+        setCookie("userToken", accessToken, {
+          path: "/",
+          maxAge: 7200, // 2 hours
+          sameSite: true,
+        });
+
+        if (typeof window !== "undefined") window.location.href = `/home`;
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
@@ -58,8 +68,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ signup }) => {
         } else {
           setErrorMessage("Something went wrong. Try again later.");
         }
-      })
-      .finally(() => {
+
         setIsLoading(false);
       });
   };

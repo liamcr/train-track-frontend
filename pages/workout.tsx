@@ -15,6 +15,7 @@ import WorkoutCardHeader from "../components/WorkoutCardHeader";
 import ExerciseList from "../components/ExerciseList";
 import PageWrapper from "../components/PageWrapper";
 import ToastAlert from "../components/ToastAlert";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/WorkoutPage.module.css");
 
@@ -34,6 +35,8 @@ const WorkoutPage: React.FC = () => {
   const [workoutData, setWorkoutData] = useState<Workout | null>(null);
   const [exercises, setExercises] = useState<Exercise[] | null>(null);
 
+  const [cookies] = useCookies(["userToken"]);
+
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
 
@@ -43,9 +46,7 @@ const WorkoutPage: React.FC = () => {
       axios
         .get(WORKOUT_URL(idSearchParam), {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies.userToken}`,
           },
         })
         .then((response) => {
@@ -54,9 +55,7 @@ const WorkoutPage: React.FC = () => {
           axios
             .get(GET_EXERCISE_URL(response.data.exerciseIds.join()), {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                  "train-track-access-token"
-                )}`,
+                Authorization: `Bearer ${cookies.userToken}`,
               },
             })
             .then((response) => {

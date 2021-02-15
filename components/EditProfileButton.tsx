@@ -15,6 +15,7 @@ import { FullUser } from "../util/commonTypes";
 import axios, { AxiosResponse } from "axios";
 import { UPDATE_USER_URL, UPLOAD_URL } from "../util/consts";
 import ToastAlert from "./ToastAlert";
+import { useCookies } from "react-cookie";
 
 type EditProfileButtonProps = {
   user: FullUser;
@@ -34,6 +35,8 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const [displayPictureChanged, setDisplayPictureChanged] = useState(false);
   const [userDataChanged, setUserDataChanged] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [cookies] = useCookies(["userToken"]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,8 +77,6 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const handleDisplayImageUpdate = (
     callback: (res: AxiosResponse<any>) => void
   ) => {
-    if (typeof localStorage === "undefined") return;
-
     if (selectedFile !== null) {
       setIsLoading(true);
 
@@ -85,9 +86,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
       axios
         .post(UPLOAD_URL, fd, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies["userToken"]}`,
           },
         })
         .then(callback)
@@ -102,16 +101,12 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   const handleUserDataUpdate = (
     callback: (res: AxiosResponse<any>) => void
   ) => {
-    if (typeof localStorage === "undefined") return;
-
     setIsLoading(true);
 
     axios
       .post(UPDATE_USER_URL, newUserData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies["userToken"]}`,
         },
       })
       .then(callback)

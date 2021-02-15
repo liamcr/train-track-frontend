@@ -1,6 +1,7 @@
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FOLLOW_URL, UNFOLLOW_URL } from "../util/consts";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
@@ -18,11 +19,11 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   const [followState, setFollowState] = useState(initFollowState);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [cookies] = useCookies(["userToken"]);
+
   const { dispatch } = useContext(FollowersContext);
 
   const onButtonPressed = () => {
-    if (typeof localStorage === "undefined") return;
-
     setIsLoading(true);
 
     axios
@@ -31,9 +32,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies["userToken"]}`,
           },
         }
       )

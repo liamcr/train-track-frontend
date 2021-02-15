@@ -8,10 +8,13 @@ import FollowerBar from "../components/FollowerBar";
 import PageWrapper from "../components/PageWrapper";
 import { FollowersProvider } from "../util/FollowerContextProvider";
 import ToastAlert from "../components/ToastAlert";
+import { useCookies } from "react-cookie";
 
 const Profile: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [userData, setUserData] = useState<FullUser | null>(null);
+
+  const [cookies] = useCookies(["userToken"]);
 
   useEffect(() => {
     const idSearchParam = new URL(window.location.href).searchParams.get("id");
@@ -21,9 +24,7 @@ const Profile: React.FC = () => {
     axios
       .get(endpointToCall, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
       .then((user) => {

@@ -18,6 +18,7 @@ import axios from "axios";
 import { ADD_EXERCISES_URL, ADD_WORKOUT_URL } from "../util/consts";
 import PageWrapper from "../components/PageWrapper";
 import ToastAlert from "../components/ToastAlert";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/NewWorkout.module.css");
 
@@ -43,6 +44,8 @@ const NewWorkout: React.FC = () => {
       sets: [{ value: 5, unit: "reps", weight: { unit: "lbs" } }],
     },
   ]);
+
+  const [cookies] = useCookies(["userToken"]);
 
   const handleDateChange = (date: MaterialUiPickersDate) => {
     setSelectedDate(date);
@@ -72,8 +75,6 @@ const NewWorkout: React.FC = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (typeof localStorage === "undefined") return;
-
     setIsLoading(true);
 
     const data = new FormData(event.target as HTMLFormElement);
@@ -92,9 +93,7 @@ const NewWorkout: React.FC = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies.userToken}`,
           },
         }
       )
@@ -110,9 +109,7 @@ const NewWorkout: React.FC = () => {
             },
             {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                  "train-track-access-token"
-                )}`,
+                Authorization: `Bearer ${cookies.userToken}`,
               },
             }
           )

@@ -15,6 +15,7 @@ import { Workout } from "../util/commonTypes";
 import { LIKE_URL, UNLIKE_URL, USER_URL } from "../util/consts";
 import axios from "axios";
 import Image from "next/image";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/FollowerBar.module.css");
 
@@ -34,8 +35,9 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
     };
   }>({});
 
+  const [cookies] = useCookies(["userToken"]);
+
   const onLikePressed = () => {
-    if (typeof localStorage === "undefined") return;
     setIsLoading(true);
 
     axios
@@ -44,9 +46,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies.userToken}`,
           },
         }
       )
@@ -73,9 +73,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
         axios
           .get(USER_URL(userId), {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem(
-                "train-track-access-token"
-              )}`,
+              Authorization: `Bearer ${cookies.userToken}`,
             },
           })
           .then((response) => {

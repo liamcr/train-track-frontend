@@ -15,6 +15,7 @@ import { USER_URL } from "../util/consts";
 import { FollowersContext } from "../util/FollowerContextProvider";
 import ToastAlert from "./ToastAlert";
 import Image from "next/image";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/FollowerBar.module.css");
 
@@ -43,6 +44,8 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
   const [followerOpen, setFollowerOpen] = useState(false);
   const [followingOpen, setFollowingOpen] = useState(false);
 
+  const [cookies] = useCookies(["userToken"]);
+
   useEffect(() => {
     if (followers) {
       dispatch({ type: "SET", initValue: followers.length });
@@ -50,9 +53,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
         axios
           .get(USER_URL(followerId), {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem(
-                "train-track-access-token"
-              )}`,
+              Authorization: `Bearer ${cookies.userToken}`,
             },
           })
           .then((response) => {
@@ -89,9 +90,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
         axios
           .get(USER_URL(followingId), {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem(
-                "train-track-access-token"
-              )}`,
+              Authorization: `Bearer ${cookies.userToken}`,
             },
           })
           .then((response) => {

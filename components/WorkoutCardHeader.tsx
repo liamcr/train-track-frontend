@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { USER_URL } from "../util/consts";
 import { FullUser, Workout } from "../util/commonTypes";
 import { formatDate } from "../util/helperFns";
+import { useCookies } from "react-cookie";
 
 const styles = require("../styles/WorkoutPage.module.css");
 
@@ -32,13 +33,13 @@ const WorkoutCardHeader: React.FC<WorkoutCardHeaderProps> = ({
 
   const [userData, setUserData] = useState<FullUser | null>(null);
 
+  const [cookies] = useCookies(["userToken"]);
+
   useEffect(() => {
     axios
       .get(USER_URL(workoutData.user), {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
       .then((response) => {

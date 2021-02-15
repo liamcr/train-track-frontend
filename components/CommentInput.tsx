@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { COMMENT_URL, USER_URL } from "../util/consts";
 import { Comment, Workout } from "../util/commonTypes";
+import { useCookies } from "react-cookie";
 
 type CommentInputProps = {
   workout: Workout;
@@ -17,13 +18,13 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [comment, setComment] = useState("");
 
+  const [cookies] = useCookies(["userToken"]);
+
   useEffect(() => {
     axios
       .get(USER_URL(""), {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem(
-            "train-track-access-token"
-          )}`,
+          Authorization: `Bearer ${cookies["userToken"]}`,
         },
       })
       .then((res) => {
@@ -38,8 +39,6 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
   };
 
   const onSend = () => {
-    if (typeof localStorage === "undefined") return;
-
     setIsLoading(true);
 
     axios
@@ -48,9 +47,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
         { comment: comment },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "train-track-access-token"
-            )}`,
+            Authorization: `Bearer ${cookies["userToken"]}`,
           },
         }
       )

@@ -2,6 +2,7 @@ import React from "react";
 import { AppProps } from "next/app";
 import "../styles.css";
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
+import { CookiesProvider } from "react-cookie";
 
 const theme = createMuiTheme({
   palette: {
@@ -12,10 +13,12 @@ const theme = createMuiTheme({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
 
