@@ -45,7 +45,7 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
 
   const onAvatarOrNameClick = () => {
     if (typeof window !== "undefined")
-      window.location.href = `/profile?id=${comment.userId}`;
+      window.location.href = `/profile/${comment.userId}`;
   };
 
   return (

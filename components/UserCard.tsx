@@ -26,7 +26,7 @@ const UserCard: React.FC<UserCardProps> = ({ userInfo }) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea href={`/profile?id=${userInfo._id}`}>
+      <CardActionArea href={`/profile/${userInfo._id}`}>
         <CardHeader
           avatar={
             userInfo.displayImage !== "" ? (

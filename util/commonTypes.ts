@@ -49,3 +49,9 @@ export type FullUser = {
 export type UserCache = {
   [key: string]: User;
 };
+
+export type ParsedAccessToken = {
+  userId: string;
+  exp: number;
+  iat: number;
+};

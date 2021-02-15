@@ -125,7 +125,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
                 button
                 onClick={() => {
                   if (typeof window !== "undefined")
-                    window.location.href = `/profile?id=${userId}`;
+                    window.location.href = `/profile/${userId}`;
                 }}
                 key={userId}
               >

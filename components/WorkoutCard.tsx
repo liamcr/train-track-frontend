@@ -73,7 +73,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
 
   return (
     <Card className={classes.workoutCard}>
-      <CardActionArea href={`/profile?id=${workout.user}`}>
+      <CardActionArea href={`/profile/${workout.user}`}>
         <CardHeader
           avatar={
             userInfo !== null && userInfo.displayImage !== "" ? (

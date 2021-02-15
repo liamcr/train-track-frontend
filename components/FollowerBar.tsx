@@ -162,7 +162,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     button
                     onClick={() => {
                       if (typeof window !== "undefined")
-                        window.location.href = `/profile?id=${followerId}`;
+                        window.location.href = `/profile/${followerId}`;
                     }}
                     key={followerId}
                   >
@@ -217,7 +217,7 @@ const FollowerBar: React.FC<FollowerBarProps> = ({ followers, following }) => {
                     button
                     onClick={() => {
                       if (typeof window !== "undefined")
-                        window.location.href = `/profile?id=${followingId}`;
+                        window.location.href = `/profile/${followingId}`;
                     }}
                     key={followingId}
                   >

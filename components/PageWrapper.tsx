@@ -15,11 +15,13 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { getAccessToken } from "../util/helperFns";
 import Image from "next/image";
 import SEO from "./SEO";
+import jwt_decode from "jwt-decode";
+import { ParsedAccessToken } from "../util/commonTypes";
 
 type PageWrapperProps = {
   navValue?: "home" | "search" | "profile";
@@ -75,11 +77,26 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 }) => {
   const classes = useStyles();
 
+  const [userId, setUserId] = useState("");
+
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    if (!getAccessToken()) {
+    const accessToken = getAccessToken();
+
+    if (!accessToken) {
       window.location.href = "/";
+
+      return;
+    }
+
+    try {
+      setUserId(jwt_decode<ParsedAccessToken>(accessToken).userId);
+    } catch (error) {
+      // Access token is invalid and/or doesn't match it's signature
+      window.location.href = "/";
+
+      return;
     }
   }, []);
 
@@ -110,7 +127,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
                   label="Profile"
                   value="profile"
                   icon={<UserIcon />}
-                  href="/profile"
+                  href={`/profile/${userId}`}
                 />
               </BottomNavigation>
             </>
@@ -144,7 +161,9 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
                   button
                   onClick={() => {
                     if (typeof window !== "undefined")
-                      window.location.href = `/${name.toLowerCase()}`;
+                      window.location.href = `/${name.toLowerCase()}/${
+                        name === "Profile" ? userId : ""
+                      }`;
                   }}
                 >
                   <ListItemIcon>
