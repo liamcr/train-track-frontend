@@ -121,16 +121,16 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     if (displayPictureChanged && userDataChanged) {
       handleDisplayImageUpdate(() => {
         handleUserDataUpdate(() => {
-          if (typeof window !== "undefined") window.location.href = "/profile";
+          if (typeof window !== "undefined") window.location.reload();
         });
       });
     } else if (userDataChanged) {
       handleUserDataUpdate(() => {
-        if (typeof window !== "undefined") window.location.href = "/profile";
+        if (typeof window !== "undefined") window.location.reload();
       });
     } else if (displayPictureChanged) {
       handleDisplayImageUpdate(() => {
-        if (typeof window !== "undefined") window.location.href = "/profile";
+        if (typeof window !== "undefined") window.location.reload();
       });
     }
   };
