@@ -1,0 +1,15 @@
+.userSearchContainer {
+  width: 95%;
+  max-width: 600px;
+  margin: 8px auto;
+}
+
+.noUsersSearchContainer {
+  color: var(--primary-disabled);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 16pt;
+  margin-top: 12px;
+}

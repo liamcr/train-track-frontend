@@ -1,0 +1,48 @@
+.newWorkoutContainer {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exerciseInputContainer {
+  padding: 5px 5px 24px 5px;
+}
+
+.dynamicExerciseContainer .exerciseInputContainer:not(:last-child) {
+  border-bottom: 2px #666666 solid;
+}
+
+.setListManagementButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.setInputListElement {
+  display: flex;
+  align-items: center;
+}
+
+.setListItemNum {
+  width: 20%;
+  font-size: 24pt;
+  text-align: center;
+  padding: 5px;
+  color: var(--text-secondary);
+}
+
+.setInputValues {
+  width: 100%;
+  padding: 12px 0;
+}
+
+.notLastSetInput {
+  border-bottom: 1px #666666 solid;
+}
+
+.setInputRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

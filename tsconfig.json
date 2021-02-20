@@ -17,10 +17,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    "pages",
+    "components",
+    "util"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

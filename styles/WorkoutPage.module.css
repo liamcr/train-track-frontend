@@ -1,0 +1,11 @@
+.workoutCardContainer {
+  width: 95%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.workoutCardSubheader {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+}
