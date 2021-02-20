@@ -5,16 +5,19 @@ import {
   createStyles,
   Divider,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
   makeStyles,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import UserIcon from "@material-ui/icons/Person";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { getAccessToken } from "../util/helperFns";
@@ -22,6 +25,7 @@ import Image from "next/image";
 import SEO from "./SEO";
 import jwt_decode from "jwt-decode";
 import { ParsedAccessToken } from "../util/commonTypes";
+import { useCookies } from "react-cookie";
 
 type PageWrapperProps = {
   navValue?: "home" | "search" | "profile";
@@ -52,6 +56,9 @@ const useStyles = makeStyles(() =>
     drawerPaper: {
       width: drawerWidth,
     },
+    drawerItemTitle: {
+      fontSize: 20,
+    },
     content: {
       flexGrow: 1,
       width: `calc(100% - ${drawerWidth}px)`,
@@ -79,6 +86,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 
   const [userId, setUserId] = useState("");
 
+  const [, , removeCookie] = useCookies(["userToken"]);
+
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
@@ -100,12 +109,26 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
     }
   }, []);
 
+  const handleLogOut = () => {
+    removeCookie("userToken");
+
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
+  };
+
   return (
     <>
       <SEO title="Train Track" />
       {isMobile ? (
         <>
-          <Header fixed={!!fixedHeader} />
+          <Header fixed={!!fixedHeader}>
+            <Tooltip title="Log Out">
+              <IconButton onClick={handleLogOut}>
+                <ExitToAppIcon fontSize="large" />
+              </IconButton>
+            </Tooltip>
+          </Header>
           {children}
           {!bottomNavHidden && (
             <>
@@ -155,7 +178,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
               </Typography>
             </ButtonBase>
             <Divider />
-            <List>
+            <List style={{ flex: 1 }}>
               {["Home", "Search", "Profile"].map((name, i) => (
                 <ListItem
                   key={i}
@@ -176,11 +199,27 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
                       <UserIcon fontSize="large" />
                     )}
                   </ListItemIcon>
-                  <Typography variant="body1" style={{ fontSize: 20 }}>
+                  <Typography
+                    variant="body1"
+                    className={classes.drawerItemTitle}
+                  >
                     {name}
                   </Typography>
                 </ListItem>
               ))}
+              <ListItem
+                key={3}
+                button
+                style={{ position: "absolute", bottom: 8 }}
+                onClick={handleLogOut}
+              >
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                <Typography variant="body1" className={classes.drawerItemTitle}>
+                  Log Out
+                </Typography>
+              </ListItem>
             </List>
           </Drawer>
           <div
