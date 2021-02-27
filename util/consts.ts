@@ -1,4 +1,4 @@
-const apiHost = "http://localhost:5000";
+const apiHost = process.env.BACKEND_URL || "http://localhost:5000";
 
 export const REGISTER_URL = `${apiHost}/users/register`;
 export const LOGIN_URL = `${apiHost}/users/login`;
