@@ -42,7 +42,7 @@ export type FullUser = {
   followers: string[];
   following: string[];
   displayImage: string;
-  isFollowing?: boolean;
+  isFollowing: boolean;
   _id: string;
 };
 

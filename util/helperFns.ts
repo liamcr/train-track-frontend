@@ -1,6 +1,7 @@
 import cookie from "cookie";
 import { IncomingMessage } from "http";
-import { ExerciseSet } from "./commonTypes";
+import jwtDecode from "jwt-decode";
+import { ExerciseSet, ParsedAccessToken } from "./commonTypes";
 
 /**
  * Get access token from cookies.
@@ -12,6 +13,12 @@ export function getAccessToken(req?: IncomingMessage): string | undefined {
   );
 
   return parsedCookies?.userToken;
+}
+
+export function getUserIdFromAccessToken(): string {
+  const { userId } = jwtDecode(getAccessToken() || "") as ParsedAccessToken;
+
+  return userId;
 }
 
 const months = [
