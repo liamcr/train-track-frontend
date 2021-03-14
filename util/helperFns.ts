@@ -15,8 +15,8 @@ export function getAccessToken(req?: IncomingMessage): string | undefined {
   return parsedCookies?.userToken;
 }
 
-export function getUserIdFromAccessToken(): string {
-  const { userId } = jwtDecode(getAccessToken() || "") as ParsedAccessToken;
+export function getUserIdFromAccessToken(accessToken: string): string {
+  const { userId } = jwtDecode(accessToken) as ParsedAccessToken;
 
   return userId;
 }

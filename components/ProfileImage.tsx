@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FullUser } from "../util/commonTypes";
 import { getUserIdFromAccessToken } from "../util/helperFns";
 import EditProfileButton from "./EditProfileButton";
@@ -14,12 +15,13 @@ type ProfileImageProps = {
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
+  const [cookies] = useCookies(["userToken"]);
   const [currentUserId, setCurrentUserId] = useState("");
 
-  // Wrap currentUserId in useEffect so that `document` is accessible
   useEffect(() => {
-    setCurrentUserId(getUserIdFromAccessToken());
-  }, []);
+    if (cookies.userToken)
+      setCurrentUserId(getUserIdFromAccessToken(cookies.userToken));
+  }, [cookies]);
 
   return (
     <div className={styles.profileImageContainer}>
