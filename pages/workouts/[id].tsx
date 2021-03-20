@@ -1,6 +1,7 @@
 import {
   Card,
   CardActions,
+  CardContent,
   CircularProgress,
   createStyles,
   makeStyles,
@@ -17,13 +18,14 @@ import PageWrapper from "../../components/PageWrapper";
 import ToastAlert from "../../components/ToastAlert";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getAccessToken } from "../../util/helperFns";
+import CommentSection from "../../components/CommentSection";
+import { TimelineProvider } from "../../util/TimelineUserCache";
 
 const styles = require("../../styles/WorkoutPage.module.css");
 
 const useStyles = makeStyles(() =>
   createStyles({
     workoutCard: {
-      padding: 16,
       marginBottom: 12,
     },
   })
@@ -50,17 +52,22 @@ const WorkoutPage: React.FC = ({
             <CircularProgress color="primary" />
           ) : (
             <>
-              <WorkoutCardHeader workoutData={workout} />
-              {workout.description && (
-                <Typography variant="body1">{workout.description}</Typography>
-              )}
-              <Typography variant="h4" style={{ marginTop: 32 }}>
-                Exercises
-              </Typography>
-              {exercises !== null && <ExerciseList exercises={exercises} />}
+              <CardContent>
+                <WorkoutCardHeader workoutData={workout} />
+                {workout.description && (
+                  <Typography variant="body1">{workout.description}</Typography>
+                )}
+                <Typography variant="h4" style={{ marginTop: 32 }}>
+                  Exercises
+                </Typography>
+                {exercises !== null && <ExerciseList exercises={exercises} />}
+              </CardContent>
               <CardActions>
                 <LikeButton workout={workout} />
               </CardActions>
+              <TimelineProvider>
+                <CommentSection workout={workout} />
+              </TimelineProvider>
             </>
           )}
         </Card>
