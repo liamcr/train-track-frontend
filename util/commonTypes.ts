@@ -5,6 +5,12 @@ export type Comment = {
   date: string;
 };
 
+export type Like = {
+  _id: string;
+  user: string;
+  workout: string;
+};
+
 export type Workout = {
   _id: string;
   user: string;

@@ -16,6 +16,10 @@ export const UPLOAD_URL = `${apiHost}/upload`;
 
 export const WORKOUT_URL = (workoutId: string) =>
   `${apiHost}/workouts/${workoutId}`;
+export const WORKOUT_EXERCISES_URL = (workoutId: string) =>
+  `${apiHost}/workouts/${workoutId}/exercises`;
+export const WORKOUT_LIKES_URL = (workoutId: string) =>
+  `${apiHost}/workouts/${workoutId}/likes`;
 
 export const SEARCH_URL = (searchQuery: string) =>
   `${apiHost}/search?search=${searchQuery}`;
