@@ -8,9 +8,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
-import { GET_EXERCISE_URL, WORKOUT_URL } from "../../util/consts";
-import { Exercise, Workout } from "../../util/commonTypes";
+import React, { useEffect, useState } from "react";
+import {
+  GET_EXERCISE_URL,
+  WORKOUT_COMMENTS_URL,
+  WORKOUT_EXERCISES_URL,
+  WORKOUT_URL,
+} from "../../util/consts";
+import { Exercise, Workout, Comment } from "../../util/commonTypes";
 import LikeButton from "../../components/LikeButton";
 import WorkoutCardHeader from "../../components/WorkoutCardHeader";
 import ExerciseList from "../../components/ExerciseList";
@@ -20,6 +25,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getAccessToken } from "../../util/helperFns";
 import CommentSection from "../../components/CommentSection";
 import { TimelineProvider } from "../../util/TimelineUserCache";
+import { useCookies } from "react-cookie";
+import { updateNonNullExpression } from "typescript";
 
 const styles = require("../../styles/WorkoutPage.module.css");
 
@@ -39,10 +46,30 @@ const WorkoutPage: React.FC = ({
   const classes = useStyles();
 
   const [errorMessage, setErrorMessage] = useState(error);
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  const [cookies] = useCookies(["userToken"]);
 
   const handleClose = () => {
     setErrorMessage("");
   };
+
+  useEffect(() => {
+    if (!error) {
+      axios
+        .get(WORKOUT_COMMENTS_URL(workout._id), {
+          headers: {
+            Authorization: `Bearer ${cookies.userToken}`,
+          },
+        })
+        .then((response) => {
+          setComments(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [cookies.userToken]);
 
   return (
     <PageWrapper bottomNavHidden>
@@ -66,7 +93,11 @@ const WorkoutPage: React.FC = ({
                 <LikeButton workout={workout} />
               </CardActions>
               <TimelineProvider>
-                <CommentSection workout={workout} />
+                <CommentSection
+                  workout={workout}
+                  comments={comments}
+                  setComments={setComments}
+                />
               </TimelineProvider>
             </>
           )}
@@ -99,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const workoutData = workoutRes.data as Workout;
 
     const exercisesRes = await axios.get(
-      GET_EXERCISE_URL(workoutData.exerciseIds.join()),
+      WORKOUT_EXERCISES_URL(workoutData._id),
       {
         headers: {
           Authorization: `Bearer ${getAccessToken(context.req)}`,

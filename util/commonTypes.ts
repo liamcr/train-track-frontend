@@ -1,11 +1,25 @@
+import { JwtPayload } from "jwt-decode";
+
 export type Comment = {
   _id: string;
-  userId: string;
+  user: string;
+  workout: string;
   comment: string;
-  date: string;
 };
 
 export type Like = {
+  _id: string;
+  user: string;
+  workout: string;
+};
+
+export type FollowRelation = {
+  follower: string;
+  followee: string;
+  _id: string;
+};
+
+export type LikeRelation = {
   _id: string;
   user: string;
   workout: string;
@@ -16,16 +30,16 @@ export type Workout = {
   user: string;
   name: string;
   description?: string;
-  exerciseIds: string[];
-  date: string;
   liked: boolean;
-  likes: string[];
-  comments: Comment[];
+  date: string;
 };
 
 export type Exercise = {
   name: string;
   description: string;
+  user: string;
+  workout: string;
+  index: number;
   sets: ExerciseSet[];
 };
 
@@ -45,10 +59,7 @@ export type User = {
 
 export type FullUser = {
   username: string;
-  followers: string[];
-  following: string[];
   displayImage: string;
-  isFollowing: boolean;
   _id: string;
 };
 
@@ -56,8 +67,6 @@ export type UserCache = {
   [key: string]: User;
 };
 
-export type ParsedAccessToken = {
+export interface ParsedAccessToken extends JwtPayload {
   userId: string;
-  exp: number;
-  iat: number;
-};
+}

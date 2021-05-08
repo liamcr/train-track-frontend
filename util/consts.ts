@@ -20,6 +20,8 @@ export const WORKOUT_EXERCISES_URL = (workoutId: string) =>
   `${apiHost}/workouts/${workoutId}/exercises`;
 export const WORKOUT_LIKES_URL = (workoutId: string) =>
   `${apiHost}/workouts/${workoutId}/likes`;
+export const WORKOUT_COMMENTS_URL = (workoutId: string) =>
+  `${apiHost}/workouts/${workoutId}/comments`;
 
 export const SEARCH_URL = (searchQuery: string) =>
   `${apiHost}/search?search=${searchQuery}`;

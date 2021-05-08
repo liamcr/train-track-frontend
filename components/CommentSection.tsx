@@ -6,13 +6,17 @@ import PreviousComments from "./PreviousComments";
 
 type CommentSectionProps = {
   workout: Workout;
+  comments: Comment[];
+  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
 };
 
-const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
-  const [commentList, setCommentList] = useState<Comment[]>(workout.comments);
-
+const CommentSection: React.FC<CommentSectionProps> = ({
+  workout,
+  comments,
+  setComments,
+}) => {
   const addComment = (comment: Comment) => {
-    setCommentList((prevCommentList) => [...prevCommentList, comment]);
+    setComments((prevCommentList) => [...prevCommentList, comment]);
   };
 
   return (
@@ -23,7 +27,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ workout }) => {
         padding: 16,
       }}
     >
-      <PreviousComments commentList={commentList} />
+      <PreviousComments commentList={comments} />
       <CommentInput workout={workout} addComment={addComment} />
     </Paper>
   );

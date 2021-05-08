@@ -22,7 +22,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useCookies } from "react-cookie";
 import { Skeleton } from "@material-ui/lab";
-import jwtDecode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 const styles = require("../styles/FollowerBar.module.css");
 
@@ -45,10 +45,14 @@ const LikeButton: React.FC<LikeButtonProps> = ({ workout }) => {
 
   const [cookies] = useCookies(["userToken"]);
 
-  const userId = useMemo(
-    () => (jwtDecode(cookies.userToken) as ParsedAccessToken).userId,
-    [cookies.userToken]
-  );
+  const userId = useMemo(() => {
+    try {
+      return jwt_decode<ParsedAccessToken>(cookies.userToken).userId;
+    } catch (e) {
+      console.error(e);
+      return "";
+    }
+  }, [cookies.userToken]);
 
   const onLikePressed = () => {
     setIsLoading(true);

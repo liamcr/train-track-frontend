@@ -1,10 +1,11 @@
 import { Avatar, IconButton, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { COMMENT_URL, USER_URL } from "../util/consts";
-import { Comment, Workout } from "../util/commonTypes";
+import { Comment, ParsedAccessToken, Workout } from "../util/commonTypes";
 import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
 
 type CommentInputProps = {
   workout: Workout;
@@ -20,17 +21,27 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
 
   const [cookies] = useCookies(["userToken"]);
 
+  const userId = useMemo(() => {
+    try {
+      return jwt_decode<ParsedAccessToken>(cookies.userToken).userId;
+    } catch (e) {
+      console.error(e);
+      return "";
+    }
+  }, [cookies.userToken]);
+
   useEffect(() => {
+    console.log(userId);
     axios
-      .get(USER_URL(""), {
+      .get(USER_URL(userId), {
         headers: {
-          Authorization: `Bearer ${cookies["userToken"]}`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
       .then((res) => {
         setCurrentUserDisplayPicture(res.data.displayImage);
       });
-  }, []);
+  }, [cookies.userToken]);
 
   const handleOnCommentChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,7 +58,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ workout, addComment }) => {
         { comment: comment },
         {
           headers: {
-            Authorization: `Bearer ${cookies["userToken"]}`,
+            Authorization: `Bearer ${cookies.userToken}`,
           },
         }
       )

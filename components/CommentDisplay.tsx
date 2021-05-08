@@ -18,11 +18,11 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
   const [cookies] = useCookies(["userToken"]);
 
   useEffect(() => {
-    if (state[comment.userId] !== undefined && userInfo === null) {
-      setUserInfo(state[comment.userId]);
-    } else if (state[comment.userId] === undefined) {
+    if (state[comment.user] !== undefined && userInfo === null) {
+      setUserInfo(state[comment.user]);
+    } else if (state[comment.user] === undefined) {
       axios
-        .get(USER_URL(comment.userId), {
+        .get(USER_URL(comment.user), {
           headers: {
             Authorization: `Bearer ${cookies["userToken"]}`,
           },
@@ -41,11 +41,11 @@ const CommentDisplay: React.FC<CommentDisplayProps> = ({ comment }) => {
           console.log(err);
         });
     }
-  }, [state, comment.userId, dispatch, userInfo]);
+  }, [state, comment.user, dispatch, userInfo]);
 
   const onAvatarOrNameClick = () => {
     if (typeof window !== "undefined")
-      window.location.href = `/profile/${comment.userId}`;
+      window.location.href = `/profile/${comment.user}`;
   };
 
   return (

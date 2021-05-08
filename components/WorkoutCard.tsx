@@ -1,8 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Workout, User, Exercise } from "../util/commonTypes";
+import { Workout, User, Exercise, Comment } from "../util/commonTypes";
 import { CacheContext } from "../util/TimelineUserCache";
 import axios from "axios";
-import { USER_URL, WORKOUT_EXERCISES_URL } from "../util/consts";
+import {
+  USER_URL,
+  WORKOUT_COMMENTS_URL,
+  WORKOUT_EXERCISES_URL,
+} from "../util/consts";
 import {
   Card,
   CardHeader,
@@ -19,7 +23,7 @@ import {
 } from "@material-ui/core";
 import { formatDate } from "../util/helperFns";
 import LikeButton from "./LikeButton";
-import { Comment } from "@material-ui/icons";
+import CommentIcon from "@material-ui/icons/Comment";
 import CommentSection from "./CommentSection";
 import { useCookies } from "react-cookie";
 import { Skeleton } from "@material-ui/lab";
@@ -42,6 +46,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   const { state, dispatch } = useContext(CacheContext);
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [exercises, setExercises] = useState<Exercise[] | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   const [cookies] = useCookies(["userToken"]);
 
@@ -88,6 +93,21 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(WORKOUT_COMMENTS_URL(workout._id), {
+        headers: {
+          Authorization: `Bearer ${cookies.userToken}`,
+        },
+      })
+      .then((response) => {
+        setComments(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Card className={classes.workoutCard}>
       <CardActionArea href={`/profile/${workout.user}`}>
@@ -121,15 +141,17 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
       <CardActions>
         <LikeButton workout={workout} />
         <IconButton>
-          <Comment />
+          <CommentIcon />
         </IconButton>
-        {/* <ButtonBase style={{ marginLeft: 0, padding: 4 }} disabled>
-          {`${workout.comments.length} comment${
-            workout.comments.length !== 1 ? "s" : ""
-          }`}
-        </ButtonBase> */}
+        <ButtonBase style={{ marginLeft: 0, padding: 4 }} disabled>
+          {`${comments.length} comment${comments.length !== 1 ? "s" : ""}`}
+        </ButtonBase>
       </CardActions>
-      {/* <CommentSection workout={workout} /> */}
+      <CommentSection
+        workout={workout}
+        comments={comments}
+        setComments={setComments}
+      />
     </Card>
   );
 };
