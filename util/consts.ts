@@ -1,4 +1,5 @@
-const apiHost = process.env.BACKEND_URL || "http://localhost:5000";
+const apiHost =
+  process.env.BACKEND_URL || "https://train-track-api-4wf42j4sua-ue.a.run.app";
 
 export const REGISTER_URL = `${apiHost}/users/register`;
 export const LOGIN_URL = `${apiHost}/users/login`;

@@ -1,6 +1,5 @@
 import { Typography } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { FullUser } from "../util/commonTypes";
@@ -26,18 +25,14 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ user }) => {
   return (
     <div className={styles.profileImageContainer}>
       {user && user.displayImage !== "" ? (
-        <Image
-          layout="fill"
-          objectFit="cover"
+        <img
+          className={styles.profileImage}
           src={user.displayImage}
           alt={`${user.username} DP`}
         />
       ) : (
         <Person
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
             width: "100%",
             height: "100%",
           }}
