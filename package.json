@@ -21,7 +21,7 @@
         "cookie": "^0.4.1",
         "date-fns": "^2.16.1",
         "jwt-decode": "^3.1.2",
-        "next": "^10.0.6",
+        "next": "^12.1.0",
         "react": "^17.0.1",
         "react-beautiful-dnd": "^13.0.0",
         "react-cookie": "^4.0.3",
